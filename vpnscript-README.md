@@ -7,7 +7,7 @@ OS X 10.8 Mountain Lion with Server.app replaces the ipfw firewall with pf and i
 
 This script automates and greatly speeds up the setup process as  well as reducing the possibity of accidentially kicking your Mac off its network connection.
 
-This script was developed and tested by the staff of Mac Mini Vault, we colocate a lot of Macs and tirelessly work to add usability and streamline the plight of the Mac in the data center world.
+This script was developed and tested by the staff of Mac Mini Vault, we colocate a lot of Macs and tirelessly work to add usability and streamline the plight of the Mac in the data center world.  Check out our website at http://www.macminivault.com
 
 #WHAT THIS SCRIPT DOES
 + Checks to make sure OS X is at 10.8.x and has Server.app installed and initiated
