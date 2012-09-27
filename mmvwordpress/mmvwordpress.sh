@@ -17,7 +17,7 @@
 if [[  $(sw_vers -productVersion | grep '10.8') && $(which serveradmin) && $(which mysql) ]]
 then
 echo "Congratulations, you are running OS X 10.8.x and have Server.app and MySQL installed...."
-#GET LATED WORDPRESS VERSION
+#GET LATEST WORDPRESS VERSION
 cd ~/Downloads
 curl -o mmvwordpress.tar.gz http://wordpress.org/latest.tar.gz
 tar xzf mmvwordpress.tar.gz
