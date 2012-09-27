@@ -133,7 +133,7 @@ vpn:Servers:com.apple.ppp.l2tp:DNS:OfferedServerAddresses:_array_index:0 = 10.0.
 EOF
 echo "ENTER VPN PASSPHRASE:"
 while read passphrase; do
-     if [[ (-z "${passphrase}") || ("${passphrase}" =~  ]]; then
+     if [[ (-z "${passphrase}") || ("${passphrase}" =~ ^[0-9]+$) ]]; then
           echo "The passphrase you entered was empty or all numeric, please make it something a little more secure (long alphanumeric)..."
           echo "ENTER VPN PASSPHRASE:"
      else
