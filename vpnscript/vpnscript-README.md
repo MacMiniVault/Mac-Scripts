@@ -22,9 +22,11 @@ This script was developed and tested by the staff of Mac Mini Vault, we colocate
 
 #INSTALLATION
 **Before installation: Make sure you have OS X 10.8, Sever.app installed and initialized, no VLANs configured, and a un-customized firewall configuration.**
-+ Download Script
-+ Open Terminal and navigate to the download location (e.g., cd Downloads)
-+ Execute the script by typing “sh vpnscript.sh”
+
++ Open Terminal and run the following command
+
+        curl https://raw.github.com/MacMiniVault/Mac-Scripts/master/vpnscript/vpnscript.sh | sh
+
 + Enter in your password and a passphrase when prompted, reboot when finished
 + When machine reboots, turn off VPN for a minute, then turn it back on
 + Create a VPN connection on your client using your username, password, and passphrase – using the advanced options to route all traffic through VPN
