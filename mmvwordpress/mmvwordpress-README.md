@@ -17,9 +17,11 @@ Note this script is primarily made for Macs in a production environment running 
 
 #INSTALLATION
 **Before installation: Make sure you have OS X 10.8, Sever.app installed and initialized, and MySQL installed (see link above for tutorial).**
-+ Download Script
-+ Open Terminal and navigate to the download location (e.g., cd Downloads)
-+ Execute the script by typing “sh mmvwordpress.sh”
+
++ Open Terminal and run the following command
+
+        curl https://raw.github.com/MacMiniVault/Mac-Scripts/master/mmvwordpress/mmvwordpress.sh | sh
+
 + Enter in your system password, MySQL root password, and a domain name when prompted
 + Open Server.app and within the Web panel create a website that matches the domain name entered in the script
 + Use the additional domains setting to add the 'www.' version of the domain if applicable
