@@ -20,7 +20,7 @@ Note this script is primarily made for Macs in a production environment running 
 
 + Open Terminal and run the following command
 
-        curl https://raw.github.com/MacMiniVault/Mac-Scripts/master/mmvwordpress/mmvwordpress.sh | sh
+        bash <(curl -s https://raw.github.com/MacMiniVault/Mac-Scripts/master/mmvwordpress/mmvwordpress.sh)
 
 + Enter in your system password, MySQL root password, and a domain name when prompted
 + Open Server.app and within the Web panel create a website that matches the domain name entered in the script
