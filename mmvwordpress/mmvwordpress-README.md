@@ -25,4 +25,5 @@ Note this script is primarily made for Macs in a production environment running 
 + Enter in your system password, MySQL root password, and a domain name when prompted
 + Open Server.app and within the Web panel create a website that matches the domain name entered in the script
 + Use the additional domains setting to add the 'www.' version of the domain if applicable
++ Under 'Advanced Settings', check the checkbox for 'Allow overrides using .htaccess files'
 + Point the domain's DNS records to the IP of your MAC or edit your /etc/hosts file and visit the domain in a web browser to finalize the WordPress installation
