@@ -3,6 +3,7 @@
 if [[  $(sw_vers -productVersion | grep '10.[6-9]') ]]
 then
 if [[ $(sudo /usr/libexec/PlistBuddy -c Print /System/Library/LaunchDaemons/com.apple.mDNSResponder.plist | grep 'NoMulticast') ]]
+then
 sudo /usr/libexec/PlistBuddy -c "Add :ProgramArguments: string -NoMulticastAdvertisements" /System/Library/LaunchDaemons/com.apple.mDNSResponder.plist
 echo "PLEASE REBOOT"
 else
