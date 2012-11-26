@@ -59,6 +59,15 @@
 <pre><code>$ bash &lt;(curl -shttps://raw.github.com/MacMiniVault/Mac-Scripts/master/mmvwordpress/mmvwordpress.sh)
 </code></pre>
 
+<h3>Disable Bonjour Script</h3>
+
+<p>By default Macs advertise their existence on the network they are connected to with a DNS Multicast protocol. This allows one Mac to see and easily connect to other Macs and devices on the network. This doesn't work so well when you have hundreds of Macs on the same network and businesses, schools, and data centers regularly disable this functionality. It can be done by edited a plist file and adding in a specific flag. If this file is <em>not</em> edited properly, the Mac can cease to resolve DNS or may no longer boot. This script quickly detects the version of OS X and makes sure the flag is not currently sets and painlessly edits the plist file.  Be sure to read the disablebonjour-README file first. Running it is as simple as:</p>
+
+<h5>NOTE: READ THE <a href="https://github.com/MacMiniVault/Mac-Scripts/blob/master/disablebonjour/disablebonjour-README.md">README FILE</a> BEFORE RUNNING!</h5>
+
+<pre><code>$ bash &lt;(curl -shttps://raw.github.com/MacMiniVault/Mac-Scripts/master/disablebonjour/disablebonjour.sh)
+</code></pre>
+
 <h3>More to come!</h3>
 
 <p>We have some more scripts to write and will add to the collection as we develop them further.</p>
