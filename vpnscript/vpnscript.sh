@@ -3,7 +3,7 @@
 # AUTHOR: JONATHAN SCHWENN @JONSCHWENN      #
 # MAC MINI VAULT - MAC MINI COLOCATION      #
 # MACMINIVAULT.COM - @MACMINIVAULT          #
-# VERSION 1.0 RELEASE DATE SEPT 20, 2012    #
+# VERSION 1.01 RELEASE DATE DEC 19, 2012    #
 # DESC:  THIS SCRIPT SETS UP A VPN SERVER   #
 #        THAT PLACES VPN CLIENTS IN A LOCAL #
 #        VLAN, ALLOWING CLIENTS TO ROUTE    #
@@ -137,7 +137,7 @@ while read passphrase; do
           echo "The passphrase you entered was empty or all numeric, please make it something a little more secure (long alphanumeric)..."
           echo "ENTER VPN PASSPHRASE:"
      else
-          echo "Checking strenght of passphrase..."
+          echo "Checking strength of passphrase..."
           break
      fi
 done
