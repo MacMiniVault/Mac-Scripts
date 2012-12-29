@@ -11,12 +11,12 @@ sudo /usr/libexec/PlistBuddy -c "Add :ProgramArguments: string -NoMulticastAdver
 echo "DNS MULTICAST (BONJOUR) ADVERTISING DISABLED"
 fi
 # SET SYSTEM PREFFERENCES
-sudo systemsetup -setharddisksleep never
-sudo systemsetup -setcomputersleep never
-sudo systemsetup -setdisplaysleep never
-sudo systemsetup -setallowpowerbuttontosleepcomputer off
-sudo systemsetup -setrestartpowerfailure on
-sudo systemsetup -setwakeonnetworkaccess on
+sudo systemsetup -setharddisksleep never > /dev/null 2>&1
+sudo systemsetup -setcomputersleep never > /dev/null 2>&1
+sudo systemsetup -setdisplaysleep never > /dev/null 2>&1
+sudo systemsetup -setallowpowerbuttontosleepcomputer off > /dev/null 2>&1
+sudo systemsetup -setrestartpowerfailure on > /dev/null 2>&1
+sudo systemsetup -setwakeonnetworkaccess on > /dev/null 2>&1
 sudo pmset repeat wakeorpoweron MTWRFSU  12:00:00
 echo "ENERGY PREFERENCES ARE SET"
 sudo networksetup -setdnsservers Ethernet 66.185.16.130 66.185.16.131
