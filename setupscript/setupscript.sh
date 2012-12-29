@@ -34,13 +34,14 @@ sudo defaults write /library/preferences/com.apple.loginwindow PowerOffDisabled 
 sudo defaults write /library/preferences/com.apple.loginwindow SHOWFULLNAME -bool true
 echo "LOGIN WINDOW PREFERENCES ARE SET"
 defaults write com.apple.systemuiserver menuExtras -array "/System/Library/CoreServices/Menu Extras/RemoteDesktop.menu" "/System/Library/CoreServices/Menu Extras/TimeMachine.menu" "/System/Library/CoreServices/Menu Extras/Volume.menu" "/System/Library/CoreServices/Menu Extras/Clock.menu"
-echo "WIFI AND BLUETOOTH ICONS ARE REMOVED FROM MENU BAR""
+echo "WIFI AND BLUETOOTH ICONS ARE REMOVED FROM MENU BAR"
 sudo defaults write /Library/Preferences/com.apple.Bluetooth.plist ControllerPowerState -bool false
 echo "BLUETOOTH PREFERENCES ARE SET"
 echo "...."
 echo "MAKE SURE SHARE PREFERENCES ARE CONFIGURED"
 echo "RUN SOFTWARE UPDATES"
 echo "REBOOT FOR ALL CHANGES TO TAKE EFFECT"
+
 else
 echo "SORRY, THIS IS ONLY FOR OS X 10.6 OR NEWER"
 fi
