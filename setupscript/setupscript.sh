@@ -83,7 +83,7 @@ echo "SOFTWARE UPDATES CAN TAKE 10+ MINUTES"
 spinner()
 {
     local pid=softwareupdate
-    local delay=0.75
+    local delay=0.5
     local spinstr='|/-\'
     while [ "$(ps a | awk '{print $5}' | grep $pid)" ]; do
         local temp=${spinstr#?}
