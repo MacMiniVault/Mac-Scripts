@@ -42,6 +42,7 @@ sudo systemsetup -setremotelogin on > /dev/null 2>&1
 sudo defaults write /var/db/launchd.db/com.apple.launchd/overrides.plist com.apple.screensharing -dict Disabled -bool true
 sudo defaults write /var/db/launchd.db/com.apple.launchd/overrides.plist com.apple.screensharing -dict Disabled -bool false
 sudo launchctl load /System/Library/LaunchDaemons/com.apple.screensharing.plist
+echo "REMOTE LOGIN AND SCREEN SHARING ARE ENABLED"
 defaults write ~/Library/Preferences/com.apple.systemuiserver menuExtras -array "/System/Library/CoreServices/Menu Extras/RemoteDesktop.menu" "/System/Library/CoreServices/Menu Extras/TimeMachine.menu" "/System/Library/CoreServices/Menu Extras/Volume.menu" "/System/Library/CoreServices/Menu Extras/Clock.menu"
 sudo killall SystemUIServer
 echo "WIFI AND BLUETOOTH ICONS ARE REMOVED FROM MENU BAR"
@@ -58,7 +59,8 @@ sudo mv /System/Library/Extensions/IOBluetoothHIDDriver.kext $bk
 sudo mv /System/Library/Extensions/AppleHIDKeyboard.kext/Contents/PlugIns/AppleBluetoothHIDKeyboard.kext $bk
 sudo mv /System/Library/Extensions/AppleHIDMouse.kext/Contents/PlugIns/AppleBluetoothHIDMouse.kext $bk
 sudo touch /System/Library/Extensions
-echo "BLUETOOTH PREFERENCES ARE SET"
+echo "BLUETOOTH IS DISABLED" 
+echo "...."
 echo "...."
 echo "MAKE SURE TO NAME COMPUTER IN SHARING PREFERENCES"
 echo "QUICK, CHANGE THE COMPUTER NAME NOW"
