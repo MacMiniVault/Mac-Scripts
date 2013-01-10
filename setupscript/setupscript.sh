@@ -1,4 +1,7 @@
 #!/bin/bash
+# REQUEST ADMIN PASSWORD AND KEEP ALIVE
+sudo -v
+while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
 # MAKES SURE WE ARE AT LEAST RUNNING 10.8 OR NEWER
 if [[  $(sw_vers -productVersion | grep '10.[8-9]') ]]
 then
@@ -33,6 +36,12 @@ echo "FINDER PREFERENCES ARE SET"
 sudo defaults write /library/preferences/com.apple.loginwindow PowerOffDisabled -bool true
 sudo defaults write /library/preferences/com.apple.loginwindow SHOWFULLNAME -bool true
 echo "LOGIN WINDOW PREFERENCES ARE SET"
+sudo scutil --set ComputerName "xxx.macminivault.com"
+echo "yes" | sudo systemsetup -setremotelogin off > /dev/null 2>&1
+sudo systemsetup -setremotelogin on > /dev/null 2>&1
+sudo defaults write /var/db/launchd.db/com.apple.launchd/overrides.plist com.apple.screensharing -dict Disabled -bool true
+sudo defaults write /var/db/launchd.db/com.apple.launchd/overrides.plist com.apple.screensharing -dict Disabled -bool false
+sudo launchctl load /System/Library/LaunchDaemons/com.apple.screensharing.plist
 #
 # NOTE: MENU BAR AND BLUETOOTH SETTINGS ARE NOT FUNCTIONING
 #
@@ -47,9 +56,16 @@ echo "LOGIN WINDOW PREFERENCES ARE SET"
 #blueutil off 
 #echo "BLUETOOTH PREFERENCES ARE SET"
 echo "...."
-echo "MAKE SURE SHARING PREFERENCES ARE CONFIGURED"
-echo "RUN SOFTWARE UPDATES"
-echo "REBOOT FOR ALL CHANGES TO TAKE EFFECT"
+echo "MAKE SURE TO NAME COMPUTER IN SHARING PREFERENCES"
+echo "QUICK, CHANGE THE COMPUTER NAME NOW"
+echo "...."
+echo "...."
+echo "RUNNING SOFTWARE UPDATES"
+echo "MACHINE WILL REBOOT AFTER SOFTWARE UPDATES"
+cd ~/Downloads
+curl -s -o bar.sh https://raw.github.com/MacMiniVault/Mac-Scripts/master/setupscript/bar.sh
+sudo softwareupdate -i -r
+sudo reboot
 else
 echo "SORRY, THIS IS ONLY FOR OS X 10.8 OR NEWER"
 fi
