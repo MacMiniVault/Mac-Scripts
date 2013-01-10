@@ -42,8 +42,10 @@ read MINI
 sudo scutil --set ComputerName "$MINI.macminivault.com"
 echo "COMPUTER NAME SET"
 echo "yes" | sudo systemsetup -setremotelogin off > /dev/null 2>&1
+sleep 5
 sudo systemsetup -setremotelogin on > /dev/null 2>&1
 sudo defaults write /var/db/launchd.db/com.apple.launchd/overrides.plist com.apple.screensharing -dict Disabled -bool true
+sleep 5
 sudo defaults write /var/db/launchd.db/com.apple.launchd/overrides.plist com.apple.screensharing -dict Disabled -bool false
 sudo launchctl load /System/Library/LaunchDaemons/com.apple.screensharing.plist
 echo "REMOTE LOGIN AND SCREEN SHARING ARE ENABLED"
@@ -68,8 +70,10 @@ echo "...."
 echo "...."
 echo "RUNNING SOFTWARE UPDATES"
 echo "MACHINE WILL REBOOT AFTER SOFTWARE UPDATES ARE INSTALLED"
-sudo softwareupdate -i -r -v
-sudo reboot
+sudo softwareupdate -i -r 
+history -c
+clear
+sudo reboot > /dev/null 2>&1
 else
 echo "SORRY, THIS IS ONLY FOR OS X 10.8 OR NEWER"
 fi
