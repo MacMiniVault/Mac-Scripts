@@ -36,7 +36,11 @@ echo "FINDER PREFERENCES ARE SET"
 sudo defaults write /library/preferences/com.apple.loginwindow PowerOffDisabled -bool true
 sudo defaults write /library/preferences/com.apple.loginwindow SHOWFULLNAME -bool true
 echo "LOGIN WINDOW PREFERENCES ARE SET"
-sudo scutil --set ComputerName "xxx.macminivault.com"
+MINI=xxx
+echo "WHAT MACHINE IS THIS? (e.g.; a1-8, d8-8, e16-5)"
+read MINI
+sudo scutil --set ComputerName "$MINI.macminivault.com"
+echo "COMPUTER NAME SET"
 echo "yes" | sudo systemsetup -setremotelogin off > /dev/null 2>&1
 sudo systemsetup -setremotelogin on > /dev/null 2>&1
 sudo defaults write /var/db/launchd.db/com.apple.launchd/overrides.plist com.apple.screensharing -dict Disabled -bool true
@@ -60,10 +64,6 @@ sudo mv /System/Library/Extensions/AppleHIDKeyboard.kext/Contents/PlugIns/AppleB
 sudo mv /System/Library/Extensions/AppleHIDMouse.kext/Contents/PlugIns/AppleBluetoothHIDMouse.kext $bk
 sudo touch /System/Library/Extensions
 echo "BLUETOOTH IS DISABLED" 
-echo "...."
-echo "...."
-echo "MAKE SURE TO NAME COMPUTER IN SHARING PREFERENCES"
-echo "QUICK, CHANGE THE COMPUTER NAME NOW"
 echo "...."
 echo "...."
 echo "RUNNING SOFTWARE UPDATES"
