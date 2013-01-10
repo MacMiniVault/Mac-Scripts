@@ -42,29 +42,31 @@ sudo systemsetup -setremotelogin on > /dev/null 2>&1
 sudo defaults write /var/db/launchd.db/com.apple.launchd/overrides.plist com.apple.screensharing -dict Disabled -bool true
 sudo defaults write /var/db/launchd.db/com.apple.launchd/overrides.plist com.apple.screensharing -dict Disabled -bool false
 sudo launchctl load /System/Library/LaunchDaemons/com.apple.screensharing.plist
-#
-# NOTE: MENU BAR AND BLUETOOTH SETTINGS ARE NOT FUNCTIONING
-#
-#defaults write com.apple.systemuiserver menuExtras -array "/System/Library/CoreServices/Menu Extras/RemoteDesktop.menu" "/System/Library/CoreServices/Menu Extras/TimeMachine.menu" "/System/Library/CoreServices/Menu Extras/Volume.menu" "/System/Library/CoreServices/Menu Extras/Clock.menu"
-#sudo killall SystemUIServer
-#echo "WIFI AND BLUETOOTH ICONS ARE REMOVED FROM MENU BAR"
-#cd ~/Downloads
-#curl -O -s https://raw.github.com/MacMiniVault/Mac-Scripts/master/setupscript/blueutil
-#sudo mkdir -p /usr/local/bin
-#sudo mv blueutil /usr/local/bin/
-#sudo chmod 744 /usr/local/bin/blueutil
-#blueutil off 
-#echo "BLUETOOTH PREFERENCES ARE SET"
+defaults write ~/Library/Preferences/com.apple.systemuiserver menuExtras -array "/System/Library/CoreServices/Menu Extras/RemoteDesktop.menu" "/System/Library/CoreServices/Menu Extras/TimeMachine.menu" "/System/Library/CoreServices/Menu Extras/Volume.menu" "/System/Library/CoreServices/Menu Extras/Clock.menu"
+sudo killall SystemUIServer
+echo "WIFI AND BLUETOOTH ICONS ARE REMOVED FROM MENU BAR"
+launchctl unload -w /System/Library/LaunchAgents/com.apple.bluetoothUIServer.plist
+launchctl unload -w /System/Library/LaunchAgents/com.apple.bluetoothAudioAgent.plist
+sudo launchctl unload -w /System/Library/LaunchDaemons/com.apple.blued.plist
+sudo launchctl unload -w /System/Library/LaunchDaemons/com.apple.bnepd.plist
+sudo launchctl unload -w /System/Library/LaunchDaemons/com.apple.IOBluetoothUSBDFU.plist
+bk=~/backup-bluetooth-extensions
+mkdir $bk
+sudo mv /System/Library/Extensions/AppleBluetoothMultitouch.kext $bk
+sudo mv /System/Library/Extensions/IOBluetoothFamily.kext $bk
+sudo mv /System/Library/Extensions/IOBluetoothHIDDriver.kext $bk
+sudo mv /System/Library/Extensions/AppleHIDKeyboard.kext/Contents/PlugIns/AppleBluetoothHIDKeyboard.kext $bk
+sudo mv /System/Library/Extensions/AppleHIDMouse.kext/Contents/PlugIns/AppleBluetoothHIDMouse.kext $bk
+sudo touch /System/Library/Extensions
+echo "BLUETOOTH PREFERENCES ARE SET"
 echo "...."
 echo "MAKE SURE TO NAME COMPUTER IN SHARING PREFERENCES"
 echo "QUICK, CHANGE THE COMPUTER NAME NOW"
 echo "...."
 echo "...."
 echo "RUNNING SOFTWARE UPDATES"
-echo "MACHINE WILL REBOOT AFTER SOFTWARE UPDATES"
-cd ~/Downloads
-curl -s -o bar.sh https://raw.github.com/MacMiniVault/Mac-Scripts/master/setupscript/bar.sh
-sudo softwareupdate -i -r
+echo "MACHINE WILL REBOOT AFTER SOFTWARE UPDATES ARE INSTALLED"
+sudo softwareupdate -i -r -v
 sudo reboot
 else
 echo "SORRY, THIS IS ONLY FOR OS X 10.8 OR NEWER"
