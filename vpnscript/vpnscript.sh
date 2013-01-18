@@ -3,7 +3,7 @@
 # AUTHOR: JONATHAN SCHWENN @JONSCHWENN      #
 # MAC MINI VAULT - MAC MINI COLOCATION      #
 # MACMINIVAULT.COM - @MACMINIVAULT          #
-# VERSION 1.01 RELEASE DATE DEC 19, 2012    #
+# VERSION 1.02 RELEASE DATE JAN 17, 2013    #
 # DESC:  THIS SCRIPT SETS UP A VPN SERVER   #
 #        THAT PLACES VPN CLIENTS IN A LOCAL #
 #        VLAN, ALLOWING CLIENTS TO ROUTE    #
@@ -104,8 +104,12 @@ sudo sed -i -e 's/^scrub-anchor "100.I/#scrub-anchor "100.I/' /etc/pf.anchors/co
 sudo sed -i -e 's/^nat-anchor "100.I/#nat-anchor "100.I/' /etc/pf.anchors/com.apple
 sudo sed -i -e 's/^rdr-anchor "100.I/#rdr-anchor "100.I/' /etc/pf.anchors/com.apple
 sudo sed -i -e 's/^anchor "100.I/#anchor "100.I/' /etc/pf.anchors/com.apple
+#COMMENT OUT ADAPTIVE FIREWALL ON 10.8.1
+if [[  $(sw_vers -productVersion | grep '10.8.1')  ]]
+then
 sudo sed -i -e 's/^anchor "400.A/#anchor "400.A/' /etc/pf.anchors/com.apple
 sudo sed -i -e 's/^load anchor "400.A/#load anchor "400.A/' /etc/pf.anchors/com.apple
+fi
 sudo sed  -i -e '/^#anchor "100.I/  a\ 
 nat-anchor "100.customNATRules/*"\
 rdr-anchor "100.customNATRules/*"\
