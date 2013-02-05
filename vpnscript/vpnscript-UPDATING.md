@@ -8,5 +8,9 @@ If VPN stops connecting or routing client traffic after upgrading Server.app be 
 
 ### If VLAN configuration is missing run the following commands in terminal:
 
+*First run:*
+
 	sudo networksetup -createVLAN LAN Ethernet 1
+
+*Then run:*
 	sudo networksetup -setmanual LAN\ Configuration 10.0.0.1 255.255.255.0 10.0.0.1
