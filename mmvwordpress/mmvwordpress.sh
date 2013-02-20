@@ -60,7 +60,7 @@ sudo sed -i -e "s/^define('DB_NAME', 'database_name_here');/define('DB_NAME', '$
 sudo sed -i -e "s/^define('DB_USER', 'username_here');/define('DB_USER', '$wpname');/" /Library/Server/Web/Data/Sites/$domain/wp-config.php > /dev/null 2>&1
 sudo sed -i -e "s/^define('DB_PASSWORD', 'password_here');/define('DB_PASSWORD', '$wppass');/" /Library/Server/Web/Data/Sites/$domain/wp-config.php > /dev/null 2>&1
 sudo chown -R _www:staff /Library/Server/Web/Data/Sites/$domain > /dev/null 2>&1
-
+echo "SUCCESS: CREATE VIRTUAL HOST IN SERVER.APP AND FOLLOW REST OF READ-ME DOCUMENTATION"
 #LEAVING THIS AREA BLANK
 
 #EVENTUALLY WANT TO SCRIPT IN VHOST CREATION WITH serveradmin
