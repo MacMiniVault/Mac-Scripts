@@ -31,7 +31,7 @@ echo "..."
 echo "..."
 open MySQL.prefPane/
 echo "..."
-sleep 5
+sleep 15
 sudo /usr/local/mysql/support-files/mysql.server start
 echo "export PATH=$PATH:/usr/local/mysql/bin" >> ~/.bash_profile
 sudo mkdir /var/mysql; sudo ln -s /tmp/mysql.sock /var/mysql/mysql.sock
