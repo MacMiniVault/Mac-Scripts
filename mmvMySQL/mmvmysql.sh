@@ -44,9 +44,10 @@ echo "Placing password on desktop..."
 mysql -uroot -e "GRANT ALL ON *.* TO 'root'@'localhost' IDENTIFIED BY '$mypass' WITH GRANT OPTION;"
 echo "..."
 echo "..."
-echo "ALL DONE!  Install Sequel Pro or phpmyadmin to administer MySQL"
 hdiutil detach -quiet /Volumes/mysql-5.6.10-osx10.7-x86_64/
-
+sleep 2
+rm ~/Downloads/MySQL.dmg
+echo "ALL DONE!  Install Sequel Pro or phpmyadmin to administer MySQL"
 else
 "SORRY, MySQL IS NOT RUNNING ... THERE MUST BE A PROBLEM"
 else
