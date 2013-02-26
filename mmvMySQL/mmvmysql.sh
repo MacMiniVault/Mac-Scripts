@@ -50,6 +50,7 @@ rm ~/Downloads/MySQL.dmg
 echo "ALL DONE!  Install Sequel Pro or phpmyadmin to administer MySQL"
 else
 "SORRY, MySQL IS NOT RUNNING ... THERE MUST BE A PROBLEM"
+fi
 else
 echo "ERROR: YOU ARE NOT RUNNING OS X 10.7 OR NEWER"
 exit 1
