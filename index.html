@@ -33,48 +33,48 @@
       <section id="main_content" class="inner">
         <h3>We try to make Mac servers "just work"</h3>
 
-<p><a href="http://www.macminivault.com/">Mac Mini Vault</a> is division of <a href="http://www.cyberlynk.net/">CyberLynk</a> , a data center company located near Milwaukee, WI.  We have hundreds of Macs in our data center.  Right now we are up to four dedicated 48U cabinets that do nothing but host Mac minis.  Each of which can hold up to 140 Mac minis. </p>
+<p><a href="http://www.macminivault.com/">Mac Mini Vault</a> is division of <a href="http://www.cyberlynk.net/">CyberLynk</a> , a data center company located near Milwaukee, WI.  We have hundreds of Macs in our data center.  Right now we are up to six dedicated 48U cabinets that do nothing but host Mac minis.  Each of which can hold up to 140 Mac minis. </p>
 
 <p>Normally colocation is hands-off from the view point of the data center.  The customer owns the equipment and ultimately runs their own show.  Our approach is slightly different.  We have free hands-on support hours.  We also do a lot of testing.  The testing that we do revolves around making our customer's lives easier and automating the living hell out of any manual task.  Manual tasks can be messy, include typos, and most unfortunately can render a machine dead in the water.</p>
 
-<p>We've done things like create 10 different operating system 'images' for the 2011 Mac mini hardware.  This includes 3 distributions of Linux, Windows Server 2k8/2k12, and even OS X 10.6 and 10.6 Server.  We've also created little apps or scripts that automate tasks that we regularly see customers struggle with.</p>
+<p>We've done things like create 10 different operating system 'images' for the 2011 and 2012 Mac mini hardware.  This includes 3 distributions of Linux, Windows Server 2k8/2k12, and even OS X 10.6 and 10.6 Server <em>(10.6 will only run on 2011 or older hardware)</em>.  We've also created little apps or scripts that automate tasks that we regularly see customers struggle with.</p>
 
 <p>We have taken a few scripts that we've complied and put them in this GitHub project to further develop and grow them.</p>
 
 <h3>MMV MySQL Script</h3>
 
-<p>This script downloads and installs MySQL on OS X 10.7 or newer.</p>
+<p>This script downloads and installs MySQL on OS X 10.7 or newer.  Running it is as simple as copying and pasting this bash line into terminal:</p>
 
 <h5>NOTE: READ THE <a href="https://github.com/MacMiniVault/Mac-Scripts/blob/master/mmvMySQL/mmvmysql-README.md">README FILE</a> BEFORE RUNNING!</h5>
 
-<pre><code>$ bash &lt;(curl -s https://raw.github.com/MacMiniVault/Mac-Scripts/master/mmvMySQL/mmvmysql.sh)
+<pre><code>bash &lt;(curl -s https://raw.github.com/MacMiniVault/Mac-Scripts/master/mmvMySQL/mmvmysql.sh)
 </code></pre>
 
 <h3>VPN Script</h3>
 
-<p>This script sets up a VPN server on a Mac running 10.8 with Server.app.  Be sure to read the vpnscript-README file first. This script automates the VLAN, DNS, Firewall, and VPN configuration steps.  Running it is as simple as:</p>
+<p>This script sets up a VPN server on a Mac running 10.8 with Server.app.  Be sure to read the vpnscript-README file first. This script automates the VLAN, DNS, Firewall, and VPN configuration steps.  Running it is as simple as copying and pasting this bash line into terminal:</p>
 
 <h5>NOTE: READ THE <a href="https://github.com/MacMiniVault/Mac-Scripts/blob/master/vpnscript/vpnscript-README.md">README FILE</a> BEFORE RUNNING!</h5>
 
-<pre><code>$ bash &lt;(curl -s https://raw.github.com/MacMiniVault/Mac-Scripts/master/vpnscript/vpnscript.sh)
+<pre><code>bash &lt;(curl -s https://raw.github.com/MacMiniVault/Mac-Scripts/master/vpnscript/vpnscript.sh)
 </code></pre>
 
 <h3>MMV Wordpress Script</h3>
 
-<p>This script blasts out a WordPress install in seconds.  It needs OS X 10.8 with Server.app setup and running.  It also requires MySQL to be installed, we have a <a href="http://www.macminivault.com/mysql-mountain-lion/">tutorial</a> on how to do that.  It automates 95% of the process, allowing you to to a WordPress install up and running that allows for WordPress updates, plugin installs, media and theme uploads from within the WordPress backed. Currently there is a manual step required which is to create the website entry in Server.app.  Be sure to read the mmvwordpress-README file first. Running it is as simple as:</p>
+<p>This script blasts out a WordPress install in seconds.  It needs OS X 10.8 with Server.app setup and running.  It also requires MySQL to be installed, we have a <a href="http://www.macminivault.com/mysql-mountain-lion/">tutorial</a> on how to do that.  It automates 95% of the process, allowing you to to a WordPress install up and running that allows for WordPress updates, plugin installs, media and theme uploads from within the WordPress backed. Currently there is a manual step required which is to create the website entry in Server.app.  Be sure to read the mmvwordpress-README file first. Running it is as simple as copying and pasting this bash line into terminal:</p>
 
 <h5>NOTE: READ THE <a href="https://github.com/MacMiniVault/Mac-Scripts/blob/master/mmvwordpress/mmvwordpress-README.md">README FILE</a> BEFORE RUNNING!</h5>
 
-<pre><code>$ bash &lt;(curl -shttps://raw.github.com/MacMiniVault/Mac-Scripts/master/mmvwordpress/mmvwordpress.sh)
+<pre><code>bash &lt;(curl -shttps://raw.github.com/MacMiniVault/Mac-Scripts/master/mmvwordpress/mmvwordpress.sh)
 </code></pre>
 
 <h3>Disable Bonjour Script</h3>
 
-<p>By default Macs advertise their existence on the network they are connected to with a DNS Multicast protocol. This allows one Mac to see and easily connect to other Macs and devices on the network. This doesn't work so well when you have hundreds of Macs on the same network and businesses, schools, and data centers regularly disable this functionality. It can be done by edited a plist file and adding in a specific flag. If this file is <em>not</em> edited properly, the Mac can cease to resolve DNS or may no longer boot. This script quickly detects the version of OS X and makes sure the flag is not currently sets and painlessly edits the plist file.  Be sure to read the disablebonjour-README file first. Running it is as simple as:</p>
+<p>By default Macs advertise their existence on the network they are connected to with a DNS Multicast protocol. This allows one Mac to see and easily connect to other Macs and devices on the network. This doesn't work so well when you have hundreds of Macs on the same network and businesses, schools, and data centers regularly disable this functionality. It can be done by edited a plist file and adding in a specific flag. If this file is <em>not</em> edited properly, the Mac can cease to resolve DNS or may no longer boot. This script quickly detects the version of OS X and makes sure the flag is not currently sets and painlessly edits the plist file.  Be sure to read the disablebonjour-README file first. Running it is as simple as copying and pasting this bash line into terminal:</p>
 
 <h5>NOTE: READ THE <a href="https://github.com/MacMiniVault/Mac-Scripts/blob/master/disablebonjour/disablebonjour-README.md">README FILE</a> BEFORE RUNNING!</h5>
 
-<pre><code>$ bash &lt;(curl -shttps://raw.github.com/MacMiniVault/Mac-Scripts/master/disablebonjour/disablebonjour.sh)
+<pre><code>bash &lt;(curl -shttps://raw.github.com/MacMiniVault/Mac-Scripts/master/disablebonjour/disablebonjour.sh)
 </code></pre>
 
 <h3>More to come!</h3>
