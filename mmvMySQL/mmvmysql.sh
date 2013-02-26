@@ -44,6 +44,7 @@ echo "Placing password on desktop..."
 /usr/local/mysql/bin/mysql -uroot -e "GRANT ALL ON *.* TO 'root'@'localhost' IDENTIFIED BY '$mypass' WITH GRANT OPTION;"
 echo "..."
 echo "..."
+cd ~/
 hdiutil detach -quiet /Volumes/mysql-5.6.10-osx10.7-x86_64/
 sleep 2
 rm ~/Downloads/MySQL.dmg
