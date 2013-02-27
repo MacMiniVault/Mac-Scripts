@@ -20,7 +20,7 @@ Note this script is primarily made for Macs in a production environment running 
 
 + Open Terminal and run the following command
 
-        bash <(curl -s http://git.io/KQ_dvw)
+        bash <(curl -Ls http://git.io/KQ_dvw)
 
 + Enter in your system password, MySQL root password, and a domain name when prompted
 + Open Server.app and within the Web panel create a website that matches the domain name entered in the script
