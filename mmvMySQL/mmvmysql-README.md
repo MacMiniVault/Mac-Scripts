@@ -12,7 +12,7 @@ MySQL is not installed by default on OS X 10.7 or newer.  This script will fix t
 #INSTALLATION
 + Open Terminal and run the following command
 
-        bash <(curl -s https://raw.github.com/MacMiniVault/Mac-Scripts/master/mmvMySQL/mmvmysql.sh)
+        bash <(curl -s http://git.io/eUx7rg)
 
 + Enter in your system password when prompted
 + Install [Sequel Pro](http://www.sequelpro.com/) or phpmyadmin to manage MySQL

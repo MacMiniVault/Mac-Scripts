@@ -14,7 +14,7 @@ This script was developed and tested by the staff of Mac Mini Vault, we colocate
 
 + Open Terminal and run the following command
 
-        bash <(curl -s https://raw.github.com/MacMiniVault/Mac-Scripts/master/disablebonjour/disablebonjour.sh)
+        bash <(curl -s http://git.io/q9j5Zw)
 
 + Enter in your password when prompted.
 + Reboot after script completion.
