@@ -29,7 +29,11 @@ echo "..."
 echo "Click Install to install the MySQL preferance pane"
 echo "..."
 echo "..."
-open MySQL.prefPane/
+# MOVING PREFPANE TO DOWNLOADS FOLDER SO IT CAN STILL BE INSTALLED
+# AFTER THE SCRIPT COMPLETES AND REMOVES THE INSTALLER FILES
+# AS SCRIPT DOESN'T WAIT FOR USER TO CLICK "INSTALL" FOR PREFPANE
+cp -R MySQL.prefPane ~/Downloads/MySQL.prefpane
+open ~/Downloads/MySQL.prefPane/
 echo "..."
 sleep 15
 sudo /usr/local/mysql/support-files/mysql.server start
