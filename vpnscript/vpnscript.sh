@@ -104,12 +104,8 @@ sudo sed -i -e 's/^scrub-anchor "100.I/#scrub-anchor "100.I/' /etc/pf.anchors/co
 sudo sed -i -e 's/^nat-anchor "100.I/#nat-anchor "100.I/' /etc/pf.anchors/com.apple
 sudo sed -i -e 's/^rdr-anchor "100.I/#rdr-anchor "100.I/' /etc/pf.anchors/com.apple
 sudo sed -i -e 's/^anchor "100.I/#anchor "100.I/' /etc/pf.anchors/com.apple
-#COMMENT OUT ADAPTIVE FIREWALL ON 10.8.1
-if [[  $(sw_vers -productVersion | grep '10.8.1')  ]]
-then
-sudo sed -i -e 's/^anchor "400.A/#anchor "400.A/' /etc/pf.anchors/com.apple
-sudo sed -i -e 's/^load anchor "400.A/#load anchor "400.A/' /etc/pf.anchors/com.apple
-fi
+#FIX APPLE TYPO FOR ADAPTIVE FIREWALL - APPLE KB TS4418
+sudo sed -i -e 's/^load anchor "400.AdaptiveFirewall\//load anchor "400.AdaptiveFirewall/' /etc/pf.anchors/com.apple
 sudo sed  -i -e '/^#anchor "100.I/  a\ 
 nat-anchor "100.customNATRules/*"\
 rdr-anchor "100.customNATRules/*"\
