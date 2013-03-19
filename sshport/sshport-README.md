@@ -24,4 +24,4 @@ This script was developed and tested by the staff of Mac Mini Vault, we colocate
 + Enter in a valid port number 
 - Note: This script does not prevent you from using other active ports!  Choose wisely, we recommend something high up above 1000.
 + Enter in your password when prompted.
-+ Reboot after script completion.
++ Thats it!  (re-run script and enter "22" to return to factory setting)
