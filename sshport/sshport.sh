@@ -19,7 +19,7 @@ echo "TO 22, JUST ENTER "22" FOR THE PORT NUMBER."
 echo "........."
 echo "PLEASE ENTER A PORT NUMBER:"
 while read port; do
-	if [[ $port =~ [0-9]{2,10} ]]; then
+	if [[ $port =~ ^[0-9]{2,10}$ ]]; then
 		if [[ $port = 22 ]]; then
 			sudo /usr/libexec/PlistBuddy -c "Set Sockets:Listeners:SockServiceName ssh" /System/Library/LaunchDaemons/ssh.plist 
 echo "SYSTEM WILL NOW LISTEN ON DEFAULT PORT 22 FOR SSH"
