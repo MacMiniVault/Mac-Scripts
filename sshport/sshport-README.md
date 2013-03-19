@@ -25,3 +25,5 @@ This script was developed and tested by the staff of Mac Mini Vault, we colocate
 - Note: This script does not prevent you from using other active ports!  Choose wisely, we recommend something high up above 1000.
 + Enter in your password when prompted.
 + Thats it!  (re-run script and enter "22" to return to factory setting)
++ To connect to the server just add the port number to your ssh command.  If your alternative port was 9222, the command would be:
+				ssh -p9222 user@server.example.com
