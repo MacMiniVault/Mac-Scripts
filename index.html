@@ -101,13 +101,16 @@
 
 <hr><p>Enabling remote SSH access on a Mac is simplistic and easy. Under the sharing preferences there is a 'Remote Login' option that requires a single click to be activated. This allows for some powerful remote access via the command line. SFTP file transfers and remotely diagnosing a distressed Mac with non-functioning VNC/ARD access are two prime examples for enabling Remote Login.</p>
 
-<p>If this machine is live on the internet and port 22 is not being filtered by a firewall then you may run into some unwanted attention. Bots and scanners crawl the web looking for responses on port 22. The majority of the time this results in no harm, as they have to randomly guess login credentials. For the peace of mind and a little added security, running SSH on a non-standard port is just a good idea.</p>
-
-<p>For a list of standard port numbers check out article TS1629 in Apple's Knowledge Base.</p>
+<p>If this machine is live on the internet and port 22 is not being filtered by a firewall then you may run into some unwanted attention. Bots and scanners crawl the web looking for responses on port 22. The majority of the time this results in no harm, as they have to randomly guess login credentials. For the peace of mind and a little added security, running SSH on a non-standard port is just a good idea. Running it is as simple as copying and pasting this bash line into terminal:</p>
 
 <h6>NOTE: READ THE <a href="https://github.com/MacMiniVault/Mac-Scripts/blob/master/sshport/sshport-README.md">README FILE</a> BEFORE RUNNING!</h6>
 
 <pre><code>bash &lt;(curl -Ls http://git.io/_9fF7g)
+</code></pre>
+
+<p>To connect to the server just add the port number to your ssh command. If your alternative port was 9222, the command would be:</p>
+
+<pre><code>ssh -p9222 user@server.example.com
 </code></pre>
 
 <p>.</p>
