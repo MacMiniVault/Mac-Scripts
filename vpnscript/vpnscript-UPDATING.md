@@ -1,6 +1,6 @@
-# NOTICE FOR UPDATING SERVER.APP WITH VPN CONFIG
+# NOTICE FOR UPDATING SERVER.APP or OS X WITH VPN CONFIG
 ===========
-If VPN stops connecting or routing client traffic after upgrading Server.app be sure to try a few things:
+If VPN stops connecting or routing client traffic after upgrading Server.app or OS X be sure to try a few things:
 
 + Reboot 
 + Turn VPN off and on
@@ -13,4 +13,5 @@ If VPN stops connecting or routing client traffic after upgrading Server.app be 
 	sudo networksetup -createVLAN LAN Ethernet 1
 
 *Then run:*
-	sudo networksetup -setmanual LAN\ Configuration 10.0.0.1 255.255.255.0 10.0.0.1
+
+	sudo networksetup -setmanual LAN\ Configuration 10.0.0.1 255.255.255.0 10.0.0.1
