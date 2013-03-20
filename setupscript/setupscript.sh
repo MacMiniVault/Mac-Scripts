@@ -71,7 +71,8 @@ sudo mv /System/Library/Extensions/AppleBluetoothMultitouch.kext $bk
 sudo mv /System/Library/Extensions/IOBluetoothFamily.kext $bk
 sudo mv /System/Library/Extensions/IOBluetoothHIDDriver.kext $bk
 sudo mv /System/Library/Extensions/AppleHIDKeyboard.kext/Contents/PlugIns/AppleBluetoothHIDKeyboard.kext $bk
-sudo mv /System/Library/Extensions/AppleHIDMouse.kext/Contents/PlugIns/AppleBluetoothHIDMouse.kext $bk
+#COMMENTED OUT FOR 10.8.3
+#sudo mv /System/Library/Extensions/AppleHIDMouse.kext/Contents/PlugIns/AppleBluetoothHIDMouse.kext $bk
 sudo touch /System/Library/Extensions
 echo "BLUETOOTH IS DISABLED" 
 echo "...."
