@@ -49,7 +49,7 @@ sudo scutil --set ComputerName "$MINI.macminivault.com"
 echo "COMPUTER NAME SET"
 echo "yes" | sudo systemsetup -setremotelogin off > /dev/null 2>&1
 sleep 5
-sudo systemsetup -setremotelogin on > /dev/null 2>&1
+#sudo systemsetup -setremotelogin on > /dev/null 2>&1
 sudo defaults write /var/db/launchd.db/com.apple.launchd/overrides.plist com.apple.screensharing -dict Disabled -bool true
 sleep 5
 sudo defaults write /var/db/launchd.db/com.apple.launchd/overrides.plist com.apple.screensharing -dict Disabled -bool false
