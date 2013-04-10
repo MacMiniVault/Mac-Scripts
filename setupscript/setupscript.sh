@@ -65,15 +65,6 @@ launchctl unload -w /System/Library/LaunchAgents/com.apple.bluetoothAudioAgent.p
 sudo launchctl unload -w /System/Library/LaunchDaemons/com.apple.blued.plist
 sudo launchctl unload -w /System/Library/LaunchDaemons/com.apple.bnepd.plist
 sudo launchctl unload -w /System/Library/LaunchDaemons/com.apple.IOBluetoothUSBDFU.plist
-bk=~/backup-bluetooth-extensions
-mkdir $bk
-sudo mv /System/Library/Extensions/AppleBluetoothMultitouch.kext $bk
-sudo mv /System/Library/Extensions/IOBluetoothFamily.kext $bk
-sudo mv /System/Library/Extensions/IOBluetoothHIDDriver.kext $bk
-sudo mv /System/Library/Extensions/AppleHIDKeyboard.kext/Contents/PlugIns/AppleBluetoothHIDKeyboard.kext $bk
-#COMMENTED OUT FOR 10.8.3
-#sudo mv /System/Library/Extensions/AppleHIDMouse.kext/Contents/PlugIns/AppleBluetoothHIDMouse.kext $bk
-sudo touch /System/Library/Extensions
 echo "BLUETOOTH IS DISABLED" 
 echo "...."
 echo "...."
