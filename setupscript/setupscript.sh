@@ -58,13 +58,15 @@ echo "REMOTE LOGIN AND SCREEN SHARING ARE ENABLED"
 defaults write ~/Library/Preferences/com.apple.systemuiserver menuExtras -array "/System/Library/CoreServices/Menu Extras/RemoteDesktop.menu" "/System/Library/CoreServices/Menu Extras/TimeMachine.menu" "/System/Library/CoreServices/Menu Extras/Volume.menu" "/System/Library/CoreServices/Menu Extras/Clock.menu"
 sudo killall SystemUIServer
 echo "WIFI AND BLUETOOTH ICONS ARE REMOVED FROM MENU BAR"
-# UNLOAD AND MOVE BLUETOOTH EXTENTIONS
 # DISABLES THE ANNOYING "NO KEYBOARD" BLUETOOTH POPUP
-launchctl unload -w /System/Library/LaunchAgents/com.apple.bluetoothUIServer.plist
-launchctl unload -w /System/Library/LaunchAgents/com.apple.bluetoothAudioAgent.plist
+sudo launchctl unload -w /System/Library/LaunchAgents/com.apple.bluetoothUIServer.plist
+sudo launchctl unload -w /System/Library/LaunchAgents/com.apple.bluetoothAudioAgent.plist
 sudo launchctl unload -w /System/Library/LaunchDaemons/com.apple.blued.plist
 sudo launchctl unload -w /System/Library/LaunchDaemons/com.apple.bnepd.plist
 sudo launchctl unload -w /System/Library/LaunchDaemons/com.apple.IOBluetoothUSBDFU.plist
+cd /System/Library/CoreServices
+sudo mv Bluetooth\ Setup\ Assistant.app/ Bluetooth\ Setup\ Assistant-OFF.app/
+cd -
 echo "BLUETOOTH IS DISABLED" 
 echo "...."
 echo "...."
