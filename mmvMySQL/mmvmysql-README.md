@@ -15,4 +15,7 @@ MySQL is not installed by default on OS X 10.7 or newer.  This script will fix t
         bash <(curl -Ls http://git.io/eUx7rg)
 
 + Enter in your system password when prompted
++ The script will install MySQL, generate a root password and display it along with writing a file to the dekstop including the password.
++ Click to install the MySQL preference pane when prompted.
++ Close your terminal and open a new terminal to access MySQL via command line
 + Install [Sequel Pro](http://www.sequelpro.com/) or phpmyadmin to manage MySQL
