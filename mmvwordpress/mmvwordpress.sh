@@ -26,7 +26,7 @@ mv wp-config-sample.php wp-config.php
 #START WEB SERVICE AND MAKE SURE PHP IS ENABLED
 echo "YOU MAY BE ASKED FOR YOUR SYSTEM ADMINISTRATOR PASSWORD...."
 sudo /Applications/Server.app/Contents/ServerRoot/usr/sbin/serveradmin start web
-sudo webappctl start com.apple.webapp.php
+sudo /Applications/Server.app/Contents/ServerRoot/usr/sbin/webappctl start com.apple.webapp.php
 #ASK FOR DOMAIN NAME - THANKS TO @SHAUNINMAN FOR SOME OF THE REGEX USED IN VALIDATION OF DOMAIN
 echo "ENTER DOMAIN NAME:"
 regex='^[a-zA-Z0-9\-\.]+\.((a[cdefgilmnoqrstuwxz]|aero|arpa)|(b[abdefghijmnorstvwyz]|biz)|(c[acdfghiklmnorsuvxyz]|cat|com|coop)|d[ejkmoz]|(e[ceghrstu]|edu)|f[ijkmor]|(g[abdefghilmnpqrstuwy]|gov)|h[kmnrtu]|(i[delmnoqrst]|info|int)|(j[emop]|jobs)|k[eghimnprwyz]|l[abcikrstuvy]|(m[acdghklmnopqrstuvwxyz]|mil|mobi|museum)|(n[acefgilopruz]|name|net)|(om|org)|(p[aefghklmnrstwy]|pro)|qa|r[eouw]|s[abcdeghijklmnortvyz]|(t[cdfghjklmnoprtvwz]|travel)|u[agkmsyz]|v[aceginu]|w[fs]|y[etu]|z[amw])$'
