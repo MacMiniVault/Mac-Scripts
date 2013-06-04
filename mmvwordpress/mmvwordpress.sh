@@ -14,7 +14,7 @@
 #  MYSQL INSTALLED 
 #############################################
 #CHECK FOR OS X 10.8, SERVER.app, and MySQL
-if [[  $(sw_vers -productVersion | grep '10.8') && $(which serveradmin) && $(which mysql) ]]
+if [[  $(sw_vers -productVersion | grep '10.8') && $(serverinfo --configured | grep 'has') && $(which mysql) ]]
 then
 echo "Congratulations, you are running OS X 10.8.x and have Server.app and MySQL installed...."
 #GET LATEST WORDPRESS VERSION
@@ -25,7 +25,7 @@ cd wordpress
 mv wp-config-sample.php wp-config.php
 #START WEB SERVICE AND MAKE SURE PHP IS ENABLED
 echo "YOU MAY BE ASKED FOR YOUR SYSTEM ADMINISTRATOR PASSWORD...."
-sudo serveradmin start web
+sudo /Applications/Server.app/Contents/ServerRoot/usr/sbin/serveradmin start web
 sudo webappctl start com.apple.webapp.php
 #ASK FOR DOMAIN NAME - THANKS TO @SHAUNINMAN FOR SOME OF THE REGEX USED IN VALIDATION OF DOMAIN
 echo "ENTER DOMAIN NAME:"
@@ -33,7 +33,7 @@ regex='^[a-zA-Z0-9\-\.]+\.((a[cdefgilmnoqrstuwxz]|aero|arpa)|(b[abdefghijmnorstv
 while read domain; do
  if [[ $domain =~ $regex ]]; then 
 echo "BUILDING WORDPRESS SITE..... "
-        if [[ $(sudo serveradmin settings web | grep $domain) ]]; then
+        if [[ $(sudo /Applications/Server.app/Contents/ServerRoot/usr/sbin/serveradmin settings web | grep $domain) ]]; then
                 echo "DOMAIN ALREADY EXISTS ON THIS SERVER ..."
                 echo ""
                 echo "PLEASE ENTER A DOMAIN NAME:"
