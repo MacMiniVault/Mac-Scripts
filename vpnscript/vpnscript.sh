@@ -17,7 +17,7 @@
 #  THIS SCRIPT WILL BACKUP AND REPLACE DNS AND FIREWALL CONFIGS
 #############################################
 #CHECK FOR OS X 10.8 AND SERVER.app
-if [[  $(sw_vers -productVersion | grep '10.8') && $(which serveradmin) ]]
+if [[  $(sw_vers -productVersion | grep '10.8') && $(serverinfo --configured | grep 'has') ]]
 then
 echo "Congratulations, you are running OS X 10.8.x and have Server.app installed...."
 #CHECK IF SCRIPT HAS BEEN RUN BEFORE
@@ -28,8 +28,8 @@ else
 #CREATE TEST FILE TO ENSURE SCRIPT IS NOT EXECUTED MULTIPLE TIMES
 sudo touch /etc/vpn_MMV
 #STOP VPN AND DNS SERVICES
-sudo serveradmin stop dns > /dev/null 2>&1
-sudo serveradmin stop vpn > /dev/null 2>&1
+sudo /Applications/Server.app/Contents/ServerRoot/usr/sbin/serveradmin stop dns > /dev/null 2>&1
+sudo /Applications/Server.app/Contents/ServerRoot/usr/sbin/serveradmin stop vpn > /dev/null 2>&1
 #START VLAN SETTINGS
 sudo networksetup -createVLAN LAN Ethernet 1
 sudo networksetup -setmanual LAN\ Configuration 10.0.0.1 255.255.255.0 10.0.0.1
@@ -126,7 +126,7 @@ sudo chmod 644 /etc/pf.anchors/customNATRules
 sudo /usr/libexec/PlistBuddy -c 'add :ProgramArguments:3 string -e' /System/Library/LaunchDaemons/com.apple.pfctl.plist
 echo 'net.inet.ip.forwarding=1' | sudo tee -a /etc/sysctl.conf > /dev/null 2>&1
 #START VPN SETTINGS
-sudo serveradmin settings > /dev/null 2>&1 << EOF
+sudo /Applications/Server.app/Contents/ServerRoot/usr/sbin/serveradmin settings > /dev/null 2>&1 << EOF
 vpn:Servers:com.apple.ppp.l2tp:IPv4:DestAddressRanges:_array_index:0 = 10.0.0.150
 vpn:Servers:com.apple.ppp.l2tp:IPv4:DestAddressRanges:_array_index:1 = 10.0.0.200
 vpn:Servers:com.apple.ppp.l2tp:DNS:OfferedServerAddresses:_array_index:0 = 10.0.0.1
@@ -141,9 +141,9 @@ while read passphrase; do
           break
      fi
 done
-sudo serveradmin settings vpn:Servers:com.apple.ppp.l2tp:L2TP:IPSecSharedSecretValue = $passphrase
-sudo serveradmin start dns > /dev/null 2>&1
-sudo serveradmin start vpn > /dev/null 2>&1
+sudo /Applications/Server.app/Contents/ServerRoot/usr/sbin/serveradmin settings vpn:Servers:com.apple.ppp.l2tp:L2TP:IPSecSharedSecretValue = $passphrase
+sudo /Applications/Server.app/Contents/ServerRoot/usr/sbin/serveradmin start dns > /dev/null 2>&1
+sudo /Applications/Server.app/Contents/ServerRoot/usr/sbin/serveradmin start vpn > /dev/null 2>&1
 echo "VPN SETUP SUCCESSFUL"
 echo "REBOOT TO TAKE EFFECT"
 echo "ONCE REBOOTED, TURN VPN OFF AND BACK ON"
