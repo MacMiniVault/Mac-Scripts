@@ -10,7 +10,7 @@
 #  OS X 10.7 or newer
 #############################################
 #CHECK FOR OS X 10.7+
-if [[  $(sw_vers -productVersion | grep '10.[7-8]')  ]]
+if [[  $(sw_vers -productVersion | grep '10.[7-9]')  ]]
 then
 echo "Downloading MySQL Installers ... may take a few moments"
 curl -s -o ~/Downloads/MySQL.dmg http://cdn.mysql.com/Downloads/MySQL-5.6/mysql-5.6.10-osx10.7-x86_64.dmg
