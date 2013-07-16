@@ -40,6 +40,7 @@ sudo killall Finder
 echo "FINDER PREFERENCES ARE SET"
 sudo defaults write /library/preferences/com.apple.loginwindow PowerOffDisabled -bool true
 sudo defaults write /library/preferences/com.apple.loginwindow SHOWFULLNAME -bool true
+sudo defaults write /library/preferences/com.apple.loginwindow showInputMenu -bool true
 echo "LOGIN WINDOW PREFERENCES ARE SET"
 # SET COMPUTER NAME, DISABLE AND REENABLE REMOTE LOGIN AND SCREEN SHARING
 MINI=xxx
