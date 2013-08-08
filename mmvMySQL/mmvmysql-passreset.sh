@@ -22,7 +22,7 @@ echo $mypass > ~/Desktop/MYSQL_PASSWORD
 echo "Setting MySQL root Password to $mypass"
 echo "Placing password on desktop..."
 /usr/local/mysql/bin/mysql -uroot -e "UPDATE mysql.user SET Password=PASSWORD('$mypass') WHERE User='root'; FLUSH PRIVILEGES;"
-udo /usr/local/mysql/support-files/mysql.server stop
+sudo /usr/local/mysql/support-files/mysql.server stop
 sudo /usr/local/mysql/support-files/mysql.server start 
 
 else
