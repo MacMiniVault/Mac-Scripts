@@ -13,13 +13,13 @@
 if [[  $(sw_vers -productVersion | grep '10.[7-9]')  ]]
 then
 echo "Downloading MySQL Installers ... may take a few moments"
-curl -s -o ~/Downloads/MySQL.dmg http://cdn.mysql.com/Downloads/MySQL-5.6/mysql-5.6.12-osx10.7-x86_64.dmg
+curl -s -o ~/Downloads/MySQL.dmg http://cdn.mysql.com/Downloads/MySQL-5.6/mysql-5.6.13-osx10.7-x86_64.dmg
 hdiutil attach -quiet ~/Downloads/MySQL.dmg
-cd /Volumes/mysql-5.6.12-osx10.7-x86_64/
+cd /Volumes/mysql-5.6.13-osx10.7-x86_64/
 echo "..."
 echo "..."
 echo "Installing MySQL, administrator password required ..."
-sudo installer -pkg mysql-5.6.12-osx10.7-x86_64.pkg -target /
+sudo installer -pkg mysql-5.6.13-osx10.7-x86_64.pkg -target /
 echo "..."
 echo "..."
 echo "Installing MySQL start up items..."
@@ -49,7 +49,7 @@ echo "Placing password on desktop..."
 echo "..."
 echo "..."
 cd ~/
-hdiutil detach -quiet /Volumes/mysql-5.6.12-osx10.7-x86_64/
+hdiutil detach -quiet /Volumes/mysql-5.6.13-osx10.7-x86_64/
 sleep 2
 rm ~/Downloads/MySQL.dmg
 echo "ALL DONE!  Install Sequel Pro or phpmyadmin to administer MySQL"
