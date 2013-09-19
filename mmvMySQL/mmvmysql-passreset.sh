@@ -3,8 +3,8 @@
 # AUTHOR: JONATHAN SCHWENN @JONSCHWENN      #
 # MAC MINI VAULT - MAC MINI COLOCATION      #
 # MACMINIVAULT.COM - @MACMINIVAULT          #
-# VERSION 1.00 RELEASE DATE AUG 08 2013     #
-# DESC: SCRIPT RESETS PASS FOR MySQL on OSX  #
+# VERSION 1.01 RELEASE DATE SEPT 18 2013    #
+# DESC: SCRIPT RESETS PASS FOR MySQL on OSX #
 #############################################
 #REQUIREMENTS:
 #  OS X 10.7 or newer
@@ -22,8 +22,7 @@ echo $mypass > ~/Desktop/MYSQL_PASSWORD
 echo "Setting MySQL root Password to $mypass"
 echo "Placing password on desktop..."
 /usr/local/mysql/bin/mysql -uroot -e "UPDATE mysql.user SET Password=PASSWORD('$mypass') WHERE User='root'; FLUSH PRIVILEGES;"
-sudo /usr/local/mysql/support-files/mysql.server stop
-sudo /usr/local/mysql/support-files/mysql.server start 
+sudo /usr/local/mysql/support-files/mysql.server restart 
 
 else
 "SORRY, MySQL IS NOT RUNNING ... THERE MUST BE A PROBLEM"

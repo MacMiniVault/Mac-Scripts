@@ -3,7 +3,7 @@
 # AUTHOR: JONATHAN SCHWENN @JONSCHWENN      #
 # MAC MINI VAULT - MAC MINI COLOCATION      #
 # MACMINIVAULT.COM - @MACMINIVAULT          #
-# VERSION 1.03 RELEASE DATE SEP 16 2013     #
+# VERSION 1.04 RELEASE DATE SEP 18 2013     #
 # DESC:  THIS SCRIPT INSTALLS MySQL on OSX  #
 #############################################
 #REQUIREMENTS:
@@ -68,6 +68,37 @@ cd ~/
 hdiutil detach -quiet /Volumes/mysql-5.6.13-osx10.7-x86_64/
 sleep 2
 rm ~/Downloads/MySQL.dmg
+# NEW MY.CNF PERFORMANCE OPTION START
+echo "BASE PERFORMANCE MY.CNF IS JUST A GENERIC SUGGESTION FOR PERFORMANCE"
+echo "YOUR RESULTS MAY VARY AND YOU MAY WANT TO FURTHER TUNE YOUR MY.CNF SETTINGS"
+echo "..."
+sudo cp /usr/local/mysql/my.cnf /usr/local/mysql/mmv.cnf
+sudo tee -a /usr/local/mysql/mmv.cnf > /dev/null  << EOF
+
+# CUSTOMIZED BY MMVMySQL SCRIPT - JUST GENERIC SETTINGS
+# DO NOT TREAT AS GOSPEL
+
+skip-external-locking
+key_buffer_size = 384M
+max_allowed_packet = 1M
+table_open_cache = 512
+sort_buffer_size = 2M
+read_buffer_size = 2M
+read_rnd_buffer_size = 8M
+myisam_sort_buffer_size = 64M
+thread_cache_size = 8
+query_cache_size = 32M
+thread_concurrency = 4
+EOF
+        while true; do
+                read -p "DO YOU WANT TO LOAD A BASE PERFORMANCE MY.CNF FILE? [y/N]" cnf
+                case $cnf in
+                [Yy]* ) sudo cp /usr/local/mysql/mmv.cnf /etc/my.cnf; sudo /usr/local/mysql/support-files/mysql.server restart; break  ;;
+                [Nn]* ) break;;
+                * ) echo "Please answer yes or no.";;
+                esac
+        done
+# NEW MY.CNF PERFORMANCE OPTION END
 echo "ALL DONE!  Install Sequel Pro or phpmyadmin to administer MySQL"
 echo "Log off and log back in for 'mysql' to be recognized as a command in terminal"
 else
