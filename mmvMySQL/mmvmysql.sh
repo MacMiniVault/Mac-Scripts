@@ -13,7 +13,7 @@
 if [[  $(sw_vers -productVersion | grep '10.[7-9]')  ]]
 then
 # CHECK FOR EXISTING MySQL
-if [[ -d /usr/local/mysql -o -d /var/mysql ]]
+if [[ -d /usr/local/mysql ]]
 then
 echo "It looks like you already have MySQL installed..."
 echo "This script will most likely fail unless MySQL is completley removed"
