@@ -61,6 +61,8 @@ defaults write ~/Library/Preferences/com.apple.systemuiserver menuExtras -array 
 sudo killall SystemUIServer
 echo "WIFI AND BLUETOOTH ICONS ARE REMOVED FROM MENU BAR"
 # DISABLES THE ANNOYING "NO KEYBOARD" BLUETOOTH POPUP
+if [[  $(sw_vers -productVersion | grep '10.8') ]]
+then
 sudo rm  /System/Library/LaunchAgents/com.apple.btsa.plist
 launchctl unload -w /System/Library/LaunchAgents/com.apple.bluetoothUIServer.plist
 launchctl unload -w /System/Library/LaunchAgents/com.apple.bluetoothAudioAgent.plist
@@ -71,6 +73,7 @@ cd /System/Library/CoreServices
 sudo mv Bluetooth\ Setup\ Assistant.app/ Bluetooth\ Setup\ Assistant-OFF.app/
 cd -
 echo "BLUETOOTH IS DISABLED" 
+fi
 echo "...."
 echo "...."
 # PROGRESS SPINNER AND SOFTEWARE UPDATES
