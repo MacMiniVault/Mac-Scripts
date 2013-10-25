@@ -76,6 +76,16 @@ echo "BLUETOOTH IS DISABLED"
 fi
 echo "...."
 echo "...."
+if [[  $(sw_vers -productVersion | grep '10.9') ]]
+then
+sudo defaults write /Library/Preferences/com.apple.Bluetooth.plist ControllerPowerState '0' > /dev/null 2>&1
+sudo defaults write /Library/Preferences/com.apple.Bluetooth BluetoothAutoSeekKeyboard ‘0’ > /dev/null 2>&1
+sudo defaults write /Library/Preferences/com.apple.Bluetooth BluetoothAutoSeekPointingDevice ‘0' > /dev/null 2>&1
+sudo killall blued
+echo "BLUETOOTH IS DISABLED"
+fi
+echo "...."
+echo "...."
 # PROGRESS SPINNER AND SOFTEWARE UPDATES
 echo "RUNNING SOFTWARE UPDATES"
 echo "MACHINE WILL REBOOT AFTER SOFTWARE UPDATES ARE INSTALLED"
