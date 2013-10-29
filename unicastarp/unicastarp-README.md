@@ -1,4 +1,4 @@
-#READ ME FOR UNICAST ARP CACHE VALIDATION
+#READ ME FOR DISABLING MAVERICK'S UNICAST ARP CACHE VALIDATION
 ===========
 
 There is a new security function in OS X 10.9 Mavericks that performs validation of the ARP cache.  Basically, it's trying to attempt to see if the network gateway (router) is being spoofed/redirected.  Unfortunately it interprets our redundant routers as an issue and causes network performance, lag, and packet loss.
