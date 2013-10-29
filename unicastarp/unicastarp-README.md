@@ -7,7 +7,7 @@ Not many Macs are in this scenario, but we happen to have a lot.  Each Mac mini 
 
 To disable this function in OS X 10.9 we've written a script.  It's reversible in the future, but in the mean time it'll stop you from pulling your hair out.  Macs on high availability networks found in data centers and enterprise environments can be affected.
 
-Credit to Lunaweb in this [post](https://discussions.apple.com/message/23529716#23529716) in Apple's Community Forum.
+Credit to Lunaweb in this [post](https://discussions.apple.com/message/23529716#23529716) in Apple's Community Forum for the fix.
 
 This script was developed and tested by the staff of Mac Mini Vault, we colocate a lot of Macs and tirelessly work to add usability and streamline the plight of the Mac in the data center world.  Check out our website at http://www.macminivault.com
 
