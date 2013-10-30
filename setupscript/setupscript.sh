@@ -84,6 +84,20 @@ sudo defaults write /Library/Preferences/com.apple.Bluetooth BluetoothAutoSeekPo
 echo "BLUETOOTH IS DISABLED"
 # DISABLE IDIOTIC SETTING 'DISPLAYS HAVE SEPERATE SPACES' ON MAVERICKS
 defaults write com.apple.spaces spans-displays -bool TRUE
+# DISABLES UNICAST ARP CACHE VALIDATION
+if [[ -f /etc/sysctl.conf ]]
+then
+if grep 'unicast' /etc/sysctl.conf > /dev/null 2>&1
+then
+echo "PATCH WAS PREVIOUSLY ENABLED"
+fi
+else
+sudo sysctl -w net.link.ether.inet.arp_unicast_lim=0  > /dev/null 2>&1
+echo "net.link.ether.inet.arp_unicast_lim=0" | sudo tee -a /etc/sysctl.conf  > /dev/null 2>&1
+sudo chown root:wheel /etc/sysctl.conf
+sudo chmod 644 /etc/sysctl.conf
+echo "PATCH ENABLED"
+fi
 fi
 echo "...."
 echo "...."
