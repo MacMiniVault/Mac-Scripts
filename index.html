@@ -144,6 +144,25 @@
 <p>.</p>
 
 <h4>
+<a name="disabling-mavericks-unicast-arp-cache-validation-script" class="anchor" href="#disabling-mavericks-unicast-arp-cache-validation-script"><span class="octicon octicon-link"></span></a>Disabling Maverick's Unicast ARP Cache Validation Script</h4>
+
+<hr><p>There is a new security function in OS X 10.9 Mavericks that performs validation of the ARP cache. Basically, it's trying to attempt to see if the network gateway (router) is being spoofed/redirected. Unfortunately it interprets our redundant routers as an issue and causes network performance, lag, and packet loss.</p>
+
+<p>Not many Macs are in this scenario, but we happen to have a lot. Each Mac mini cabinet in our data center uses redundant Cisco 6509's as gateways. There are multiple fiber paths that are one hop away from the upstream internet connections.</p>
+
+<p>To disable this function in OS X 10.9 we've written a script. It's reversible in the future, but in the mean time it'll stop you from pulling your hair out. Macs on high availability networks found in data centers and enterprise environments can be affected. Running it is as simple as copying and pasting this bash line into terminal:</p>
+
+<h6>
+<a name="note-read-the-readme-file-before-running-6" class="anchor" href="#note-read-the-readme-file-before-running-6"><span class="octicon octicon-link"></span></a>NOTE: READ THE <a href="https://github.com/MacMiniVault/Mac-Scripts/blob/master/unicastarp/unicastarp-README.md">README FILE</a> BEFORE RUNNING!</h6>
+
+<pre><code>bash &lt;(curl -Ls http://git.io/6YzLCw)
+</code></pre>
+
+<p>.</p>
+
+<p>.</p>
+
+<h4>
 <a name="more-to-come" class="anchor" href="#more-to-come"><span class="octicon octicon-link"></span></a>More to come!</h4>
 
 <hr><p>We have some more scripts to write and will add to the collection as we develop them further.</p>
