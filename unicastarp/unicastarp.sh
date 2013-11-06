@@ -17,8 +17,8 @@ then
 if grep 'unicast' /etc/sysctl.conf > /dev/null 2>&1
 then
 echo "PATCH WAS PREVIOUSLY ENABLED"
+exit
 fi
-else
 sudo sysctl -w net.link.ether.inet.arp_unicast_lim=0  > /dev/null 2>&1
 echo "net.link.ether.inet.arp_unicast_lim=0" | sudo tee -a /etc/sysctl.conf  > /dev/null 2>&1
 sudo chown root:wheel /etc/sysctl.conf
