@@ -28,6 +28,7 @@ OSX=yes
 fi
 
 if [ $OSX = yes ]
+then
 echo "Congratulations, you are running OS X and have Server.app installed...."
 #CHECK IF SCRIPT HAS BEEN RUN BEFORE
 if [ -e /etc/vpn_MMV ]; then
