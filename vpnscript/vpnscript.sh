@@ -17,14 +17,15 @@
 #  THIS SCRIPT WILL BACKUP AND REPLACE DNS AND FIREWALL CONFIGS
 #############################################
 #CHECK FOR OS X AND SERVER.app
-OSX=none
+OSX=no
 if [[  $(sw_vers -productVersion | grep '10.8') && $(serverinfo --configured | grep 'has') ]]
 then
 OSX=yes
 fi
-if [[  $(sw_vers -productVersion | grep '10.') && $(serverinfo --configured | grep 'has') && $(serverinfo --shortversion | grep -v '3.0.1') ]]
+if [[  $(sw_vers -productVersion | grep '10.9') && $(serverinfo --configured | grep 'has') && $(serverinfo --shortversion | grep -v '3.0.1') ]]
 then
-OSX=yes
+#10.9 not working yet
+OSX=no
 fi
 
 if [ $OSX = yes ]
