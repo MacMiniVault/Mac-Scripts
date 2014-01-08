@@ -3,7 +3,7 @@
 # AUTHOR: JONATHAN SCHWENN @JONSCHWENN      #
 # MAC MINI VAULT - MAC MINI COLOCATION      #
 # MACMINIVAULT.COM - @MACMINIVAULT          #
-# VERSION 1.02 RELEASE DATE JAN 17, 2013    #
+# VERSION 2.00 RELEASE DATE JAN 07, 2014    #
 # DESC:  THIS SCRIPT SETS UP A VPN SERVER   #
 #        THAT PLACES VPN CLIENTS IN A LOCAL #
 #        VLAN, ALLOWING CLIENTS TO ROUTE    #
@@ -11,15 +11,24 @@
 #        ONLY USING THE SINGLE PUBLIC IP    #
 #############################################
 #REQUIREMENTS:
-#  OS X 10.8
+#  OS X 10.8 or OS X 10.9.1 w/SERVER.APP 3.0.2
 #  SERVER.APP INSTALLED / INITIALIZED
 #  NO VLANS CONFIGURED
 #  THIS SCRIPT WILL BACKUP AND REPLACE DNS AND FIREWALL CONFIGS
 #############################################
-#CHECK FOR OS X 10.8 AND SERVER.app
+#CHECK FOR OS X AND SERVER.app
+OSX=none
 if [[  $(sw_vers -productVersion | grep '10.8') && $(serverinfo --configured | grep 'has') ]]
 then
-echo "Congratulations, you are running OS X 10.8.x and have Server.app installed...."
+OSX=yes
+fi
+if [[  $(sw_vers -productVersion | grep '10.') && $(serverinfo --configured | grep 'has') && $(serverinfo --shortversion | grep -v '3.0.1']]
+then
+OSX=yes
+fi
+
+if [ $OSX = yes]
+echo "Congratulations, you are running OS X and have Server.app installed...."
 #CHECK IF SCRIPT HAS BEEN RUN BEFORE
 if [ -e /etc/vpn_MMV ]; then
 echo "SCRIPT CAN NOT BE RUN MORE THAN ONCE."
@@ -151,6 +160,7 @@ fi
 exit 0
 #END IF STATEMENT CHECKING FOR OS X & SERVER.APP
 else
-echo "ERROR: YOU ARE NOT RUNNING OS X 10.8 OR YOU DO NOT HAVE SERVER.APP INSTALLED"
+echo "ERROR: YOU ARE NOT RUNNING OS X OR YOU DO NOT HAVE SERVER.APP INSTALLED"
+echo "NOTE: FOR MAVERICKS, SERVER.APP 3.0.2 OR HIGHER IS REQUIRED"
 exit 1
 fi
