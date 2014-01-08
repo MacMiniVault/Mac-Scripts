@@ -22,12 +22,12 @@ if [[  $(sw_vers -productVersion | grep '10.8') && $(serverinfo --configured | g
 then
 OSX=yes
 fi
-if [[  $(sw_vers -productVersion | grep '10.') && $(serverinfo --configured | grep 'has') && $(serverinfo --shortversion | grep -v '3.0.1']]
+if [[  $(sw_vers -productVersion | grep '10.') && $(serverinfo --configured | grep 'has') && $(serverinfo --shortversion | grep -v '3.0.1') ]]
 then
 OSX=yes
 fi
 
-if [ $OSX = yes]
+if [ $OSX = yes ]
 echo "Congratulations, you are running OS X and have Server.app installed...."
 #CHECK IF SCRIPT HAS BEEN RUN BEFORE
 if [ -e /etc/vpn_MMV ]; then
