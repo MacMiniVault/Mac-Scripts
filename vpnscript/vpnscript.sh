@@ -7,7 +7,7 @@
 # DESC:  THIS SCRIPT SETS UP A VPN SERVER   #
 #        THAT PLACES VPN CLIENTS IN A LOCAL #
 #        VLAN, ALLOWING CLIENTS TO ROUTE    #
-#        ALL TRAFFIC THROUG REMOTE MAC      #
+#        ALL TRAFFIC THROUGH REMOTE MAC     #
 #        ONLY USING THE SINGLE PUBLIC IP    #
 #############################################
 #REQUIREMENTS:
