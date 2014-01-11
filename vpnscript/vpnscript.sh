@@ -126,7 +126,7 @@ load anchor "100.customNATRules" from "/etc/pf.anchors/customNATRules"
 '  /etc/pf.anchors/com.apple 
 #SET PERMS BACK
 sudo chmod 644 /etc/pf.anchors/com.apple
-elseif [[  $(sw_vers -productVersion | grep '10.9')   ]]
+elif [[  $(sw_vers -productVersion | grep '10.9')   ]]
 then
 #START FIREWALL SETTINGS
 #SETTING PERMS FOR EDITING - WILL SET PERMS BACK
