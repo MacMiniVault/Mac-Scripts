@@ -3,7 +3,7 @@
 # AUTHOR: JONATHAN SCHWENN @JONSCHWENN      #
 # MAC MINI VAULT - MAC MINI COLOCATION      #
 # MACMINIVAULT.COM - @MACMINIVAULT          #
-# VERSION 2.00 RELEASE DATE JAN 07, 2014    #
+# VERSION 2.00 RELEASE DATE JAN 10, 2014    #
 # DESC:  THIS SCRIPT SETS UP A VPN SERVER   #
 #        THAT PLACES VPN CLIENTS IN A LOCAL #
 #        VLAN, ALLOWING CLIENTS TO ROUTE    #
@@ -24,8 +24,8 @@ OSX=yes
 fi
 if [[  $(sw_vers -productVersion | grep '10.9') && $(serverinfo --configured | grep 'has') && $(serverinfo --shortversion | grep -v '3.0.1') ]]
 then
-#10.9 not working yet
-OSX=no
+#10.9 testing enabled
+OSX=yes
 fi
 
 if [ $OSX = yes ]
@@ -44,6 +44,8 @@ sudo /Applications/Server.app/Contents/ServerRoot/usr/sbin/serveradmin stop vpn 
 #START VLAN SETTINGS
 sudo networksetup -createVLAN LAN Ethernet 1
 sudo networksetup -setmanual LAN\ Configuration 10.0.0.1 255.255.255.0 10.0.0.1
+if [[ $(sw_vers -productVersion | grep '10.8') ]]
+then
 #FIND CURRENT RESOLVING DNS SERVERS
 RESOLVERS=$(grep nameserver /etc/resolv.conf | awk '{ printf ("%s;\n", $2) }')
 #START DNS SETTINGS
@@ -124,6 +126,20 @@ load anchor "100.customNATRules" from "/etc/pf.anchors/customNATRules"
 '  /etc/pf.anchors/com.apple 
 #SET PERMS BACK
 sudo chmod 644 /etc/pf.anchors/com.apple
+elseif [[  $(sw_vers -productVersion | grep '10.9')   ]]
+then
+#START FIREWALL SETTINGS
+#SETTING PERMS FOR EDITING - WILL SET PERMS BACK
+sudo chmod 666 /etc/pf.anchors/com.apple
+sudo cp /etc/pf.anchors/com.apple /etc/pf-backup
+sudo sed  -i -e '8i\
+nat-anchor "100.customNATRules/*"\
+rdr-anchor "100.customNATRules/*"\
+load anchor "100.customNATRules" from "/etc/pf.anchors/customNATRules"
+'  /etc/pf.anchors/com.apple 
+#SET PERMS BACK
+sudo chmod 644 /etc/pf.anchors/com.apple
+fi
 #CREATE CUSTOM NAT RULES - SETTING PERMS FOR EDITING - WILL SET PERMS BACK
 sudo touch /etc/pf.anchors/customNATRules
 sudo chmod 666 /etc/pf.anchors/customNATRules
