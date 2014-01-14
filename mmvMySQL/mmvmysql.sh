@@ -29,7 +29,7 @@ echo "..."
 fi
 # LOOKS GOOD, LETS GRAB MySQL AND GET STARTED ...
 echo "Downloading MySQL Installers ... may take a few moments"
-curl -s -o ~/Downloads/MySQL.dmg http://cdn.mysql.com/Downloads/MySQL-5.6/mysql-5.6.15-osx10.7-x86_64.dmg
+curl -# -o ~/Downloads/MySQL.dmg http://cdn.mysql.com/Downloads/MySQL-5.6/mysql-5.6.15-osx10.7-x86_64.dmg
 hdiutil attach -quiet ~/Downloads/MySQL.dmg
 cd /Volumes/mysql-5.6.15-osx10.7-x86_64/
 echo "..."
@@ -105,7 +105,7 @@ EOF
 while true; do
                 read -p "DO YOU WANT TO AUTOMATICALLY INSTALL SEQUEL PRO? [Y/n]" sp
                 case $sp in
-                [Yy]* ) curl -s -o ~/Downloads/SequelPro.dmg https://sequel-pro.googlecode.com/files/sequel-pro-1.0.2.dmg; hdiutil attach -quiet ~/Downloads/SequelPro.dmg;cp -R /Volumes/Sequel\ Pro\ 1.0.2/Sequel\ Pro.app/ /Applications/Sequel\ Pro.app/; hdiutil detach -quiet /Volumes/Sequel\ Pro\ 1.0.2/;sleep 5; rm ~/Downloads/SequelPro.dmg; echo "Sequel Pro is now in your Applications folder!";  break  ;;
+                [Yy]* ) curl -# -o ~/Downloads/SequelPro.dmg https://sequel-pro.googlecode.com/files/sequel-pro-1.0.2.dmg; hdiutil attach -quiet ~/Downloads/SequelPro.dmg;cp -R /Volumes/Sequel\ Pro\ 1.0.2/Sequel\ Pro.app/ /Applications/Sequel\ Pro.app/; hdiutil detach -quiet /Volumes/Sequel\ Pro\ 1.0.2/;sleep 5; rm ~/Downloads/SequelPro.dmg; echo "Sequel Pro is now in your Applications folder!";  break  ;;
                 [Nn]* ) break;;
                 * ) echo "Please answer yes or no.";;
                 esac
