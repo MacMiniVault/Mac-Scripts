@@ -16,9 +16,9 @@ echo "DNS MULTICAST (BONJOUR) ADVERTISING DISABLED"
 fi
 # SET ENERGY PREFFERENCES
 # SET AUTO POWER ON / WAKE EVERY MIDNIGHT
-sudo systemsetup -setharddisksleep never > /dev/null 2>&1
-sudo systemsetup -setcomputersleep never > /dev/null 2>&1
-sudo systemsetup -setdisplaysleep never > /dev/null 2>&1
+sudo systemsetup -setharddisksleep Off > /dev/null 2>&1
+sudo systemsetup -setcomputersleep Off > /dev/null 2>&1
+sudo systemsetup -setdisplaysleep Off > /dev/null 2>&1
 sudo systemsetup -setallowpowerbuttontosleepcomputer off > /dev/null 2>&1
 sudo systemsetup -setrestartpowerfailure on > /dev/null 2>&1
 sudo systemsetup -setwakeonnetworkaccess on > /dev/null 2>&1
@@ -26,7 +26,22 @@ sudo pmset repeat wakeorpoweron MTWRFSU  12:00:00
 echo "ENERGY PREFERENCES ARE SET"
 # DISABLES WIFI/BLUETOOTH NETWORKING 
 # ADDES SECOND NAMESERVER FROM OS X 10.7/10.8 BUG IN SETUP ASSISTANT LIMITING TO ONE NAMESERVER
+echo "IS THIS MACHINE IN MKE1 or PHX1? [M/P]"
+while read DCDNS; do
+if [[ "$DCDNS" == "P*"  ]]
+then
+sudo networksetup -setdnsservers Ethernet 162.253.135.66 162.253.135.67 
+break
+elif [[ "$DCDNS" == "M*" ]]
+then
 sudo networksetup -setdnsservers Ethernet 66.185.16.130 66.185.16.131
+break
+else
+echo " "
+echo " "
+echo "PLEASE CHOOSE A DATA CENTER [M/P]"
+fi
+done
 sudo networksetup -setnetworkserviceenabled Wi-Fi off
 sudo networksetup -setnetworkserviceenabled "Bluetooth PAN" off
 sudo networksetup -setnetworkserviceenabled "Bluetooth DUN" off
