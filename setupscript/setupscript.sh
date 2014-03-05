@@ -28,11 +28,11 @@ echo "ENERGY PREFERENCES ARE SET"
 # ADDES SECOND NAMESERVER FROM OS X 10.7/10.8 BUG IN SETUP ASSISTANT LIMITING TO ONE NAMESERVER
 echo "IS THIS MACHINE IN MKE1 or PHX1? [M/P]"
 while read DCDNS; do
-if [[ "$DCDNS" = "P*"  ]]
+if [ $DCDNS = "P*"  ]
 then
 sudo networksetup -setdnsservers Ethernet 162.253.135.66 162.253.135.67 
 break
-elif [[ "$DCDNS" = "M*" ]]
+elif [ $DCDNS = "M*" ]
 then
 sudo networksetup -setdnsservers Ethernet 66.185.16.130 66.185.16.131
 break
