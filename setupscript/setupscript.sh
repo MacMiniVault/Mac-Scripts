@@ -40,6 +40,7 @@ else
 echo " "
 echo " "
 echo "PLEASE CHOOSE A DATA CENTER [M/P]"
+echo $DCDNS
 fi
 done
 sudo networksetup -setnetworkserviceenabled Wi-Fi off
