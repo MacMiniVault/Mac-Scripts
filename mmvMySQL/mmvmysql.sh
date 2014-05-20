@@ -3,7 +3,7 @@
 # AUTHOR: JONATHAN SCHWENN @JONSCHWENN      #
 # MAC MINI VAULT - MAC MINI COLOCATION      #
 # MACMINIVAULT.COM - @MACMINIVAULT          #
-# VERSION 1.06 RELEASE DATE FEB 26 2014     #
+# VERSION 1.07 RELEASE DATE MAY 20 2014     #
 # DESC:  THIS SCRIPT INSTALLS MySQL on OSX  #
 #############################################
 #REQUIREMENTS:
@@ -53,7 +53,7 @@ open ~/Downloads/MySQL.prefPane/
 echo "..."
 sleep 15
 sudo /usr/local/mysql/support-files/mysql.server start
-echo "export PATH=$PATH:/usr/local/mysql/bin" >> ~/.bash_profile
+echo -e "\nexport PATH=$PATH:/usr/local/mysql/bin" >> ~/.bash_profile
 sudo mkdir /var/mysql; sudo ln -s /tmp/mysql.sock /var/mysql/mysql.sock
 if [[  $(sudo /usr/local/mysql/support-files/mysql.server status | grep "SUCCESS") ]]
 then
