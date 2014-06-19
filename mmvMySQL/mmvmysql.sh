@@ -93,7 +93,7 @@ sudo tee -a /usr/local/mysql/mmv.cnf > /dev/null  << EOF
 # CUSTOMIZED BY MMVMySQL SCRIPT - JUST GENERIC SETTINGS
 # DO NOT TREAT AS GOSPEL
 
-innodb_buffer_pool_size=3G
+innodb_buffer_pool_size=2G
 skip-name_resolve
 max-connect-errors=100000
 max-connections=500
