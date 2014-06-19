@@ -3,7 +3,7 @@
 # AUTHOR: JONATHAN SCHWENN @JONSCHWENN      #
 # MAC MINI VAULT - MAC MINI COLOCATION      #
 # MACMINIVAULT.COM - @MACMINIVAULT          #
-# VERSION 1.07 RELEASE DATE MAY 20 2014     #
+# VERSION 1.08 RELEASE DATE JUN 19 2014     #
 # DESC:  THIS SCRIPT INSTALLS MySQL on OSX  #
 #############################################
 #REQUIREMENTS:
@@ -27,17 +27,29 @@ echo "..."
 		esac
 	done
 fi
+# PLANNING ON UNCOMMENTING THE BELOW TO CREATE pidof
+# BEFORE WE DO ANYTHING, LETS CREATE A SMALL pidof UTILITY
+# WE ARE GOING TO PUT IT IN /usr/local/bin
+#if ! type pidof > /dev/null; then
+#if [ ! -d "$/usr/local/bin" ]; then
+#sudo mkdir -p /usr/local/bin
+#fi
+###MAKE pidof HERE
+# NEED TO WRITE STILL
+#fi
 # LOOKS GOOD, LETS GRAB MySQL AND GET STARTED ...
 echo "Downloading MySQL Installers ... may take a few moments"
-curl -# -o ~/Downloads/MySQL.dmg http://cdn.mysql.com/Downloads/MySQL-5.6/mysql-5.6.17-osx10.7-x86_64.dmg
+curl -# -o ~/Downloads/MySQL.dmg http://cdn.mysql.com/Downloads/MySQL-5.6/mysql-5.6.19-osx10.7-x86_64.dmg
 hdiutil attach -quiet ~/Downloads/MySQL.dmg
-cd /Volumes/mysql-5.6.17-osx10.7-x86_64/
+cd /Volumes/mysql-5.6.19-osx10.7-x86_64/
 echo "..."
 echo "..."
 echo "Installing MySQL, administrator password required ..."
-sudo installer -pkg mysql-5.6.17-osx10.7-x86_64.pkg -target /
+sudo installer -pkg mysql-5.6.19-osx10.7-x86_64.pkg -target /
 echo "..."
 echo "..."
+# INSTALLING START UP ITEMS. UNTIL THERE IS A GUI/PREF PANE TO CONTROL
+# THE PREFERRED LAUNCHD METHOD, WE'LL STICK WITH WHAT MySQL OFFERS
 echo "Installing MySQL start up items..."
 sudo installer -pkg MySQLStartupItem.pkg -target /
 echo "..."
@@ -53,7 +65,8 @@ open ~/Downloads/MySQL.prefPane/
 echo "..."
 sleep 15
 sudo /usr/local/mysql/support-files/mysql.server start
-echo -e "\nexport PATH=$PATH:/usr/local/mysql/bin" >> ~/.bash_profile
+touch ~/.bash_profile >/dev/null 2>&1
+echo -e "\nexport PATH=$PATH:/usr/local/mysql/bin" | sudo tee -a  ~/.bash_profile > /dev/null
 sudo mkdir /var/mysql; sudo ln -s /tmp/mysql.sock /var/mysql/mysql.sock
 if [[  $(sudo /usr/local/mysql/support-files/mysql.server status | grep "SUCCESS") ]]
 then
@@ -65,7 +78,7 @@ echo "Placing password on desktop..."
 echo "..."
 echo "..."
 cd ~/
-hdiutil detach -quiet /Volumes/mysql-5.6.17-osx10.7-x86_64/
+hdiutil detach -quiet /Volumes/mysql-5.6.19-osx10.7-x86_64/
 sleep 2
 rm ~/Downloads/MySQL.dmg
 # NEW MY.CNF PERFORMANCE OPTION START
@@ -80,17 +93,11 @@ sudo tee -a /usr/local/mysql/mmv.cnf > /dev/null  << EOF
 # CUSTOMIZED BY MMVMySQL SCRIPT - JUST GENERIC SETTINGS
 # DO NOT TREAT AS GOSPEL
 
-skip-external-locking
-key_buffer_size = 384M
-max_allowed_packet = 1M
-table_open_cache = 512
-sort_buffer_size = 2M
-read_buffer_size = 2M
-read_rnd_buffer_size = 8M
-myisam_sort_buffer_size = 64M
-thread_cache_size = 8
-query_cache_size = 32M
-thread_concurrency = 4
+innodb_buffer_pool_size=3G
+skip-name_resolve
+max-connect-errors=100000
+max-connections=500
+
 EOF
         while true; do
                 read -p "DO YOU WANT TO LOAD A BASE PERFORMANCE MY.CNF FILE? [y/N]" cnf
