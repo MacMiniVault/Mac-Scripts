@@ -3,14 +3,14 @@
 # AUTHOR: JONATHAN SCHWENN @JONSCHWENN      #
 # MAC MINI VAULT - MAC MINI COLOCATION      #
 # MACMINIVAULT.COM - @MACMINIVAULT          #
-# VERSION 1.08 RELEASE DATE JUN 19 2014     #
+# VERSION 1.09 RELEASE DATE JUN 30 2014     #
 # DESC:  THIS SCRIPT INSTALLS MySQL on OSX  #
 #############################################
 #REQUIREMENTS:
 #  OS X 10.7 or newer
 #############################################
 # CHECK FOR OS X 10.7+
-if [[  $(sw_vers -productVersion | grep '10.[7-9]')  ]]
+if [[  $(sw_vers -productVersion | grep -E '10.[7-9]|1[0-9]')  ]]
 then
 # CHECK FOR EXISTING MySQL
 if [[ -d /usr/local/mysql && -d /var/mysql ]]
