@@ -39,13 +39,13 @@ fi
 #fi
 # LOOKS GOOD, LETS GRAB MySQL AND GET STARTED ...
 echo "Downloading MySQL Installers ... may take a few moments"
-curl -# -o ~/Downloads/MySQL.dmg http://cdn.mysql.com/Downloads/MySQL-5.6/mysql-5.6.19-osx10.7-x86_64.dmg
+curl -# -o ~/Downloads/MySQL.dmg http://cdn.mysql.com/Downloads/MySQL-5.6/mysql-5.6.20-osx10.7-x86_64.dmg
 hdiutil attach -quiet ~/Downloads/MySQL.dmg
-cd /Volumes/mysql-5.6.19-osx10.7-x86_64/
+cd /Volumes/mysql-5.6.20-osx10.7-x86_64/
 echo "..."
 echo "..."
 echo "Installing MySQL, administrator password required ..."
-sudo installer -pkg mysql-5.6.19-osx10.7-x86_64.pkg -target /
+sudo installer -pkg mysql-5.6.20-osx10.7-x86_64.pkg -target /
 echo "..."
 echo "..."
 # INSTALLING START UP ITEMS. UNTIL THERE IS A GUI/PREF PANE TO CONTROL
@@ -78,7 +78,7 @@ echo "Placing password on desktop..."
 echo "..."
 echo "..."
 cd ~/
-hdiutil detach -quiet /Volumes/mysql-5.6.19-osx10.7-x86_64/
+hdiutil detach -quiet /Volumes/mysql-5.6.20-osx10.7-x86_64/
 sleep 2
 rm ~/Downloads/MySQL.dmg
 # NEW MY.CNF PERFORMANCE OPTION START
