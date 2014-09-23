@@ -19,7 +19,7 @@ echo "It looks like you already have MySQL installed..."
 echo "This script will most likely fail unless MySQL is completley removed."
 echo "If MySQL does install, your old version and databases will still be"
 echo "under /usr/local/ and you will have to manually move databases to the"
-echo "new install.  It's important to copy/move with permissions in tact."
+echo "new install.  It's important to copy/move with permissions intact."
 echo "..."
 echo "..."
 	while true; do
