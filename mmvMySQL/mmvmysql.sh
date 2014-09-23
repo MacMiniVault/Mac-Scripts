@@ -3,7 +3,7 @@
 # AUTHOR: JONATHAN SCHWENN @JONSCHWENN      #
 # MAC MINI VAULT - MAC MINI COLOCATION      #
 # MACMINIVAULT.COM - @MACMINIVAULT          #
-# VERSION 1.09 RELEASE DATE JUN 30 2014     #
+# VERSION 1.50 RELEASE DATE SEP 23 2014     #
 # DESC:  THIS SCRIPT INSTALLS MySQL on OSX  #
 #############################################
 #REQUIREMENTS:
@@ -13,10 +13,14 @@
 if [[  $(sw_vers -productVersion | grep -E '10.[7-9]|1[0-9]')  ]]
 then
 # CHECK FOR EXISTING MySQL
-if [[ -d /usr/local/mysql && -d /var/mysql ]]
+if [[ -d /usr/local/mysql  ]]
 then
 echo "It looks like you already have MySQL installed..."
-echo "This script will most likely fail unless MySQL is completley removed"
+echo "This script will most likely fail unless MySQL is completley removed."
+echo "If MySQL does install, your old version and databases will still be"
+echo "under /usr/local/ and you will have to manually move databases to the"
+echo "new install.  It's important to copy/move with permissions in tact."
+echo "..."
 echo "..."
 	while true; do
 		read -p "DO YOU WANT TO CONTINUE? [y/N]" yn
@@ -27,16 +31,20 @@ echo "..."
 		esac
 	done
 fi
-# PLANNING ON UNCOMMENTING THE BELOW TO CREATE pidof
-# BEFORE WE DO ANYTHING, LETS CREATE A SMALL pidof UTILITY
-# WE ARE GOING TO PUT IT IN /usr/local/bin
-#if ! type pidof > /dev/null; then
-#if [ ! -d "$/usr/local/bin" ]; then
-#sudo mkdir -p /usr/local/bin
-#fi
-###MAKE pidof HERE
-# NEED TO WRITE STILL
-#fi
+# MYSQL INSTALLER WANTS A 'pidof' COMMAND SOMETIMES
+# SO WE'LL GIVE IT A 'pidof' COMMAND
+if [[ !  $(command -v pidof) ]]; then
+if [ ! -d "$/usr/local/bin" ]; then
+sudo mkdir -p /usr/local/bin
+fi
+# HARD TO CAT DIRECT TO BIN DIR, PUTTING IN DOCUMENTS THEN MOVING
+sudo cat << 'EOF' > ~/Documents/pidof
+#!/bin/sh
+ps axc|awk "{if (\$5==\"$1\") print \$1}"
+EOF
+sudo mv ~/Documents/pidof /usr/local/bin/pidof
+sudo chmod 755 /usr/local/bin/pidof
+fi
 # LOOKS GOOD, LETS GRAB MySQL AND GET STARTED ...
 echo "Downloading MySQL Installers ... may take a few moments"
 curl -# -o ~/Downloads/MySQL.dmg http://cdn.mysql.com/Downloads/MySQL-5.6/mysql-5.6.20-osx10.7-x86_64.dmg
@@ -65,9 +73,11 @@ open ~/Downloads/MySQL.prefPane/
 echo "..."
 sleep 15
 sudo /usr/local/mysql/support-files/mysql.server start
+# ADDING MYSQL PATH TO BASH PROFILE, MAY CONFLICT WITH EXISTING PROFILES/.RC FILES
 touch ~/.bash_profile >/dev/null 2>&1
 echo -e "\nexport PATH=$PATH:/usr/local/mysql/bin" | sudo tee -a  ~/.bash_profile > /dev/null
 sudo mkdir /var/mysql; sudo ln -s /tmp/mysql.sock /var/mysql/mysql.sock
+# IF MySQL IS RUNNING, GENERATE, SET, AND DOCUMENT  ROOT PASSWORD
 if [[  $(sudo /usr/local/mysql/support-files/mysql.server status | grep "SUCCESS") ]]
 then
 mypass="$(cat /dev/urandom | base64 | tr -dc A-Za-z0-9_ | head -c8)"
@@ -77,6 +87,7 @@ echo "Placing password on desktop..."
 /usr/local/mysql/bin/mysql -uroot -e "GRANT ALL ON *.* TO 'root'@'localhost' IDENTIFIED BY '$mypass' WITH GRANT OPTION;"
 echo "..."
 echo "..."
+# UNMOUNT AND DELELTE DOWNLOADED MySQL INSTALLER
 cd ~/
 hdiutil detach -quiet /Volumes/mysql-5.6.20-osx10.7-x86_64/
 sleep 2
