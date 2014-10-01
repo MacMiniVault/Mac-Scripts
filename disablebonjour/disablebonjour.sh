@@ -31,7 +31,8 @@ then
         	then
                 	# CHECKS FOR FLAG IN CURRENT PLIST FILE
 			if [[ $(sudo /usr/libexec/PlistBuddy -c Print /System/Library/LaunchDaemons/com.apple.discoveryd.plist | grep 'no-multicast') ]]
-	       			echo "MULTICAST DISABLED, NO CHANGES MADE"
+	                then	
+				echo "MULTICAST DISABLED, NO CHANGES MADE"
                 	else
                         	sudo /usr/libexec/PlistBuddy -c "Add :ProgramArguments: string --no-multicast" /System/Library/LaunchDaemons/com.apple.discoveryd.plist
                         	echo "MULTICAST DISABLED (OSX 10.10), PLEASE REBOOT"
