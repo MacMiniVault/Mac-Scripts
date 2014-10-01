@@ -1,5 +1,4 @@
 #!/bin/bash
-#!/bin/bash
 #############################################
 # AUTHOR: JONATHAN SCHWENN @JONSCHWENN      #
 # MAC MINI VAULT - MAC MINI COLOCATION      #
