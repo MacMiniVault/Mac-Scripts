@@ -44,6 +44,6 @@ then
 	fi
 
 else
-echo "SORRY, OS X NOT DETECTED - NO CHANGES MADE
+echo "SORRY, OS X NOT DETECTED - NO CHANGES MADE"
 fi
 exit
