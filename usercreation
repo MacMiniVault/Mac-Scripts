@@ -7,7 +7,7 @@
 # Execute command with -l (local user) -s (source file) -h (help)
 # It is possible to call the -L parameter but this will not yet create the LDAP users!
 #																												 
-# Created by Bradley Massey - Underside, Corp.
+# Created by Bradley Massey
 # Version 1.0																									 
 ##################################################################################################################
 
