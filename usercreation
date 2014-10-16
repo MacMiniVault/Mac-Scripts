@@ -1,0 +1,155 @@
+#!/bin/bash
+
+##################################################################################################################
+# This utility takes in a source file and creates local user(s)	
+# This is intended for initial setup tasks. Will be ported for ldap users eventually
+# Takes in a source csv, field seperator = ";", format = username;password;realname;
+# Execute command with -l (local user) -s (source file) -h (help)
+# It is possible to call the -L parameter but this will not yet create the LDAP users!
+#																												 
+# Created by Bradley Massey - Underside, Corp.
+# Version 1.0																									 
+##################################################################################################################
+
+function main {
+	
+	max=$(cat $inputFile|wc -l);
+
+	if [ $max -gt 0 ]; then
+		echo "About to build arrays out of source file";
+		# Cat file and store users and passwords into an array
+		usrArray=($(cat $inputFile|awk 'BEGIN {FS=";"} {gsub(/\r/,"",$0); print $1;}';));
+		pwdArray=($(cat $inputFile|awk 'BEGIN {FS=";"} {gsub(/\r/,"",$0); print $2;}';));
+		rnArray=($(cat $inputFile|awk 'BEGIN {FS=";"} {gsub(/\r/,"",$0); print $3;}';));
+
+		echo "About to compare arrays sizes";
+		if cmpa arg; then 
+			echo "Compared array sizes - ready to create users";
+			printf "User type to be created : ";
+			if ut arg; then
+				echo 'here';
+				aid;
+				# Creating users
+				echo 'About to create users';
+				# If you want to verify everything without creating the users, comment the next line
+				clo;
+				return 0;
+			else
+				return 1;
+			fi
+		return 0;
+		echo 'quit';	
+		else
+			echo 'Obscure error, dafuq?';
+			echo 'Exiting';
+			return 1;
+		fi
+	else 
+		echo 'No users to be created';
+	fi
+}
+
+# Verify that there is a user for every password - cmpa (compare array)
+function cmpa {
+	if [ ${#usrArray[*]} -ne ${#pwdArray[*]} ]; then
+		# Other comparisons should be added here
+		echo 'Error - will not create users. Verify that all users are assigned a password';
+		echo "Usr Array size : ${#usrArray[*]}, Pwd Array size : ${#pwdArray[*]}";
+		return 1;
+	fi
+	return 0; 
+}
+
+# The user type must be one or the other, cannot have both or none - ut (user type)
+function ut {
+	if [ $ldp ] && [ $lop ]; then
+		echo "error - will not create both at same time";
+		return 1;
+	elif [ ! $lop ] && [ ! $ldp ]; then
+		echo "Must specify what user type to create. -h for help";
+		return 1;
+	elif [ ! $ldp ] && [  $lop ]; then 
+		echo "local users";
+	elif [ $ldp ] && [ ! $lop ]; then 
+		echo "ldap users";
+	fi
+}
+
+# This function goes through all local users UniqueID's to find the highest and
+# initialises next uuid variable to highest+1
+# Do NOT overwrite an existing UUID, you WILL encounter problems
+function aid {
+	bi=0;
+	bs=$bi;
+	
+	all=($(sudo dscl localhost -readall /Local/Default/Users |grep 'UniqueID' |awk 'BEGIN {FS=":"}; {print $2}';));
+	for num in ${all[*]}; do
+		#cptr?
+		if [ $num -gt $bs ]; then
+			bi=$(($bs));
+			bs=$(($num));
+			cpt=$(($cpt+1));
+		fi
+	done
+	
+	# Echo highest UniqueID, fly throughs, assign next UniqueID
+	echo "Highest UniqueID : $bs"; echo "Found in : $cpt comparaisons";
+	nid=$(($bs+1));
+	echo 'Next User ID to create : '$nid;			
+}
+
+# This function will create as many users that are specified in the source file
+# Where username is usrArray[x], password is pwdArray[x], realname (if provided) is rnArray[x]
+# Home directory = /Users/"Real Name", Default Group = Staff, default shell = /bin/bash, User Unique ID = $nid
+function clo {
+	for ((i=0;$i<$max;i=$(($i+1)))); do
+		sudo dscl . -create /Users/${usrArray[$i]};
+		sudo dscl . -create /Users/${usrArray[$i]} UserShell /bin/bash;
+		sudo dscl . -create /Users/${usrArray[$i]} RealName ${rnArray[$i]};
+		sudo dscl . -create /Users/${usrArray[$i]} NFSHomeDirectory /Users/${rnArray[$i]};
+
+		sudo dscl . -create /Users/${usrArray[$i]} UniqueID $nid;
+		sudo dscl . -create /Users/${usrArray[$i]} PrimaryGroupID 20;
+		sudo dscl . -passwd /Users/${usrArray[$i]} ${pwdArray[$i]};
+
+		nid=$(($nid+1));
+
+		echo "successfully created user : ${usrArray[$i]}";
+	done
+	echo 'log out || restart computer for all changes to take effect';
+}
+
+# function get help 
+function gh {
+	echo 'Note : You will be prompted to authenticate in order to create users.';
+	echo 'Note : Real Names cannot contain spaces.';
+	echo '';
+	echo 'syntax : command -l || -L [user_type] && -s [source_file]';
+	echo '';
+	echo 'Parameters :';
+	echo '';	
+	printf "	s"; echo '	source csv file [username;password;realname;]';
+	printf "	l"; echo '	set user_type to Local';
+	printf "	L"; echo '	set user_type to LDAP';
+	printf "	h"; echo '	get help';
+	echo '';
+	echo 'Example usage :';
+	echo '';
+	echo '	Create local users from file'
+	echo '	./blkusr.sh -l -s /tmp/folder/file.csv';
+	echo '';
+	echo '	Create LDAP users from file'
+	echo '	./blkusr.sh -L -s /tmp/folder/file.csv'
+}
+
+# Options
+while getopts ":s:lLh" opt; do
+	case $opt in
+		s) inputFile="$OPTARG"; main;;
+		l) lop=1;;
+		L) ldp=1;;
+		h) gh;;
+		:) echo 'Invalid option -'$OPTARG' requires an argument';;
+		?) echo 'Unknown option -'$OPTARG;
+	esac
+done
