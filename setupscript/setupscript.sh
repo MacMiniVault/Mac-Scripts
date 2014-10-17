@@ -3,17 +3,37 @@
 sudo -v
 while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
 # MAKES SURE WE ARE AT LEAST RUNNING 10.8 OR NEWER
-if [[  $(sw_vers -productVersion | grep '10.[8-9]') ]]
+if [[  $(sw_vers -productVersion | grep -E '10.[7-9]|1[0-9]') ]]
 then
-# CHECKS FOR FLAG IN CURRENT PLIST FILE
-if [[ $(sudo /usr/libexec/PlistBuddy -c Print /System/Library/LaunchDaemons/com.apple.mDNSResponder.plist | grep 'NoMulticast') ]]
-then
-echo "SORRY, MULTICAST IS ALREADY DISABLED"
-else
-# ADDS NOMULTICASTADVERTISEMENTS FLAG
-sudo /usr/libexec/PlistBuddy -c "Add :ProgramArguments: string -NoMulticastAdvertisements" /System/Library/LaunchDaemons/com.apple.mDNSResponder.plist
-echo "DNS MULTICAST (BONJOUR) ADVERTISING DISABLED"
-fi
+# DISABLE BONJOUR ADVERTISING
+if [[  $(sw_vers -productVersion | grep '10.[6-9]') ]]
+	then
+		# CHECKS FOR FLAG IN CURRENT PLIST FILE
+		if [[ $(sudo /usr/libexec/PlistBuddy -c Print /System/Library/LaunchDaemons/com.apple.mDNSResponder.plist | grep 'NoMulticast') ]]
+		then
+			echo "MULTICAST DISABLED, NO CHANGES MADE"
+		else
+			sudo /usr/libexec/PlistBuddy -c "Add :ProgramArguments: string -NoMulticastAdvertisements" /System/Library/LaunchDaemons/com.apple.mDNSResponder.plist
+			echo "MULTICAST DISABLED (OS X 10.6-10.9), PLEASE REBOOT"
+		fi
+		exit
+	else
+	echo  "CHECKING FOR OS X 10.10..."
+		if [[  $(sw_vers -productVersion | grep '10.10') ]]
+        	then
+                	# CHECKS FOR FLAG IN CURRENT PLIST FILE
+			if [[ $(sudo /usr/libexec/PlistBuddy -c Print /System/Library/LaunchDaemons/com.apple.discoveryd.plist | grep 'no-multicast') ]]
+	                then	
+				echo "MULTICAST DISABLED, NO CHANGES MADE"
+                	else
+                        	sudo /usr/libexec/PlistBuddy -c "Add :ProgramArguments: string --no-multicast" /System/Library/LaunchDaemons/com.apple.discoveryd.plist
+                        	echo "MULTICAST DISABLED (OSX 10.10), PLEASE REBOOT"
+                	fi
+                	exit
+		else
+		fi
+	fi
+ 
 # SET ENERGY PREFFERENCES
 # SET AUTO POWER ON / WAKE EVERY MIDNIGHT
 sudo systemsetup -setallowpowerbuttontosleepcomputer off > /dev/null 2>&1
@@ -59,15 +79,16 @@ echo "COMPUTER NAME SET"
 echo "yes" | sudo systemsetup -setremotelogin off > /dev/null 2>&1
 sleep 5
 #sudo systemsetup -setremotelogin on > /dev/null 2>&1
+if [[  $(sw_vers -productVersion | grep '10.[6-9]') ]]
+then
 sudo defaults write /var/db/launchd.db/com.apple.launchd/overrides.plist com.apple.screensharing -dict Disabled -bool true
 sleep 5
 sudo defaults write /var/db/launchd.db/com.apple.launchd/overrides.plist com.apple.screensharing -dict Disabled -bool false
 sudo launchctl load /System/Library/LaunchDaemons/com.apple.screensharing.plist
+fi
 echo "REMOTE LOGIN AND SCREEN SHARING ARE ENABLED"
-defaults write ~/Library/Preferences/com.apple.systemuiserver menuExtras -array "/System/Library/CoreServices/Menu Extras/RemoteDesktop.menu" "/System/Library/CoreServices/Menu Extras/TimeMachine.menu" "/System/Library/CoreServices/Menu Extras/Volume.menu" "/System/Library/CoreServices/Menu Extras/Clock.menu"
-sudo killall SystemUIServer
-echo "WIFI AND BLUETOOTH ICONS ARE REMOVED FROM MENU BAR"
 # DISABLES THE ANNOYING "NO KEYBOARD" BLUETOOTH POPUP
+# MOUNTAIN LION SPEDIFIC SETTINGS
 if [[  $(sw_vers -productVersion | grep '10.8') ]]
 then
 sudo rm  /System/Library/LaunchAgents/com.apple.btsa.plist
@@ -83,13 +104,14 @@ echo "BLUETOOTH IS DISABLED"
 fi
 echo "...."
 echo "...."
+# MAVERICKS SPECIFIC SETTINGS
 if [[  $(sw_vers -productVersion | grep '10.9') ]]
 then
 sudo defaults write /Library/Preferences/com.apple.Bluetooth ControllerPowerState '0' > /dev/null 2>&1
 sudo defaults write /Library/Preferences/com.apple.Bluetooth BluetoothAutoSeekKeyboard '0' > /dev/null 2>&1
 sudo defaults write /Library/Preferences/com.apple.Bluetooth BluetoothAutoSeekPointingDevice '0' > /dev/null 2>&1
 echo "BLUETOOTH IS DISABLED"
-# DISABLE IDIOTIC SETTING 'DISPLAYS HAVE SEPERATE SPACES' ON MAVERICKS
+# DISABLE IDIOTIC SETTING 'DISPLAYS HAVE SEPERATE SPACES' 
 defaults write com.apple.spaces spans-displays -bool TRUE
 # DISABLES UNICAST ARP CACHE VALIDATION
 if [[ -f /etc/sysctl.conf ]]
@@ -105,6 +127,18 @@ sudo chown root:wheel /etc/sysctl.conf
 sudo chmod 644 /etc/sysctl.conf
 echo "PATCH ENABLED"
 fi
+fi
+echo "...."
+echo "...."
+# YOSEMITE SPECIFIC SETTINGS
+if [[  $(sw_vers -productVersion | grep '10.10') ]]
+then
+sudo defaults write /Library/Preferences/com.apple.Bluetooth ControllerPowerState '0' > /dev/null 2>&1
+sudo defaults write /Library/Preferences/com.apple.Bluetooth BluetoothAutoSeekKeyboard '0' > /dev/null 2>&1
+sudo defaults write /Library/Preferences/com.apple.Bluetooth BluetoothAutoSeekPointingDevice '0' > /dev/null 2>&1
+echo "BLUETOOTH IS DISABLED"
+# DISABLE IDIOTIC SETTING 'DISPLAYS HAVE SEPERATE SPACES' 
+defaults write com.apple.spaces spans-displays -bool TRUE
 fi
 echo "...."
 echo "...."
