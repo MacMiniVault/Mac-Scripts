@@ -10,7 +10,7 @@
 #  OS X 10.8 or newer
 #############################################
 #CHECK FOR OS X 10.8+
-if [[  $(sw_vers -productVersion | grep '10.[8-9]')  ]]
+if [[  $(sw_vers -productVersion | grep -E '10.[7-9]|1[0-9]')  ]]
 then
 echo "THIS SCRIPT WILL CHANGE YOUR SSH PORT AND RESTART SSH."
 echo "THE DEFAULT PORT FOR SSH IS 22, WE RECOMMEND A CUSTOM"
