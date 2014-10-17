@@ -14,9 +14,8 @@ if [[  $(sw_vers -productVersion | grep '10.[6-9]') ]]
 			echo "MULTICAST DISABLED, NO CHANGES MADE"
 		else
 			sudo /usr/libexec/PlistBuddy -c "Add :ProgramArguments: string -NoMulticastAdvertisements" /System/Library/LaunchDaemons/com.apple.mDNSResponder.plist
-			echo "MULTICAST DISABLED (OS X 10.6-10.9), PLEASE REBOOT"
+			echo "MULTICAST DISABLED (OS X 10.6-10.9)"
 		fi
-		exit
 	else
 	echo  "CHECKING FOR OS X 10.10..."
 		if [[  $(sw_vers -productVersion | grep '10.10') ]]
@@ -27,13 +26,10 @@ if [[  $(sw_vers -productVersion | grep '10.[6-9]') ]]
 				echo "MULTICAST DISABLED, NO CHANGES MADE"
                 	else
                         	sudo /usr/libexec/PlistBuddy -c "Add :ProgramArguments: string --no-multicast" /System/Library/LaunchDaemons/com.apple.discoveryd.plist
-                        	echo "MULTICAST DISABLED (OSX 10.10), PLEASE REBOOT"
+                        	echo "MULTICAST DISABLED (OSX 10.10)"
                 	fi
-                	exit
-		else
 		fi
-	fi
- 
+fi
 # SET ENERGY PREFFERENCES
 # SET AUTO POWER ON / WAKE EVERY MIDNIGHT
 sudo systemsetup -setallowpowerbuttontosleepcomputer off > /dev/null 2>&1
