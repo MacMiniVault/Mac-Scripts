@@ -3,7 +3,7 @@
 # AUTHOR: JONATHAN SCHWENN @JONSCHWENN      #
 # MAC MINI VAULT - MAC MINI COLOCATION      #
 # MACMINIVAULT.COM - @MACMINIVAULT          #
-# VERSION 2.00 RELEASE DATE JAN 10, 2014    #
+# VERSION 2.50 RELEASE DATE OCT 28, 2014    #
 # DESC:  THIS SCRIPT SETS UP A VPN SERVER   #
 #        THAT PLACES VPN CLIENTS IN A LOCAL #
 #        VLAN, ALLOWING CLIENTS TO ROUTE    #
@@ -11,7 +11,7 @@
 #        ONLY USING THE SINGLE PUBLIC IP    #
 #############################################
 #REQUIREMENTS:
-#  OS X 10.8 or OS X 10.9.1 w/SERVER.APP 3.0.2
+#  OS X 10.8 or OS X 10.9.1 w/SERVER.APP 3.0.2 or OS X 10.10
 #  SERVER.APP INSTALLED / INITIALIZED
 #  NO VLANS CONFIGURED
 #  THIS SCRIPT WILL BACKUP AND REPLACE DNS AND FIREWALL CONFIGS
@@ -24,7 +24,10 @@ OSX=yes
 fi
 if [[  $(sw_vers -productVersion | grep '10.9') && $(serverinfo --configured | grep 'has') && $(serverinfo --shortversion | grep -v '3.0.1') ]]
 then
-#10.9 testing enabled
+OSX=yes
+fi
+if [[  $(sw_vers -productVersion | grep '10.10') && $(serverinfo --configured | grep 'has')  ]]
+then
 OSX=yes
 fi
 
@@ -126,7 +129,7 @@ load anchor "100.customNATRules" from "/etc/pf.anchors/customNATRules"
 '  /etc/pf.anchors/com.apple 
 #SET PERMS BACK
 sudo chmod 644 /etc/pf.anchors/com.apple
-elif [[  $(sw_vers -productVersion | grep '10.9')   ]]
+elif [[  $(sw_vers -productVersion | grep '[10.9|10.10]')   ]]
 then
 #START FIREWALL SETTINGS
 #SETTING PERMS FOR EDITING - WILL SET PERMS BACK
