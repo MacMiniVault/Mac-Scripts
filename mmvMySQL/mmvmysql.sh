@@ -71,7 +71,6 @@ sudo cat << 'EOF' > ~/Documents/com.mysql.mysqld.plist
 <key>ProgramArguments</key>
 <array>
 <string>/usr/local/mysql/bin/mysqld</string>
-<string>--bind-address=127.0.0.1</string>
 <string>--user=_mysql</string>
 </array>
 <key>RunAtLoad</key>
@@ -127,7 +126,7 @@ EOF
         while true; do
                 read -p "DO YOU WANT TO LOAD A BASE PERFORMANCE MY.CNF FILE? [y/N]" cnf
                 case $cnf in
-                [Yy]* ) sudo cp /usr/local/mysql/mmv.cnf /etc/my.cnf; sudo /usr/local/mysql/support-files/mysql.server restart; break  ;;
+                [Yy]* ) sudo cp /usr/local/mysql/mmv.cnf /etc/my.cnf; sudo launchctl unload -w /Library/LaunchDaemons/com.mysql.mysqld.plist; sudo launchctl load -w /Library/LaunchDaemons/com.mysql.mysqld.plist; break  ;;
                 [Nn]* ) break;;
                 * ) echo "Please answer yes or no.";;
                 esac
