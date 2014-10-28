@@ -3,7 +3,7 @@
 # AUTHOR: JONATHAN SCHWENN @JONSCHWENN      #
 # MAC MINI VAULT - MAC MINI COLOCATION      #
 # MACMINIVAULT.COM - @MACMINIVAULT          #
-# VERSION 1.50 RELEASE DATE SEP 23 2014     #
+# VERSION 2.0 RELEASE DATE OCT 28 2014      #
 # DESC:  THIS SCRIPT INSTALLS MySQL on OSX  #
 #############################################
 #REQUIREMENTS:
@@ -33,6 +33,7 @@ echo "..."
 fi
 # MYSQL INSTALLER WANTS A 'pidof' COMMAND SOMETIMES
 # SO WE'LL GIVE IT A 'pidof' COMMAND
+# COMES IN HANDY SINCE WE'RE NO LONGER USING THE MYSQL.SERVER START/STATUS SCRIPT
 if [[ !  $(command -v pidof) ]]; then
 if [ ! -d "$/usr/local/bin" ]; then
 sudo mkdir -p /usr/local/bin
@@ -47,38 +48,51 @@ sudo chmod 755 /usr/local/bin/pidof
 fi
 # LOOKS GOOD, LETS GRAB MySQL AND GET STARTED ...
 echo "Downloading MySQL Installers ... may take a few moments"
-curl -# -o ~/Downloads/MySQL.dmg http://cdn.mysql.com/Downloads/MySQL-5.6/mysql-5.6.20-osx10.7-x86_64.dmg
+# DEAR MYSQL, WHY DOES THE 10.9 INSTALLER HAVE 10.8 IN THE NAME?
+curl -# -o ~/Downloads/MySQL.dmg http://cdn.mysql.com/Downloads/MySQL-5.6/mysql-5.6.21-osx10.9-x86_64.dmg
 hdiutil attach -quiet ~/Downloads/MySQL.dmg
-cd /Volumes/mysql-5.6.20-osx10.7-x86_64/
+cd /Volumes/mysql-5.6.21-osx10.8-x86_64/
 echo "..."
 echo "..."
 echo "Installing MySQL, administrator password required ..."
-sudo installer -pkg mysql-5.6.20-osx10.7-x86_64.pkg -target /
+sudo installer -pkg mysql-5.6.21-osx10.8-x86_64.pkg -target /
 echo "..."
 echo "..."
-# INSTALLING START UP ITEMS. UNTIL THERE IS A GUI/PREF PANE TO CONTROL
-# THE PREFERRED LAUNCHD METHOD, WE'LL STICK WITH WHAT MySQL OFFERS
-echo "Installing MySQL start up items..."
-sudo installer -pkg MySQLStartupItem.pkg -target /
-echo "..."
-echo "..."
-echo "Click Install to install the MySQL preferance pane"
-echo "..."
-echo "..."
-# MOVING PREFPANE TO DOWNLOADS FOLDER SO IT CAN STILL BE INSTALLED
-# AFTER THE SCRIPT COMPLETES AND REMOVES THE INSTALLER FILES
-# AS SCRIPT DOESN'T WAIT FOR USER TO CLICK "INSTALL" FOR PREFPANE
-cp -R MySQL.prefPane ~/Downloads/MySQL.prefpane
-open ~/Downloads/MySQL.prefPane/
-echo "..."
-sleep 15
-sudo /usr/local/mysql/support-files/mysql.server start
+# MYSQL NO LONGER SHIPS WITH STARTUP ITEMS OR PREF PANE
+# WHICH IS GOOD, BECAUSE STARTUP ITEMS ARE DEPRECATED
+# WHAT IS NOT GOOD IS NO AUTOSTART FUNCTION - SO LET'S MAKE A LAUNCHD CONTROL! 
+sudo cat << 'EOF' > ~/Documents/com.mysql.mysqld.plist
+<plist version="1.0">
+<dict>
+<key>KeepAlive</key>
+<true/>
+<key>Label</key>
+<string>com.mysql.mysqld</string>
+<key>ProgramArguments</key>
+<array>
+<string>/usr/local/mysql/bin/mysqld</string>
+<string>--bind-address=127.0.0.1</string>
+<string>--user=_mysql</string>
+</array>
+<key>RunAtLoad</key>
+<true/>
+<key>UserName</key>
+<string>_mysql</string>
+<key>WorkingDirectory</key>
+<string>/usr/local/mysql/data</string>
+</dict>
+</plist>
+EOF
+sudo mv ~/Documents/com.mysql.mysqld.plist /Library/LaunchDaemons/com.mysql.mysqld.plist
+sudo chown root:wheel /Library/LaunchDaemons/com.mysql.mysqld.plist
+sudo chmod 644 /Library/LaunchDaemons/com.mysql.mysqld.plist
+sudo launchctl load -w /Library/LaunchDaemons/com.mysql.mysqld.plist 
 # ADDING MYSQL PATH TO BASH PROFILE, MAY CONFLICT WITH EXISTING PROFILES/.RC FILES
 touch ~/.bash_profile >/dev/null 2>&1
-echo -e "\nexport PATH=$PATH:/usr/local/mysql/bin" | sudo tee -a  ~/.bash_profile > /dev/null
+echo "\nexport PATH=$PATH:/usr/local/mysql/bin" | sudo tee -a  ~/.bash_profile > /dev/null
 sudo mkdir /var/mysql; sudo ln -s /tmp/mysql.sock /var/mysql/mysql.sock
 # IF MySQL IS RUNNING, GENERATE, SET, AND DOCUMENT  ROOT PASSWORD
-if [[  $(sudo /usr/local/mysql/support-files/mysql.server status | grep "SUCCESS") ]]
+if [[  $(pidof mysqld) ]]
 then
 mypass="$(cat /dev/urandom | base64 | tr -dc A-Za-z0-9_ | head -c8)"
 echo $mypass > ~/Desktop/MYSQL_PASSWORD
@@ -89,7 +103,7 @@ echo "..."
 echo "..."
 # UNMOUNT AND DELELTE DOWNLOADED MySQL INSTALLER
 cd ~/
-hdiutil detach -quiet /Volumes/mysql-5.6.20-osx10.7-x86_64/
+hdiutil detach -quiet /Volumes/mysql-5.6.21-osx10.8-x86_64/
 sleep 2
 rm ~/Downloads/MySQL.dmg
 # NEW MY.CNF PERFORMANCE OPTION START
