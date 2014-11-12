@@ -10,7 +10,7 @@
 #  OS X 10.7 or newer
 #############################################
 #CHECK FOR OS X 10.7+
-if [[  $(sw_vers -productVersion | grep '10.[7-9]')  ]]
+if [[  $(sw_vers -productVersion | grep -E '10.[7-9]|1[0-9]')  ]]
 then
 sudo /usr/local/mysql/support-files/mysql.server start
 if [[  $(sudo /usr/local/mysql/support-files/mysql.server status | grep "SUCCESS") ]]
