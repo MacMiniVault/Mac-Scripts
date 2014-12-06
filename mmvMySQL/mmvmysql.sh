@@ -47,31 +47,21 @@ sudo chmod 755 /usr/local/bin/pidof
 fi
 # LOOKS GOOD, LETS GRAB MySQL AND GET STARTED ...
 echo "Downloading MySQL Installers ... may take a few moments"
-curl -# -o ~/Downloads/MySQL.dmg http://cdn.mysql.com/Downloads/MySQL-5.6/mysql-5.6.20-osx10.7-x86_64.dmg
+curl -# -o ~/Downloads/MySQL.dmg http://dev.mysql.com/get/Downloads/MySQL-5.6/mysql-5.6.22-osx10.9-x86_64.dmg
 hdiutil attach -quiet ~/Downloads/MySQL.dmg
-cd /Volumes/mysql-5.6.20-osx10.7-x86_64/
+# DEAR MySQL, WHY HAVE A SPECIFIC 10.9 DOWNLOAD IF IT JUST HAS THE 10.8 INSTALLER?
+cd /Volumes/mysql-5.6.22-osx10.8-x86_64/
 echo "..."
 echo "..."
 echo "Installing MySQL, administrator password required ..."
-sudo installer -pkg mysql-5.6.20-osx10.7-x86_64.pkg -target /
+sudo installer -pkg mysql-5.6.22-osx10.8-x86_64.pkg -target /
 echo "..."
 echo "..."
-# INSTALLING START UP ITEMS. UNTIL THERE IS A GUI/PREF PANE TO CONTROL
-# THE PREFERRED LAUNCHD METHOD, WE'LL STICK WITH WHAT MySQL OFFERS
-echo "Installing MySQL start up items..."
-sudo installer -pkg MySQLStartupItem.pkg -target /
-echo "..."
-echo "..."
-echo "Click Install to install the MySQL preferance pane"
-echo "..."
-echo "..."
-# MOVING PREFPANE TO DOWNLOADS FOLDER SO IT CAN STILL BE INSTALLED
-# AFTER THE SCRIPT COMPLETES AND REMOVES THE INSTALLER FILES
-# AS SCRIPT DOESN'T WAIT FOR USER TO CLICK "INSTALL" FOR PREFPANE
-cp -R MySQL.prefPane ~/Downloads/MySQL.prefpane
-open ~/Downloads/MySQL.prefPane/
-echo "..."
-sleep 15
+# AS OF RIGHT NOW MYSQL AUTOMATICALLY INSTALLS THE STARTUP ITEM AND PREFPANE
+# STARTUP ITEMS DO NOT WORK.  WE ARE GOING TO PRESENT SOME INFO TO THE END USER ABOUT THIS 
+
+
+
 sudo /usr/local/mysql/support-files/mysql.server start
 # ADDING MYSQL PATH TO BASH PROFILE, MAY CONFLICT WITH EXISTING PROFILES/.RC FILES
 touch ~/.bash_profile >/dev/null 2>&1

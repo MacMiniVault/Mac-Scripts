@@ -1,3 +1,6 @@
+#YOSMITE OS X 10.10 NOTE:
+[BE SURE TO READ THIS!!!](https://github.com/MacMiniVault/Mac-Scripts/blob/master/mmvMySQL/mmvmysql-Yosemite.md)
+
 #READ ME FOR MMV MySQL SCRIPT
 ===========
 
@@ -32,3 +35,4 @@ This script will restart MySQL, reset the password, and then restart it again
 This script creates a modified my.cnf file named mmv.cnf.  The performance settings will not be perfect for every MySQL server.  The intention was to give a small performance boost in a generic way.  This script gives the option to copy over the mmv.cnf file to /etc/my.cnf and restart MySQL.  We encourage you to further tune your MySQL server after it is running for awhile.  You can do so by running this command in your terminal and it will display stats and recommendations. (Credit Major Hayden for MySQLTuner)
 
 	perl <(curl -Ls https://raw.github.com/major/MySQLTuner-perl/master/mysqltuner.pl)
+
