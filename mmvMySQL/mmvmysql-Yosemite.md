@@ -14,6 +14,6 @@ Here’s are the events that lead up to the changes we are making in our script:
 
 If you upgraded to Yosemite and you can’t get MySQL to auto start on boot anymore - you can run this script:
 
-	 bash <(curl -Ls http://git.io/xxxxx)
+	 bash <(curl -Ls http://git.io/9QjHYg)
 
 We’re going to release an updated MySQL installer script by December 9th that will incorporate these changes.
