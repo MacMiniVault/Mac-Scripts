@@ -10,9 +10,10 @@ Here’s are the events that lead up to the changes we are making in our script:
 + MySQL uses a mysql.server script as a part of their preference pane
 + The MySQL preference pane is a nice way to toggle MySQL off and on
 + Writing a Launchd plist to start MySQL would break the usability of the preference pane
-+ We wrote a Launchd plist that simply starts mysql.server on boot
++ We wrote a Launchd plist that ~~simply starts mysql.server~~ looks for networking on boot and starts MySQL once the mysql.server script can start MySQL with the proper ‘hostname’.pid
 
 If you upgraded to Yosemite and you can’t get MySQL to auto start on boot anymore - you can run this script:
+
 
 	 bash <(curl -Ls http://git.io/9QjHYg)
 

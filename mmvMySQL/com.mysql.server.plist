@@ -7,10 +7,10 @@
     <key>Label</key> 
     <string>com.mysql.server</string>
     <key>ProgramArguments</key>
-    <array>
-      <string>/usr/local/mysql/support-files/mysql.server</string>
-      <string>start</string>
-    </array>
+        <array>
+        <string>sh</string>
+        <string>/usr/local/mysql/support-files/mmv-start.sh</string>
+        </array>    
     <key>RunAtLoad</key> 		
     <true/>
  </dict>

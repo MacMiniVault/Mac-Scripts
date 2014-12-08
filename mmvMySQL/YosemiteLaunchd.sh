@@ -18,6 +18,10 @@ echo "..."
 read -p 'DO YOU WANT TO MAKE MYSQL START ON BOOT? [y/n]: '  answer
 case "${answer}" in [Yy])
 sudo /usr/local/mysql/support-files/mysql.server stop > /dev/null 2>&1 
+curl -s -o ~/Downloads/mmv-start.sh https://raw.githubusercontent.com/MacMiniVault/Mac-Scripts/master/mmvMySQL/mmv-start.sh
+sudo mv ~/Downloads/mmv-start.sh /usr/local/mysql/support-files/
+sudo chown root:wheel /usr/local/mysql/support-files/mmv-start.sh
+sudo chmod +x /usr/local/mysql/support-files/mmv-start.sh
 curl -s -o ~/Downloads/com.mysql.server.plist https://raw.githubusercontent.com/MacMiniVault/Mac-Scripts/master/mmvMySQL/com.mysql.server.plist
 sudo mv ~/Downloads/com.mysql.server.plist /Library/LaunchDaemons/
 sudo chown root:wheel /Library/LaunchDaemons/com.mysql.server.plist
