@@ -2,10 +2,10 @@
 
 MySQL and Apple have recently taken steps forward in their respective software development. In some ways OS X and MySQL are walking down separate paths at this point. We are making a few tweaks to our scripts to help with that.
 
-Here’s are the events that lead up to the changes we are making in our script:
+Here are the events that lead up to the creation of our script:
 + MySQL has used StartupItems to auto start MySQL on boot for it’s OS X installer
 + Apple has deprecated StartupItems for quite some time (OS X 10.4)
-+ There has been a MySQL bug report that dates back to 2011 about this
++ There has been a MySQL [bug report](http://bugs.mysql.com/bug.php?id=59855) that dates back to 2011 about this
 + Apple finally dropped support for StartupItems in OS X 10.10 Yosemite
 + MySQL uses a mysql.server script as a part of their preference pane
 + The MySQL preference pane is a nice way to toggle MySQL off and on
