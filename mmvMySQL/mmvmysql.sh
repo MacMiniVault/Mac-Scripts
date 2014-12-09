@@ -3,14 +3,14 @@
 # AUTHOR: JONATHAN SCHWENN @JONSCHWENN      #
 # MAC MINI VAULT - MAC MINI COLOCATION      #
 # MACMINIVAULT.COM - @MACMINIVAULT          #
-# VERSION 1.50 RELEASE DATE SEP 23 2014     #
+# VERSION 2.00 RELEASE DATE DEC 09 2014     #
 # DESC:  THIS SCRIPT INSTALLS MySQL on OSX  #
 #############################################
 #REQUIREMENTS:
 #  OS X 10.7 or newer
 #############################################
 # CHECK FOR OS X 10.7+
-if [[  $(sw_vers -productVersion | grep -E '10.[7-9]|1[0-9]')  ]]
+if [[  $(sw_vers -productVersion | grep -E '10.[7-9]|1[0-0]')  ]]
 then
 # CHECK FOR EXISTING MySQL
 if [[ -d /usr/local/mysql  ]]
@@ -49,20 +49,37 @@ fi
 echo "Downloading MySQL Installers ... may take a few moments"
 curl -# -o ~/Downloads/MySQL.dmg http://dev.mysql.com/get/Downloads/MySQL-5.6/mysql-5.6.22-osx10.9-x86_64.dmg
 hdiutil attach -quiet ~/Downloads/MySQL.dmg
+# PLIST TO ALTER MySQL INSTALLER TO NOT ATTEMPT TO INSTALL STARTUP ITEMS
+curl - o ~/Downloads/MySQL-install.plist https://raw.githubusercontent.com/MacMiniVault/Mac-Scripts/master/mmvMySQL/install.plist
 # DEAR MySQL, WHY HAVE A SPECIFIC 10.9 DOWNLOAD IF IT JUST HAS THE 10.8 INSTALLER?
 cd /Volumes/mysql-5.6.22-osx10.8-x86_64/
 echo "..."
 echo "..."
 echo "Installing MySQL, administrator password required ..."
-sudo installer -pkg mysql-5.6.22-osx10.8-x86_64.pkg -target /
+sudo installer -applyChoiceChangesXML ~/Downloads/MySQL-install.plist -pkg mysql-5.6.22-osx10.8-x86_64.pkg -target /
 echo "..."
 echo "..."
-# AS OF RIGHT NOW MYSQL AUTOMATICALLY INSTALLS THE STARTUP ITEM AND PREFPANE
-# STARTUP ITEMS DO NOT WORK.  WE ARE GOING TO PRESENT SOME INFO TO THE END USER ABOUT THIS 
-
-
-
-sudo /usr/local/mysql/support-files/mysql.server start
+# AS OF RIGHT NOW MYSQL AUTOMATICALLY INSTALLS THE STARTUP ITEMS AND PREFPANE
+# STARTUP ITEMS DO NOT WORK IN YOSEMITE - WE MADE A LAUNCHD START SETUP 
+# TWO FILES ARE NEEDED
+# A PLIST FOR LAUNCHD TO START ON BOOT
+# AND A SCRIPT THAT THE PLIST LOADS, SCRIPT WAITS FOR NETWORKING TO INITIALIZE AND STARTS MySQL
+curl -s -o ~/Downloads/mmv-start.sh https://raw.githubusercontent.com/MacMiniVault/Mac-Scripts/master/mmvMySQL/mmv-start.sh
+sudo mv ~/Downloads/mmv-start.sh /usr/local/mysql/support-files/
+sudo chown root:wheel /usr/local/mysql/support-files/mmv-start.sh
+sudo chmod +x /usr/local/mysql/support-files/mmv-start.sh
+curl -s -o ~/Downloads/com.mysql.server.plist https://raw.githubusercontent.com/MacMiniVault/Mac-Scripts/master/mmvMySQL/com.mysql.server.plist
+sudo mv ~/Downloads/com.mysql.server.plist /Library/LaunchDaemons/
+sudo chown root:wheel /Library/LaunchDaemons/com.mysql.server.plist
+sudo chmod 644 /Library/LaunchDaemons/com.mysql.server.plist
+        while true; do
+                read -p "DO YOU WANT TO LOAD MySQL ON BOOT? [y/N]" cnf
+                case $cnf in
+                [Yy]* ) sudo launchctl load -w /Library/LaunchDaemons/com.mysql.server.plist; break  ;;
+                [Nn]* ) sudo /usr/local/mysql/support-files/mysql.server start; break;;
+                * ) echo "Please answer yes or no.";;
+                esac
+        done
 # ADDING MYSQL PATH TO BASH PROFILE, MAY CONFLICT WITH EXISTING PROFILES/.RC FILES
 touch ~/.bash_profile >/dev/null 2>&1
 echo -e "\nexport PATH=$PATH:/usr/local/mysql/bin" | sudo tee -a  ~/.bash_profile > /dev/null
@@ -79,9 +96,10 @@ echo "..."
 echo "..."
 # UNMOUNT AND DELELTE DOWNLOADED MySQL INSTALLER
 cd ~/
-hdiutil detach -quiet /Volumes/mysql-5.6.20-osx10.7-x86_64/
+hdiutil detach -quiet /Volumes/mysql-5.6.22-osx10.8-x86_64/
 sleep 2
 rm ~/Downloads/MySQL.dmg
+rm ~/Downloads/MySQL-install.plist
 # NEW MY.CNF PERFORMANCE OPTION START
 echo "BASE PERFORMANCE MY.CNF IS JUST A GENERIC SUGGESTION FOR PERFORMANCE"
 echo "YOUR RESULTS MAY VARY AND YOU MAY WANT TO FURTHER TUNE YOUR MY.CNF SETTINGS"
