@@ -47,10 +47,10 @@ sudo chmod 755 /usr/local/bin/pidof
 fi
 # LOOKS GOOD, LETS GRAB MySQL AND GET STARTED ...
 echo "Downloading MySQL Installers ... may take a few moments"
-curl -# -o ~/Downloads/MySQL.dmg http://dev.mysql.com/get/Downloads/MySQL-5.6/mysql-5.6.22-osx10.9-x86_64.dmg
+curl -# -Lo ~/Downloads/MySQL.dmg http://cdn.mysql.com/get/Downloads/MySQL-5.6/mysql-5.6.22-osx10.9-x86_64.dmg
 hdiutil attach -quiet ~/Downloads/MySQL.dmg
 # PLIST TO ALTER MySQL INSTALLER TO NOT ATTEMPT TO INSTALL STARTUP ITEMS
-curl - o ~/Downloads/MySQL-install.plist https://raw.githubusercontent.com/MacMiniVault/Mac-Scripts/master/mmvMySQL/install.plist
+curl -o ~/Downloads/MySQL-install.plist https://raw.githubusercontent.com/MacMiniVault/Mac-Scripts/master/mmvMySQL/install.plist
 # DEAR MySQL, WHY HAVE A SPECIFIC 10.9 DOWNLOAD IF IT JUST HAS THE 10.8 INSTALLER?
 cd /Volumes/mysql-5.6.22-osx10.8-x86_64/
 echo "..."
