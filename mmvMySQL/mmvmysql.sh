@@ -84,6 +84,7 @@ sudo chmod 644 /Library/LaunchDaemons/com.mysql.server.plist
 touch ~/.bash_profile >/dev/null 2>&1
 echo -e "\nexport PATH=$PATH:/usr/local/mysql/bin" | sudo tee -a  ~/.bash_profile > /dev/null
 sudo mkdir /var/mysql; sudo ln -s /tmp/mysql.sock /var/mysql/mysql.sock
+sleep 10
 # IF MySQL IS RUNNING, GENERATE, SET, AND DOCUMENT  ROOT PASSWORD
 if [[  $(sudo /usr/local/mysql/support-files/mysql.server status | grep "SUCCESS") ]]
 then
