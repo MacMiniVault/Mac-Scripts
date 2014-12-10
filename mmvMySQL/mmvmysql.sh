@@ -76,7 +76,7 @@ sudo chmod 644 /Library/LaunchDaemons/com.mysql.server.plist
                 read -p "DO YOU WANT TO LOAD MySQL ON BOOT? [Y/n]" cnf
                 case $cnf in
                 [Yy]* ) sudo launchctl load -w /Library/LaunchDaemons/com.mysql.server.plist; break  ;;
-                [Nn]* ) sudo launchctl unload -w /Library/LaunchDaemons/com.mysql.server.plist; sudo /usr/local/mysql/support-files/mysql.server start; break;;
+                [Nn]* ) sudo launchctl load -w /Library/LaunchDaemons/com.mysql.server.plist; sudo launchctl unload -w /Library/LaunchDaemons/com.mysql.server.plist;  sudo /usr/local/mysql/support-files/mysql.server start; break;;
                 * ) echo "Please answer yes or no.";;
                 esac
         done
