@@ -26,6 +26,7 @@ This script was developed and tested by the staff of Mac Mini Vault, we colocate
 + Open Terminal and run the following command
 
         bash <(curl -Ls http://git.io/1UlbJQ)
+:exclamation: [**Security Notice**](https://github.com/MacMiniVault/Mac-Scripts#readme)
 
 + Enter in your password and a passphrase when prompted, reboot when finished
 + When machine reboots, turn off VPN for a minute, then turn it back on

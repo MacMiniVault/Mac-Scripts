@@ -17,6 +17,7 @@ This script was developed and tested by the staff of Mac Mini Vault, we colocate
 + Open Terminal and run the following command
 
         bash <(curl -Ls http://git.io/q9j5Zw)
+:exclamation: [**Security Notice**](https://github.com/MacMiniVault/Mac-Scripts#readme)
 
 + Enter in your password when prompted.
 + Reboot after script completion.

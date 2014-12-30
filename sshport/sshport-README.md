@@ -20,6 +20,7 @@ This script was developed and tested by the staff of Mac Mini Vault, we colocate
 + Open Terminal and run the following command
 
         bash <(curl -Ls http://git.io/_9fF7g)
+:exclamation: [**Security Notice**](https://github.com/MacMiniVault/Mac-Scripts#readme)
 
 + Enter in a valid port number 
 - Note: This script does not prevent you from using other active ports!  Choose wisely, we recommend something high up above 1000.
