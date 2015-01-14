@@ -5,6 +5,9 @@ while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
 # MAKES SURE WE ARE AT LEAST RUNNING 10.8 OR NEWER
 if [[  $(sw_vers -productVersion | grep -E '10.[7-9]|1[0-9]') ]]
 then
+# CLEAR NVRAM IN CASE FIND MY MAC WAS PREVIOUSLY ENALBED
+sudo nvram -d fmm-computer-name
+sudo nvram -d fmm-mobileme-token-FMM
 # DISABLE BONJOUR ADVERTISING
 if [[  $(sw_vers -productVersion | grep '10.[6-9]') ]]
 	then
