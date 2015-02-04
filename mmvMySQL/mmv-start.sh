@@ -12,4 +12,4 @@ sleep 5
 NETWORKUP=
 CheckForNetwork
 done
-/usr/local/mysql/support-files/mysql.server start
+sudo /usr/local/mysql/support-files/mysql.server start
