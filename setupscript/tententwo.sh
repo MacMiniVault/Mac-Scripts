@@ -19,3 +19,4 @@ sudo pmset repeat wakeorpoweron MTWRFSU  23:00:00
 sudo defaults write /Library/Preferences/com.apple.Bluetooth ControllerPowerState '0' > /dev/null 2>&1
 sudo defaults write /Library/Preferences/com.apple.Bluetooth BluetoothAutoSeekKeyboard '0' > /dev/null 2>&1
 sudo defaults write /Library/Preferences/com.apple.Bluetooth BluetoothAutoSeekPointingDevice '0' > /dev/null 2>&1
+echo "SETTING HAVE BEEN ADJUSTED - PLEASE REBOOT"
