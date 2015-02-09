@@ -19,7 +19,7 @@ then
 echo "Congratulations, you are running OS X 10.8.x and have Server.app and MySQL installed...."
 #GET LATEST WORDPRESS VERSION
 cd ~/Downloads
-curl -s -o mmvwordpress.tar.gz http://wordpress.org/latest.tar.gz
+curl -Ls -o mmvwordpress.tar.gz http://wordpress.org/latest.tar.gz
 tar xzf mmvwordpress.tar.gz
 cd wordpress 
 mv wp-config-sample.php wp-config.php
