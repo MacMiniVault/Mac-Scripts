@@ -1,135 +1,111 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="en-us">
   <head>
-    <meta charset='utf-8' />
-    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
-    <meta name="description" content="Mac-Scripts : Automation scripts focused around Mac OS X Server" />
-
-    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
-
-    <title>Mac-Scripts</title>
+    <meta charset="UTF-8">
+    <title>Mac-Scripts by MacMiniVault</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" media="screen">
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
   </head>
-
   <body>
+    <section class="page-header">
+      <h1 class="project-name">Mac-Scripts</h1>
+      <h2 class="project-tagline">Automation scripts focused around Mac OS X Server</h2>
+      <a href="https://github.com/MacMiniVault/Mac-Scripts" class="btn">View on GitHub</a>
+      <a href="https://github.com/MacMiniVault/Mac-Scripts/zipball/master" class="btn">Download .zip</a>
+      <a href="https://github.com/MacMiniVault/Mac-Scripts/tarball/master" class="btn">Download .tar.gz</a>
+    </section>
 
-    <!-- HEADER -->
-    <div id="header_wrap" class="outer">
-        <header class="inner">
-          <a id="forkme_banner" href="https://github.com/MacMiniVault/Mac-Scripts">View on GitHub</a>
+    <section class="main-content">
+      <h3>
+<a id="we-try-to-make-mac-servers-just-work" class="anchor" href="#we-try-to-make-mac-servers-just-work" aria-hidden="true"><span class="octicon octicon-link"></span></a>We try to make Mac servers "just work"</h3>
 
-          <h1 id="project_title">Mac-Scripts</h1>
-          <h2 id="project_tagline">Automation scripts focused around Mac OS X Server</h2>
-
-            <section id="downloads">
-              <a class="zip_download_link" href="https://github.com/MacMiniVault/Mac-Scripts/zipball/master">Download this project as a .zip file</a>
-              <a class="tar_download_link" href="https://github.com/MacMiniVault/Mac-Scripts/tarball/master">Download this project as a tar.gz file</a>
-            </section>
-        </header>
-    </div>
-
-    <!-- MAIN CONTENT -->
-    <div id="main_content_wrap" class="outer">
-      <section id="main_content" class="inner">
-        <h3>
-<a name="we-try-to-make-mac-servers-just-work" class="anchor" href="#we-try-to-make-mac-servers-just-work"><span class="octicon octicon-link"></span></a>We try to make Mac servers "just work"</h3>
-
-<p><a href="http://www.macminivault.com/">Mac Mini Vault</a> is division of <a href="http://www.cyberlynk.net/">CyberLynk</a> , a data center company located near Milwaukee, WI.  We have over a thousand Macs in our data centers (Milwaukee and Phoenix).  Right now we are up to seven dedicated 48U cabinets that do nothing but host Mac minis.  Each of which can hold up to 140 Mac minis. </p>
+<p><a href="http://www.macminivault.com/">Mac Mini Vault</a> is division of <a href="http://www.cyberlynk.net/">CyberLynk</a> , a data center company located near Milwaukee, WI.  We have over a thousand Macs in our data centers (Milwaukee and Phoenix).  Right now we are up over a dozen dedicated 48U cabinets that do nothing but host Mac servers.  Each of which can hold up to 140 Mac mini or 48 Mac Pro servers. </p>
 
 <p>Normally colocation is hands-off from the view point of the data center.  The customer owns the equipment and ultimately runs their own show.  Our approach is slightly different.  We have free hands-on support hours.  We also do a lot of testing.  The testing that we do revolves around making our customer's lives easier and automating the living hell out of any manual task.  Manual tasks can be messy, include typos, and most unfortunately can render a machine dead in the water.</p>
 
-<p>We've done things like create 11 different operating system 'images' for the 2011 and 2012 Mac mini hardware.  This includes 3 distributions of Linux, Windows Server 2k8/2k12, VMware ESXi 5.5, and even OS X 10.6 and 10.6 Server <em>(10.6 will only run on 2011 or older hardware &amp; some of these images have been retired)</em>.  We've also created little apps or scripts that automate tasks that we regularly see customers struggle with.</p>
+<p>We've also created many (15+) different operating system 'images' for the 2011 and 2012 Mac mini hardware.  This includes 6+ distributions of Linux, Windows Server 2k8/2k12, VMware ESXi 5.5/6.0, and even OS X 10.6 and 10.6 Server <em>(10.6 will only run on 2011 or older hardware &amp; some of these images have been retired)</em>.  We've also created little apps or scripts that automate tasks that we regularly see customers struggle with.</p>
 
 <p>We have taken a few scripts that we've complied and put them in this GitHub project to further develop and grow them.</p>
 
-<p>.</p>
-
-<p>.</p>
-
 <h4>
-<a name="mmv-mysql-script" class="anchor" href="#mmv-mysql-script"><span class="octicon octicon-link"></span></a>MMV MySQL Script</h4>
+<a id="mmv-mysql-script" class="anchor" href="#mmv-mysql-script" aria-hidden="true"><span class="octicon octicon-link"></span></a>MMV MySQL Script</h4>
 
-<hr><p>This script downloads and installs MySQL on OS X 10.7 or newer.  Note that if you have ever had MySQL installed, this script may not work.  Running it is as simple as copying and pasting this bash line into terminal:</p>
+<hr>
+
+<p>This script downloads and installs MySQL on OS X 10.7 or newer.  Note that if you have ever had MySQL installed, this script may not work.  Running it is as simple as copying and pasting this bash line into terminal:</p>
 
 <h6>
-<a name="note-read-the-readme-file-before-running" class="anchor" href="#note-read-the-readme-file-before-running"><span class="octicon octicon-link"></span></a>NOTE: READ THE <a href="https://github.com/MacMiniVault/Mac-Scripts/blob/master/mmvMySQL/mmvmysql-README.md">README FILE</a> BEFORE RUNNING!</h6>
+<a id="note-read-the-readme-file-before-running" class="anchor" href="#note-read-the-readme-file-before-running" aria-hidden="true"><span class="octicon octicon-link"></span></a>NOTE: READ THE <a href="https://github.com/MacMiniVault/Mac-Scripts/blob/master/mmvMySQL/mmvmysql-README.md">README FILE</a> BEFORE RUNNING!</h6>
 
 <pre><code>bash &lt;(curl -Ls http://git.io/eUx7rg)
 </code></pre>
 
-<p>.</p>
-
-<p>.</p>
-
 <h4>
-<a name="mmv-mysql-password-reset-script" class="anchor" href="#mmv-mysql-password-reset-script"><span class="octicon octicon-link"></span></a>MMV MySQL Password Reset Script</h4>
+<a id="mmv-mysql-password-reset-script" class="anchor" href="#mmv-mysql-password-reset-script" aria-hidden="true"><span class="octicon octicon-link"></span></a>MMV MySQL Password Reset Script</h4>
 
-<hr><p>Did you install MySQL on OS X using our script and forget the root password?  Our script displays the password during installation and also places a file on the desktop with it.  Don't worry - this script will restart MySQL and reset the root password.  It'll show the password and place a file on the desktop again containing the file. Running it is as simple as copying and pasting this bash line into terminal:</p>
+<hr>
+
+<p>Did you install MySQL on OS X using our script and forget the root password?  Our script displays the password during installation and also places a file on the desktop with it.  Don't worry - this script will restart MySQL and reset the root password.  It'll show the password and place a file on the desktop again containing the file. Running it is as simple as copying and pasting this bash line into terminal:</p>
 
 <h6>
-<a name="note-read-the-readme-file-before-running-1" class="anchor" href="#note-read-the-readme-file-before-running-1"><span class="octicon octicon-link"></span></a>NOTE: READ THE <a href="https://github.com/MacMiniVault/Mac-Scripts/blob/master/mmvMySQL/mmvmysql-README.md">README FILE</a> BEFORE RUNNING!</h6>
+<a id="note-read-the-readme-file-before-running-1" class="anchor" href="#note-read-the-readme-file-before-running-1" aria-hidden="true"><span class="octicon octicon-link"></span></a>NOTE: READ THE <a href="https://github.com/MacMiniVault/Mac-Scripts/blob/master/mmvMySQL/mmvmysql-README.md">README FILE</a> BEFORE RUNNING!</h6>
 
 <pre><code>bash &lt;(curl -Ls http://git.io/9xqEnQ)
 </code></pre>
 
-<p>.</p>
-
-<p>.</p>
-
 <h4>
-<a name="vpn-script" class="anchor" href="#vpn-script"><span class="octicon octicon-link"></span></a>VPN Script</h4>
+<a id="vpn-script" class="anchor" href="#vpn-script" aria-hidden="true"><span class="octicon octicon-link"></span></a>VPN Script</h4>
 
-<hr><p>This script sets up a VPN server on a Mac running 10.8 or 10.9 with Server.app.  Be sure to read the vpnscript-README file first. This script automates the VLAN, DNS, Firewall, and VPN configuration steps.  Running it is as simple as copying and pasting this bash line into terminal:</p>
+<hr>
+
+<p>This script sets up a VPN server on a Mac running 10.8, 10.9, or 10.10 with Server.app.  Be sure to read the vpnscript-README file first. This script automates the VLAN, DNS, Firewall, and VPN configuration steps.  Running it is as simple as copying and pasting this bash line into terminal:</p>
 
 <h6>
-<a name="note-read-the-readme-file-before-running-2" class="anchor" href="#note-read-the-readme-file-before-running-2"><span class="octicon octicon-link"></span></a>NOTE: READ THE <a href="https://github.com/MacMiniVault/Mac-Scripts/blob/master/vpnscript/vpnscript-README.md">README FILE</a> BEFORE RUNNING!</h6>
+<a id="note-read-the-readme-file-before-running-2" class="anchor" href="#note-read-the-readme-file-before-running-2" aria-hidden="true"><span class="octicon octicon-link"></span></a>NOTE: READ THE <a href="https://github.com/MacMiniVault/Mac-Scripts/blob/master/vpnscript/vpnscript-README.md">README FILE</a> BEFORE RUNNING!</h6>
 
 <pre><code>bash &lt;(curl -Ls http://git.io/1UlbJQ)
 </code></pre>
 
-<p>.</p>
-
-<p>.</p>
-
 <h4>
-<a name="mmv-wordpress-script" class="anchor" href="#mmv-wordpress-script"><span class="octicon octicon-link"></span></a>MMV Wordpress Script</h4>
+<a id="mmv-wordpress-script" class="anchor" href="#mmv-wordpress-script" aria-hidden="true"><span class="octicon octicon-link"></span></a>MMV Wordpress Script</h4>
 
-<hr><p>This script blasts out a WordPress install in seconds.  It needs OS X 10.8 or 10.9 with Server.app setup and running.  It also requires MySQL to be installed, we have a <a href="http://www.macminivault.com/mysql-mountain-lion/">tutorial</a> on how to do that.  It automates 95% of the process, allowing you to to a WordPress install up and running that allows for WordPress updates, plugin installs, media and theme uploads from within the WordPress backed. Currently there is a manual step required which is to create the website entry in Server.app.  Be sure to read the mmvwordpress-README file first. Running it is as simple as copying and pasting this bash line into terminal:</p>
+<hr>
+
+<p>This script blasts out a WordPress install in seconds.  It needs OS X 10.8 or 10.9 with Server.app setup and running.  It also requires MySQL to be installed, we have a <a href="http://www.macminivault.com/mysql-mountain-lion/">tutorial</a> on how to do that.  It automates 95% of the process, allowing you to to a WordPress install up and running that allows for WordPress updates, plugin installs, media and theme uploads from within the WordPress backed. Currently there is a manual step required which is to create the website entry in Server.app.  Be sure to read the mmvwordpress-README file first. Running it is as simple as copying and pasting this bash line into terminal:</p>
 
 <h6>
-<a name="note-read-the-readme-file-before-running-3" class="anchor" href="#note-read-the-readme-file-before-running-3"><span class="octicon octicon-link"></span></a>NOTE: READ THE <a href="https://github.com/MacMiniVault/Mac-Scripts/blob/master/mmvwordpress/mmvwordpress-README.md">README FILE</a> BEFORE RUNNING!</h6>
+<a id="note-read-the-readme-file-before-running-3" class="anchor" href="#note-read-the-readme-file-before-running-3" aria-hidden="true"><span class="octicon octicon-link"></span></a>NOTE: READ THE <a href="https://github.com/MacMiniVault/Mac-Scripts/blob/master/mmvwordpress/mmvwordpress-README.md">README FILE</a> BEFORE RUNNING!</h6>
 
 <pre><code>bash &lt;(curl -Ls http://git.io/KQ_dvw)
 </code></pre>
 
-<p>.</p>
-
-<p>.</p>
-
 <h4>
-<a name="disable-bonjour-script" class="anchor" href="#disable-bonjour-script"><span class="octicon octicon-link"></span></a>Disable Bonjour Script</h4>
+<a id="disable-bonjour-script" class="anchor" href="#disable-bonjour-script" aria-hidden="true"><span class="octicon octicon-link"></span></a>Disable Bonjour Script</h4>
 
-<hr><p>By default Macs advertise their existence on the network they are connected to with a DNS Multicast protocol. This allows one Mac to see and easily connect to other Macs and devices on the network. This doesn't work so well when you have hundreds of Macs on the same network and businesses, schools, and data centers regularly disable this functionality. It can be done by edited a plist file and adding in a specific flag. If this file is <em>not</em> edited properly, the Mac can cease to resolve DNS or may no longer boot. This script quickly detects the version of OS X and makes sure the flag is not currently sets and painlessly edits the plist file.  Be sure to read the disablebonjour-README file first. Running it is as simple as copying and pasting this bash line into terminal:</p>
+<hr>
+
+<p>By default Macs advertise their existence on the network they are connected to with a DNS Multicast protocol. This allows one Mac to see and easily connect to other Macs and devices on the network. This doesn't work so well when you have hundreds of Macs on the same network and businesses, schools, and data centers regularly disable this functionality. It can be done by edited a plist file and adding in a specific flag. If this file is <em>not</em> edited properly, the Mac can cease to resolve DNS or may no longer boot. This script quickly detects the version of OS X and makes sure the flag is not currently sets and painlessly edits the plist file.  Be sure to read the disablebonjour-README file first. Running it is as simple as copying and pasting this bash line into terminal:</p>
 
 <h6>
-<a name="note-read-the-readme-file-before-running-4" class="anchor" href="#note-read-the-readme-file-before-running-4"><span class="octicon octicon-link"></span></a>NOTE: READ THE <a href="https://github.com/MacMiniVault/Mac-Scripts/blob/master/disablebonjour/disablebonjour-README.md">README FILE</a> BEFORE RUNNING!</h6>
+<a id="note-read-the-readme-file-before-running-4" class="anchor" href="#note-read-the-readme-file-before-running-4" aria-hidden="true"><span class="octicon octicon-link"></span></a>NOTE: READ THE <a href="https://github.com/MacMiniVault/Mac-Scripts/blob/master/disablebonjour/disablebonjour-README.md">README FILE</a> BEFORE RUNNING!</h6>
 
 <pre><code>bash &lt;(curl -Ls http://git.io/q9j5Zw)
 </code></pre>
 
-<p>.</p>
-
-<p>.</p>
-
 <h4>
-<a name="change-ssh-port-script" class="anchor" href="#change-ssh-port-script"><span class="octicon octicon-link"></span></a>Change SSH Port Script</h4>
+<a id="change-ssh-port-script" class="anchor" href="#change-ssh-port-script" aria-hidden="true"><span class="octicon octicon-link"></span></a>Change SSH Port Script</h4>
 
-<hr><p>Enabling remote SSH access on a Mac is simplistic and easy. Under the sharing preferences there is a 'Remote Login' option that requires a single click to be activated. This allows for some powerful remote access via the command line. SFTP file transfers and remotely diagnosing a distressed Mac with non-functioning VNC/ARD access are two prime examples for enabling Remote Login.</p>
+<hr>
+
+<p>Enabling remote SSH access on a Mac is simplistic and easy. Under the sharing preferences there is a 'Remote Login' option that requires a single click to be activated. This allows for some powerful remote access via the command line. SFTP file transfers and remotely diagnosing a distressed Mac with non-functioning VNC/ARD access are two prime examples for enabling Remote Login.</p>
 
 <p>If this machine is live on the internet and port 22 is not being filtered by a firewall then you may run into some unwanted attention. Bots and scanners crawl the web looking for responses on port 22. The majority of the time this results in no harm, as they have to randomly guess login credentials. For the peace of mind and a little added security, running SSH on a non-standard port is just a good idea. Running it is as simple as copying and pasting this bash line into terminal:</p>
 
 <h6>
-<a name="note-read-the-readme-file-before-running-5" class="anchor" href="#note-read-the-readme-file-before-running-5"><span class="octicon octicon-link"></span></a>NOTE: READ THE <a href="https://github.com/MacMiniVault/Mac-Scripts/blob/master/sshport/sshport-README.md">README FILE</a> BEFORE RUNNING!</h6>
+<a id="note-read-the-readme-file-before-running-5" class="anchor" href="#note-read-the-readme-file-before-running-5" aria-hidden="true"><span class="octicon octicon-link"></span></a>NOTE: READ THE <a href="https://github.com/MacMiniVault/Mac-Scripts/blob/master/sshport/sshport-README.md">README FILE</a> BEFORE RUNNING!</h6>
 
 <pre><code>bash &lt;(curl -Ls http://git.io/_9fF7g)
 </code></pre>
@@ -139,50 +115,44 @@
 <pre><code>ssh -p9222 user@server.example.com
 </code></pre>
 
-<p>.</p>
-
-<p>.</p>
-
 <h4>
-<a name="disabling-mavericks-unicast-arp-cache-validation-script" class="anchor" href="#disabling-mavericks-unicast-arp-cache-validation-script"><span class="octicon octicon-link"></span></a>Disabling Maverick's Unicast ARP Cache Validation Script</h4>
+<a id="disabling-mavericks-unicast-arp-cache-validation-script" class="anchor" href="#disabling-mavericks-unicast-arp-cache-validation-script" aria-hidden="true"><span class="octicon octicon-link"></span></a>Disabling Maverick's Unicast ARP Cache Validation Script</h4>
 
-<hr><p>There is a new security function in OS X 10.9 Mavericks that performs validation of the ARP cache. Basically, it's trying to attempt to see if the network gateway (router) is being spoofed/redirected. Unfortunately it interprets our redundant routers as an issue and causes network performance, lag, and packet loss.</p>
+<hr>
+
+<p>There is a new security function in OS X 10.9 Mavericks that performs validation of the ARP cache. Basically, it's trying to attempt to see if the network gateway (router) is being spoofed/redirected. Unfortunately it interprets our redundant routers as an issue and causes network performance, lag, and packet loss.</p>
 
 <p>Not many Macs are in this scenario, but we happen to have a lot. Each Mac mini cabinet in our data center uses redundant Cisco 6509's as gateways. There are multiple fiber paths that are one hop away from the upstream internet connections.</p>
 
 <p>To disable this function in OS X 10.9 we've written a script. It's reversible in the future, but in the mean time it'll stop you from pulling your hair out. Macs on high availability networks found in data centers and enterprise environments can be affected. Running it is as simple as copying and pasting this bash line into terminal:</p>
 
 <h6>
-<a name="note-read-the-readme-file-before-running-6" class="anchor" href="#note-read-the-readme-file-before-running-6"><span class="octicon octicon-link"></span></a>NOTE: READ THE <a href="https://github.com/MacMiniVault/Mac-Scripts/blob/master/unicastarp/unicastarp-README.md">README FILE</a> BEFORE RUNNING!</h6>
+<a id="note-read-the-readme-file-before-running-6" class="anchor" href="#note-read-the-readme-file-before-running-6" aria-hidden="true"><span class="octicon octicon-link"></span></a>NOTE: READ THE <a href="https://github.com/MacMiniVault/Mac-Scripts/blob/master/unicastarp/unicastarp-README.md">README FILE</a> BEFORE RUNNING!</h6>
 
 <pre><code>bash &lt;(curl -Ls http://git.io/6YzLCw)
 </code></pre>
 
-<p>.</p>
+<h4>
+<a id="more-to-come" class="anchor" href="#more-to-come" aria-hidden="true"><span class="octicon octicon-link"></span></a>More to come!</h4>
 
-<p>.</p>
+<hr>
+
+<p>We have some more scripts to write and will add to the collection as we develop them further.</p>
 
 <h4>
-<a name="more-to-come" class="anchor" href="#more-to-come"><span class="octicon octicon-link"></span></a>More to come!</h4>
-
-<hr><p>We have some more scripts to write and will add to the collection as we develop them further.</p>
-
-<h4>
-<a name="support-or-contact" class="anchor" href="#support-or-contact"><span class="octicon octicon-link"></span></a>Support or Contact</h4>
+<a id="support-or-contact" class="anchor" href="#support-or-contact" aria-hidden="true"><span class="octicon octicon-link"></span></a>Support or Contact</h4>
 
 <p><a href="http://www.macminivault.com">http://www.macminivault.com</a> is our website.  We support these scripts for our customers, but if you have questions and are not our customer we can try to lend a helping hand.  If you ever have a need to place a Mac in a secure location with a lot of bandwidth, fire suppression, security, and backup power - be sure to look us up.</p>
-      </section>
-    </div>
 
-    <!-- FOOTER  -->
-    <div id="footer_wrap" class="outer">
-      <footer class="inner">
-        <p class="copyright">Mac-Scripts maintained by <a href="https://github.com/MacMiniVault">MacMiniVault</a></p>
-        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
+      <footer class="site-footer">
+        <span class="site-footer-owner"><a href="https://github.com/MacMiniVault/Mac-Scripts">Mac-Scripts</a> is maintained by <a href="https://github.com/MacMiniVault">MacMiniVault</a>.</span>
+
+        <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a> by <a href="https://twitter.com/jasonlong">Jason Long</a>.</span>
       </footer>
-    </div>
 
-              <script type="text/javascript">
+    </section>
+
+            <script type="text/javascript">
             var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
             document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
           </script>
@@ -193,6 +163,6 @@
             } catch(err) {}
           </script>
 
-
   </body>
 </html>
+
