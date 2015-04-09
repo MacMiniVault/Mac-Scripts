@@ -47,16 +47,16 @@ sudo chmod 755 /usr/local/bin/pidof
 fi
 # LOOKS GOOD, LETS GRAB MySQL AND GET STARTED ...
 echo "Downloading MySQL Installers ... may take a few moments"
-curl -# -Lo ~/Downloads/MySQL.dmg http://cdn.mysql.com/Downloads/MySQL-5.6/mysql-5.6.22-osx10.9-x86_64.dmg
+curl -# -Lo ~/Downloads/MySQL.dmg http://cdn.mysql.com/Downloads/MySQL-5.6/mysql-5.6.24-osx10.9-x86_64.dmg
 hdiutil attach -quiet ~/Downloads/MySQL.dmg
 # PLIST TO ALTER MySQL INSTALLER TO NOT ATTEMPT TO INSTALL STARTUP ITEMS
 curl -s -o ~/Downloads/MySQL-install.plist https://raw.githubusercontent.com/MacMiniVault/Mac-Scripts/master/mmvMySQL/install.plist
 # DEAR MySQL, WHY HAVE A SPECIFIC 10.9 DOWNLOAD IF IT JUST HAS THE 10.8 INSTALLER?
-cd /Volumes/mysql-5.6.22-osx10.8-x86_64/
+cd /Volumes/mysql-5.6.24-osx10.8-x86_64/
 echo "..."
 echo "..."
 echo "Installing MySQL, administrator password required ..."
-sudo installer -applyChoiceChangesXML ~/Downloads/MySQL-install.plist -pkg mysql-5.6.22-osx10.8-x86_64.pkg -target /
+sudo installer -applyChoiceChangesXML ~/Downloads/MySQL-install.plist -pkg mysql-5.6.24-osx10.8-x86_64.pkg -target /
 echo "..."
 echo "..."
 # AS OF RIGHT NOW MYSQL AUTOMATICALLY INSTALLS THE STARTUP ITEMS AND PREFPANE
@@ -97,7 +97,7 @@ echo "..."
 echo "..."
 # UNMOUNT AND DELELTE DOWNLOADED MySQL INSTALLER
 cd ~/
-hdiutil detach -quiet /Volumes/mysql-5.6.22-osx10.8-x86_64/
+hdiutil detach -quiet /Volumes/mysql-5.6.24-osx10.8-x86_64/
 sleep 2
 rm ~/Downloads/MySQL.dmg
 rm ~/Downloads/MySQL-install.plist
