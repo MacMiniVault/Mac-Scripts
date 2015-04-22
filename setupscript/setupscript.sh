@@ -85,6 +85,12 @@ sleep 5
 sudo defaults write /var/db/launchd.db/com.apple.launchd/overrides.plist com.apple.screensharing -dict Disabled -bool false
 sudo launchctl load /System/Library/LaunchDaemons/com.apple.screensharing.plist
 fi
+if [[  $(sw_vers -productVersion | grep '10.10') ]]
+then
+sudo launchctl enable system/com.apple.screensharing
+sleep 5
+sudo launchctl load -w /System/Library/LaunchDaemons/com.apple.screensharing.plist
+fi
 echo "REMOTE LOGIN AND SCREEN SHARING ARE ENABLED"
 # DISABLES THE ANNOYING "NO KEYBOARD" BLUETOOTH POPUP
 # MOUNTAIN LION SPEDIFIC SETTINGS
