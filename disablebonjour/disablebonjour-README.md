@@ -9,8 +9,8 @@ This script was developed and tested by the staff of Mac Mini Vault, we colocate
 + Checks to make sure OS X is at 10.6.x or newer
 + Checks to make sure 'NoMulticastAdvertisements' flag isn't already present (10.6-10.9)
 + Adds 'NoMulticastAdvertisements' flag to the proper plist file (10.6-10.9)
-+ Checks to make sure '--no-multicast' flag isn’t already present (10.10)
-+ Adds '--no-multicast' flag to the proper plist file (10.10)
++ Checks to make sure '--no-multicast' flag isn’t already present (10.10.0 to 10.10.3)
++ Adds '--no-multicast' flag to the proper plist file (10.10.0 to 10.10.3)
 
 #INSTALLATION
 
