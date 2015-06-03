@@ -57,6 +57,8 @@ echo "..."
 echo "..."
 echo "Installing MySQL, administrator password required ..."
 sudo installer -applyChoiceChangesXML ~/Downloads/MySQL-install.plist -pkg mysql-5.6.24-osx10.8-x86_64.pkg -target /
+# MySQL START SCRIPT CHANGES PATH - LINKING PIDOF TO THE MySQL DIR
+sudo ln -s /usr/local/bin/pidof /usr/local/mysql/bin/pidof
 echo "..."
 echo "..."
 # AS OF RIGHT NOW MYSQL AUTOMATICALLY INSTALLS THE STARTUP ITEMS AND PREFPANE
