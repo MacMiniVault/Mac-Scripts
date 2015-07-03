@@ -140,10 +140,11 @@ while true; do
                 esac
         done
 # NEW SEQUEL PRO INSTALL OPTION END
+source ~/.bash_profile
 echo " "
 echo " "
 echo "ALL DONE!  Install Sequel Pro or phpmyadmin to administer MySQL"
-echo "Log off and log back in for 'mysql' to be recognized as a command in terminal"
+echo "'mysql' is now recognized as a command in terminal"
 else
 "SORRY, MySQL IS NOT RUNNING ... THERE MUST BE A PROBLEM"
 fi
