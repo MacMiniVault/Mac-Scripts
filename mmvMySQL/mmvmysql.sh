@@ -52,7 +52,7 @@ hdiutil attach -quiet ~/Downloads/MySQL.dmg
 # PLIST TO ALTER MySQL INSTALLER TO NOT ATTEMPT TO INSTALL STARTUP ITEMS
 curl -s -o ~/Downloads/MySQL-install.plist https://raw.githubusercontent.com/MacMiniVault/Mac-Scripts/master/mmvMySQL/install.plist
 # DEAR MySQL, WHY HAVE A SPECIFIC 10.9 DOWNLOAD IF IT JUST HAS THE 10.8 INSTALLER?
-cd /Volumes/mysql-5.6.26-osx10.9-x86_64/
+cd /Volumes/mysql-5.6.26-osx10.8-x86_64/
 echo "..."
 echo "..."
 echo "Installing MySQL, administrator password required ..."
@@ -99,7 +99,7 @@ echo "..."
 echo "..."
 # UNMOUNT AND DELELTE DOWNLOADED MySQL INSTALLER
 cd ~/
-hdiutil detach -quiet /Volumes/mysql-5.6.26-osx10.9-x86_64/
+hdiutil detach -quiet /Volumes/mysql-5.6.26-osx10.8-x86_64/
 sleep 2
 rm ~/Downloads/MySQL.dmg
 rm ~/Downloads/MySQL-install.plist
