@@ -26,6 +26,7 @@ fi
 if [[  $(sw_vers -productVersion | grep '10.10') ]]
   then
   OSX=yes
+  echo "debug 1"
 fi
 
 if [[ $OSX = yes && $(serverinfo --configured | grep 'has') && $(which mysql) ]]
