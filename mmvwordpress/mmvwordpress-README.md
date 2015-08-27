@@ -6,7 +6,7 @@ The primary scenario behind this script is to use a remote Mac as a web server t
 Note this script is primarily made for Macs in a production environment running on a static IP.  If you have Server.app installed on a development machine and you don't have a problem editing the /etc/hosts file it could be used to quickly get a WordPress site setup.
 
 #WHAT THIS SCRIPT DOES
-+ Checks to make sure OS X is at 10.8.x and has Server.app installed and initiated and MySQL is installed
++ Checks to make sure OS X is at 10.8.x, 10.9.x, or 10.10.x and has Server.app installed and initiated and MySQL is installed
 + Downloads the latest version of WordPress
 + Starts the Web service within Server.app and enables PHP functionality
 + Prompts for a domain name, does basic validation to make sure it's really a domain
@@ -16,7 +16,7 @@ Note this script is primarily made for Macs in a production environment running 
 + Sets permissions so Apache owns files, things like WordPress updates, media uploads, and plugin installations can be completed within the WordPress backend.
 
 #INSTALLATION
-**Before installation: Make sure you have OS X 10.8, Sever.app installed and initialized, and MySQL installed (see link above for tutorial).**
+**Before installation: Make sure you have OS X 10.8, 10.9, or 10.10; Server.app installed and initialized, and MySQL installed (see link above for tutorial).**
 
 + Open Terminal and run the following command
 
