@@ -18,6 +18,7 @@ OSX=no
 if [[  $(sw_vers -productVersion | grep '10.8') ]]
   then
   OSX=yes
+  echo "debug 0"
 fi
 if [[  $(sw_vers -productVersion | grep '10.9') ]]
   then
