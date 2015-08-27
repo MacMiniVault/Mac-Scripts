@@ -8,30 +8,30 @@
 #        A OS X 10.8 MACHINE W/ SERVER.APP  #
 #        AND MYSQL INSTALLED                #
 #############################################
-#REQUIREMENTS:
-#  OS X 10.8
+# REQUIREMENTS:
+#  OS X 10.8, 10.9 or 10.10
 #  SERVER.APP INSTALLED / INITIALIZED
-#  MYSQL INSTALLED 
+#  MYSQL INSTALLED
 #############################################
-#CHECK FOR OS X 10.8, SERVER.app, and MySQL
-if [[  $(sw_vers -productVersion | grep '10.[8-9]') && $(serverinfo --configured | grep 'has') && $(which mysql) ]]
+#CHECK FOR OS X 10.8/10.9/10.10, SERVER.app, and MySQL
+if [[  $(sw_vers -productVersion | grep '10.[8-10]') && $(serverinfo --configured | grep 'has') && $(which mysql) ]]
 then
-echo "Congratulations, you are running OS X 10.8.x and have Server.app and MySQL installed...."
+echo "Congratulations, you are running OS X 10.8 or higher and have Server.app and MySQL installed...."
 #GET LATEST WORDPRESS VERSION
 cd ~/Downloads
 curl -Ls -o mmvwordpress.tar.gz http://wordpress.org/latest.tar.gz
 tar xzf mmvwordpress.tar.gz
-cd wordpress 
+cd wordpress
 mv wp-config-sample.php wp-config.php
 #START WEB SERVICE AND MAKE SURE PHP IS ENABLED
 echo "YOU MAY BE ASKED FOR YOUR SYSTEM ADMINISTRATOR PASSWORD...."
-sudo /Applications/Server.app/Contents/ServerRoot/usr/sbin/serveradmin start web
-sudo /Applications/Server.app/Contents/ServerRoot/usr/sbin/webappctl start com.apple.webapp.php
+sudo /Applications/Server.app/Contents/ServerRoot/usr/sbin/serveradmin start web > /dev/null 2>&1
+sudo /Applications/Server.app/Contents/ServerRoot/usr/sbin/webappctl start com.apple.webapp.php > /dev/null 2>&1
 #ASK FOR DOMAIN NAME - THANKS TO @SHAUNINMAN FOR SOME OF THE REGEX USED IN VALIDATION OF DOMAIN
 echo "ENTER DOMAIN NAME:"
 regex='^[a-zA-Z0-9\-\.]+\.((a[cdefgilmnoqrstuwxz]|aero|arpa)|(b[abdefghijmnorstvwyz]|biz)|(c[acdfghiklmnorsuvxyz]|cat|com|coop)|d[ejkmoz]|(e[ceghrstu]|edu)|f[ijkmor]|(g[abdefghilmnpqrstuwy]|gov)|h[kmnrtu]|(i[delmnoqrst]|info|int)|(j[emop]|jobs)|k[eghimnprwyz]|l[abcikrstuvy]|(m[acdeghklmnopqrstuvwxyz]|mil|mobi|museum)|(n[acefgilopruz]|name|net)|(om|org)|(p[aefghklmnrstwy]|pro)|qa|r[eouw]|s[abcdeghijklmnortvyz]|(t[cdfghjklmnoprtvwz]|travel)|u[agkmsyz]|v[aceginu]|w[fs]|y[etu]|z[amw])$'
 while read domain; do
- if [[ $domain =~ $regex ]]; then 
+ if [[ $domain =~ $regex ]]; then
 echo "BUILDING WORDPRESS SITE..... "
         if [[ $(sudo /Applications/Server.app/Contents/ServerRoot/usr/sbin/serveradmin settings web | grep $domain) ]]; then
                 echo "DOMAIN ALREADY EXISTS ON THIS SERVER ..."
@@ -45,7 +45,7 @@ echo "YOU DID NOT ENTER A VALID DOMAIN NAME"
 echo ""
 echo "PLEASE ENTER A DOMAIN NAME:"
 fi
-done    
+done
 #CREATE DATABASE NAME AND USER
 wpname="$(cat /dev/urandom | base64 | tr -dc A-Za-z0-9_ | head -c8)"
 wpname=wp_$wpname
@@ -68,7 +68,6 @@ echo "SUCCESS: CREATE VIRTUAL HOST IN SERVER.APP AND FOLLOW REST OF READ-ME DOCU
 
 #END IF STATEMENT CHECKING FOR OS X & SERVER.APP & MySQL
 else
-echo "ERROR: YOU ARE NOT RUNNING OS X 10.8 OR YOU DO NOT HAVE SERVER.APP MySQL INSTALLED"
+echo "ERROR: YOU ARE NOT RUNNING OS X 10.8/10.9/10.10 OR YOU DO NOT HAVE SERVER.APP MySQL INSTALLED"
 exit 1
 fi
-
