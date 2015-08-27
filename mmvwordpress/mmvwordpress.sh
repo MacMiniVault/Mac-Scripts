@@ -3,10 +3,10 @@
 # AUTHOR: JONATHAN SCHWENN @JONSCHWENN      #
 # MAC MINI VAULT - MAC MINI COLOCATION      #
 # MACMINIVAULT.COM - @MACMINIVAULT          #
-# VERSION 1.01 RELEASE DATE SEPT 27, 2012   #
+# VERSION 2.0 RELEASE DATE AUG 27, 2014     #
 # DESC:  THIS SCRIPT SETS UP WORDPRESS ON   #
-#        A OS X 10.8 MACHINE W/ SERVER.APP  #
-#        AND MYSQL INSTALLED                #
+#       A OS X 10.8+ MACHINE W/ SERVER.APP  #
+#       AND MYSQL INSTALLED                 #
 #############################################
 # REQUIREMENTS:
 #  OS X 10.8, 10.9 or 10.10
@@ -18,7 +18,6 @@ OSX=no
 if [[  $(sw_vers -productVersion | grep '10.8') ]]
   then
   OSX=yes
-  echo "debug 0"
 fi
 if [[  $(sw_vers -productVersion | grep '10.9') ]]
   then
@@ -27,7 +26,6 @@ fi
 if [[  $(sw_vers -productVersion | grep '10.10') ]]
   then
   OSX=yes
-  echo "debug 1"
 fi
 
 if [[ $OSX = yes && $(serverinfo --configured | grep 'has') && $(which mysql) ]]
