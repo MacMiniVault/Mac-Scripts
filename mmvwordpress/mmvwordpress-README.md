@@ -1,7 +1,7 @@
 #READ ME FOR MMV WORDPRESS SCRIPT
 ===========
 
-The primary scenario behind this script is to use a remote Mac as a web server to host a [WordPress](http://www.wordpress.org) site.  This script will run on a Mac that has OS X 10.8.x and Server.app installed and initialized.  MySQL is also required and is not installed by default.  A quick tutorial on how to install MySQL on OS X 10.8 Mountain Lion can be found [here](http://www.macminivault.com/mysql-mountain-lion/). 
+The primary scenario behind this script is to use a remote Mac as a web server to host a [WordPress](http://www.wordpress.org) site.  This script will run on a Mac that has OS X 10.8/10.9/10.10 and Server.app installed and initialized.  MySQL is also required and is not installed by default.  A quick tutorial on how to install MySQL on OS X 10.10 Yosemite can be found [here](http://www.macminivault.com/mysql-yosemite/). 
 
 Note this script is primarily made for Macs in a production environment running on a static IP.  If you have Server.app installed on a development machine and you don't have a problem editing the /etc/hosts file it could be used to quickly get a WordPress site setup.
 
