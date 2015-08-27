@@ -14,7 +14,21 @@
 #  MYSQL INSTALLED
 #############################################
 #CHECK FOR OS X 10.8/10.9/10.10, SERVER.app, and MySQL
-if [[  $(sw_vers -productVersion | grep '10.[8-10]') && $(serverinfo --configured | grep 'has') && $(which mysql) ]]
+OSX=no
+if [[  $(sw_vers -productVersion | grep '10.8') ]]
+  then
+  OSX=yes
+fi
+if [[  $(sw_vers -productVersion | grep '10.9') ]]
+  then
+  OSX=yes
+fi
+if [[  $(sw_vers -productVersion | grep '10.10') ]]
+  then
+  OSX=yes
+fi
+
+if [[  $($OSX = yes) && $(serverinfo --configured | grep 'has') && $(which mysql) ]]
 then
 echo "Congratulations, you are running OS X 10.8 or higher and have Server.app and MySQL installed...."
 #GET LATEST WORDPRESS VERSION
