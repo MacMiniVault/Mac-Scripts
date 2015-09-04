@@ -146,7 +146,12 @@ while true; do
 echo " "
 echo " "
 echo "ALL DONE!  Install Sequel Pro or phpmyadmin to administer MySQL"
+echo " "
+echo " "
+echo "MySQL will start automatically after a reboot. Use the MySQL preference pain in system preferences to manage this."
 echo "Open a new terminal for the 'mysql' command to be recognized in terminal"
+echo " "
+echo " "
 else
 "SORRY, MySQL IS NOT RUNNING ... THERE MUST BE A PROBLEM"
 fi
