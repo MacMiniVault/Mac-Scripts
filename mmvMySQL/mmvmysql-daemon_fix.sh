@@ -74,14 +74,16 @@ sudo chmod +x /usr/local/mysql/support-files/mmv-start.sh
 #sudo mv ~/Downloads/com.mysql.server.plist /Library/LaunchDaemons/
 #sudo chown root:wheel /Library/LaunchDaemons/com.mysql.server.plist
 #sudo chmod 644 /Library/LaunchDaemons/com.mysql.server.plist
-        while true; do
-                read -p "DO YOU WANT TO LOAD MySQL ON BOOT? [Y/n]" cnf
-                case $cnf in
-                [Yy]* ) sudo launchctl load -w /Library/LaunchDaemons/com.oracle.oss.mysql.mysqld.plist; break  ;;
-                [Nn]* ) sudo launchctl load -w /Library/LaunchDaemons/com.oracle.oss.mysql.mysqld.plist; sudo launchctl unload -w /Library/LaunchDaemons/com.oracle.oss.mysql.mysqld.plist;  sudo /usr/local/mysql/support-files/mysql.server start; break;;
-                * ) echo "Please answer yes or no.";;
-                esac
-        done
+#        while true; do
+#                read -p "DO YOU WANT TO LOAD MySQL ON BOOT? [Y/n]" cnf
+#                case $cnf in
+#                [Yy]* ) sudo launchctl load -w /Library/LaunchDaemons/com.oracle.oss.mysql.mysqld.plist; break  ;;
+#                [Nn]* ) sudo launchctl load -w /Library/LaunchDaemons/com.oracle.oss.mysql.mysqld.plist; sudo launchctl unload -w /Library/LaunchDaemons/com.oracle.oss.mysql.mysqld.plist;  sudo /usr/local/mysql/support-files/mysql.server start; break;;
+#                * ) echo "Please answer yes or no.";;
+#                esac
+#        done
+sudo /usr/local/mysql/support-files/mysql.server start
+
 
 # ADDING MYSQL PATH TO BASH PROFILE, MAY CONFLICT WITH EXISTING PROFILES/.RC FILES
 touch ~/.bash_profile >/dev/null 2>&1
