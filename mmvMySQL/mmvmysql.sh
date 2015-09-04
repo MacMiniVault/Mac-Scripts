@@ -3,7 +3,7 @@
 # AUTHOR: JONATHAN SCHWENN @JONSCHWENN      #
 # MAC MINI VAULT - MAC MINI COLOCATION      #
 # MACMINIVAULT.COM - @MACMINIVAULT          #
-# VERSION 2.02 RELEASE DATE APR 09 2015     #
+# VERSION 2.1 RELEASE DATE SEPT 04 2015     #
 # DESC:  THIS SCRIPT INSTALLS MySQL on OSX  #
 #############################################
 #REQUIREMENTS:
@@ -69,19 +69,10 @@ echo "..."
 curl -s -o ~/Downloads/mmv-start.sh https://raw.githubusercontent.com/MacMiniVault/Mac-Scripts/master/mmvMySQL/mmv-start.sh
 sudo mv ~/Downloads/mmv-start.sh /usr/local/mysql/support-files/
 sudo chown root:wheel /usr/local/mysql/support-files/mmv-start.sh
-sudo chmod +x /usr/local/mysql/support-files/mmv-start.sh
-curl -s -o ~/Downloads/com.mysql.server.plist https://raw.githubusercontent.com/MacMiniVault/Mac-Scripts/master/mmvMySQL/com.mysql.server.plist
-sudo mv ~/Downloads/com.mysql.server.plist /Library/LaunchDaemons/
-sudo chown root:wheel /Library/LaunchDaemons/com.mysql.server.plist
-sudo chmod 644 /Library/LaunchDaemons/com.mysql.server.plist
-        while true; do
-                read -p "DO YOU WANT TO LOAD MySQL ON BOOT? [Y/n]" cnf
-                case $cnf in
-                [Yy]* ) sudo launchctl load -w /Library/LaunchDaemons/com.mysql.server.plist; break  ;;
-                [Nn]* ) sudo launchctl load -w /Library/LaunchDaemons/com.mysql.server.plist; sudo launchctl unload -w /Library/LaunchDaemons/com.mysql.server.plist;  sudo /usr/local/mysql/support-files/mysql.server start; break;;
-                * ) echo "Please answer yes or no.";;
-                esac
-        done
+
+# LET'S START UP MYSQL
+sudo /usr/local/mysql/support-files/mysql.server start
+
 # ADDING MYSQL PATH TO BASH PROFILE, MAY CONFLICT WITH EXISTING PROFILES/.RC FILES
 touch ~/.bash_profile >/dev/null 2>&1
 echo -e "\nexport PATH=$PATH:/usr/local/mysql/bin" | sudo tee -a  ~/.bash_profile > /dev/null
@@ -143,7 +134,12 @@ while true; do
 echo " "
 echo " "
 echo "ALL DONE!  Install Sequel Pro or phpmyadmin to administer MySQL"
+echo " "
+echo " "
+echo "MySQL will start automatically after a reboot. Use the MySQL preference pain in system preferences to manage this."
 echo "Open a new terminal for the 'mysql' command to be recognized in terminal"
+echo " "
+echo " "
 else
 "SORRY, MySQL IS NOT RUNNING ... THERE MUST BE A PROBLEM"
 fi
