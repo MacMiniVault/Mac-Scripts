@@ -13,7 +13,7 @@
 if [[  $(sw_vers) ]]
 then
 	# MAKES SURE WE ARE RUNNING 10.6 -> 10.9 or 10.10.4+
-	if [[  $(sw_vers -productVersion | grep '10.[6-9]') ]] || [[  $(sw_vers -productVersion | grep '10.10.4') ]]
+	if [[  $(sw_vers -productVersion | grep '10.[6-9]') ]] || [[  $(sw_vers -productVersion | grep '10.10.[4-5]') ]]
 	then
 		# CHECKS FOR FLAG IN CURRENT PLIST FILE
 		if [[ $(sudo /usr/libexec/PlistBuddy -c Print /System/Library/LaunchDaemons/com.apple.mDNSResponder.plist | grep 'NoMulticast') ]]
