@@ -48,8 +48,8 @@ echo "ENERGY PREFERENCES ARE SET"
 while true; do
                 read -p "IS THIS MACHINE IN MKE1 or PHX1? [M/P]" sp
                 case $sp in
-                [Mm]* ) sudo networksetup -setdnsservers Ethernet 66.185.16.130 66.185.16.131; break;;
-                [Pp]* ) sudo networksetup -setdnsservers Ethernet 162.253.135.66 162.253.135.67; break;;
+                [Mm]* ) sudo networksetup -setdnsservers Ethernet 66.185.16.131 66.185.16.130; break;;
+                [Pp]* ) sudo networksetup -setdnsservers Ethernet 162.253.135.67 162.253.135.66; break;;
                 * ) echo "Please type either an M or a P.";;
                 esac
         done
@@ -85,7 +85,7 @@ sleep 5
 sudo defaults write /var/db/launchd.db/com.apple.launchd/overrides.plist com.apple.screensharing -dict Disabled -bool false
 sudo launchctl load /System/Library/LaunchDaemons/com.apple.screensharing.plist
 fi
-if [[  $(sw_vers -productVersion | grep '10.10') ]]
+if [[  $(sw_vers -productVersion | grep '10.[10-11]') ]]
 then
 sudo launchctl enable system/com.apple.screensharing
 sleep 5
@@ -135,8 +135,8 @@ fi
 fi
 echo "...."
 echo "...."
-# YOSEMITE SPECIFIC SETTINGS
-if [[  $(sw_vers -productVersion | grep '10.10') ]]
+# YOSEMITE / EL CAPITAN SPECIFIC SETTINGS
+if [[  $(sw_vers -productVersion | grep '10.[10-11]') ]]
 then
 sudo defaults write /Library/Preferences/com.apple.Bluetooth ControllerPowerState '0' > /dev/null 2>&1
 sudo defaults write /Library/Preferences/com.apple.Bluetooth BluetoothAutoSeekKeyboard '0' > /dev/null 2>&1
