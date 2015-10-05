@@ -125,7 +125,7 @@ EOF
 while true; do
                 read -p "DO YOU WANT TO AUTOMATICALLY INSTALL SEQUEL PRO? [Y/n]" sp
                 case $sp in
-                [Yy]* ) curl -# -o ~/Downloads/SequelPro.dmg https://github.com/sequelpro/sequelpro/releases/download/release-1.1/sequel-pro-1.1.dmg; hdiutil attach -quiet ~/Downloads/SequelPro.dmg;cp -R /Volumes/Sequel\ Pro\ 1.1/Sequel\ Pro.app/ /Applications/Sequel\ Pro.app/; hdiutil detach -quiet /Volumes/Sequel\ Pro\ 1.1/;sleep 5; rm ~/Downloads/SequelPro.dmg; echo "Sequel Pro is now in your Applications folder!";  break  ;;
+                [Yy]* ) curl -# -o ~/Downloads/SequelPro.dmg https://github.com/sequelpro/sequelpro/releases/download/release-1.1/sequel-pro-1.1.dmg; hdiutil attach -quiet ~/Downloads/SequelPro.dmg;mkdir /Applications/Sequel\ Pro.app/;cp -R /Volumes/Sequel\ Pro\ 1.1/Sequel\ Pro.app/ /Applications/Sequel\ Pro.app/; hdiutil detach -quiet /Volumes/Sequel\ Pro\ 1.1/;sleep 5; rm ~/Downloads/SequelPro.dmg; echo "Sequel Pro is now in your Applications folder!";  break  ;;
                 [Nn]* ) break;;
                 * ) echo "Please answer yes or no.";;
                 esac
