@@ -30,6 +30,10 @@ if [[  $(sw_vers -productVersion | grep '10.10') && $(serverinfo --configured | 
 then
 OSX=yes
 fi
+if [[  $(sw_vers -productVersion | grep '10.11') && $(serverinfo --configured | grep 'has')  ]]
+then
+OSX=yes
+fi
 
 if [ $OSX = yes ]
 then
