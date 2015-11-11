@@ -10,7 +10,7 @@ This script automates and greatly speeds up the setup process as  well as reduci
 This script was developed and tested by the staff of Mac Mini Vault, we colocate a lot of Macs and tirelessly work to add usability and streamline the plight of the Mac in the data center world.  Check out our website at http://www.macminivault.com
 
 #WHAT THIS SCRIPT DOES
-+ Checks to make sure OS X is at 10.8.x or 10.9.x and has Server.app installed and initiated
++ Checks to make sure OS X is at 10.8.x, 10.9.x, 10.10.x, or 10.11.x and has Server.app installed and initiated
 + Checks to see if this script has run before
 + Stops DNS & VPN
 + Creates and configures a private VLAN for VPN clients
@@ -21,7 +21,7 @@ This script was developed and tested by the staff of Mac Mini Vault, we colocate
 + Prompts for and sets the VPN passphrase 
 
 #INSTALLATION
-**Before installation: Make sure you have OS X 10.8/10.9/10.10, Sever.app installed and initialized, no VLANs configured, and a un-customized firewall configuration.**
+**Before installation: Make sure you have OS X 10.8/10.9/10.10/10.11, Sever.app installed and initialized, no VLANs configured, and a un-customized firewall configuration.**
 
 + Open Terminal and run the following command
 
