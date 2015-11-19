@@ -31,52 +31,31 @@ echo "..."
 		esac
 	done
 fi
-# MYSQL INSTALLER WANTS A 'pidof' COMMAND SOMETIMES
-# SO WE'LL GIVE IT A 'pidof' COMMAND
-if [[ !  $(command -v pidof) ]]; then
-if [ ! -d "$/usr/local/bin" ]; then
-sudo mkdir -p /usr/local/bin
-fi
-# HARD TO CAT DIRECT TO BIN DIR, PUTTING IN DOCUMENTS THEN MOVING
-sudo cat << 'EOF' > ~/Documents/pidof
-#!/bin/sh
-ps axc|awk "{if (\$5==\"$1\") print \$1}"
-EOF
-sudo mv ~/Documents/pidof /usr/local/bin/pidof
-sudo chmod 755 /usr/local/bin/pidof
-fi
+
 # LOOKS GOOD, LETS GRAB MySQL AND GET STARTED ...
 echo "Downloading MySQL Installers ... may take a few moments"
 curl -# -Lo ~/Downloads/MySQL.dmg http://cdn.mysql.com/Downloads/MySQL-5.7/mysql-5.7.9-osx10.10-x86_64.dmg
 hdiutil attach -quiet ~/Downloads/MySQL.dmg
-# PLIST TO ALTER MySQL INSTALLER TO NOT ATTEMPT TO INSTALL STARTUP ITEMS
-curl -s -o ~/Downloads/MySQL-install.plist https://raw.githubusercontent.com/MacMiniVault/Mac-Scripts/master/mmvMySQL/install.plist
-# DEAR MySQL, WHY HAVE A SPECIFIC 10.9 DOWNLOAD IF IT JUST HAS THE 10.8 INSTALLER?
+# DEAR MySQL, WHY HAVE A SPECIFIC 10.10 DOWNLOAD IF IT JUST HAS THE 10.9 INSTALLER?
 cd /Volumes/mysql-5.7.9-osx10.9-x86_64/
 echo "..."
 echo "..."
 echo "Installing MySQL, administrator password required ..."
-sudo installer -applyChoiceChangesXML ~/Downloads/MySQL-install.plist -pkg mysql-5.7.9-osx10.9-x86_64.pkg -target /
-# MySQL START SCRIPT CHANGES PATH - LINKING PIDOF TO THE MySQL DIR
-sudo ln -s /usr/local/bin/pidof /usr/local/mysql/bin/pidof
+sudo installer -pkg mysql-5.7.9-osx10.9-x86_64.pkg -target /
 echo "..."
 echo "..."
-# AS OF RIGHT NOW MYSQL AUTOMATICALLY INSTALLS THE STARTUP ITEMS AND PREFPANE
-# STARTUP ITEMS DO NOT WORK IN YOSEMITE - WE MADE A LAUNCHD START SETUP
-# TWO FILES ARE NEEDED
-# A PLIST FOR LAUNCHD TO START ON BOOT
-# AND A SCRIPT THAT THE PLIST LOADS, SCRIPT WAITS FOR NETWORKING TO INITIALIZE AND STARTS MySQL
-curl -s -o ~/Downloads/mmv-start.sh https://raw.githubusercontent.com/MacMiniVault/Mac-Scripts/master/mmvMySQL/mmv-start.sh
-sudo mv ~/Downloads/mmv-start.sh /usr/local/mysql/support-files/
-sudo chown root:wheel /usr/local/mysql/support-files/mmv-start.sh
 
 # LET'S START UP MYSQL
 sudo /usr/local/mysql/support-files/mysql.server start
+echo "..."
+echo "..."
+echo "IGNORE THE TEMPORARY PASSWORD DIALOG THAT JUST OPENED"
+echo "..."
+echo "..."
 
-# MYSQL NOW SETS A RANDOM PASSWORD ON STARTUP - WE NEED THAT PASSWORD
-
-echo "Enter the temporary password from the dialog box:"
-read temppass;
+# WE NEED TO RESET THE ROOT PASSWORD WITH THE NEWEST MYSQL INSTALLER, SINCE IT SETS ONE ON ITS OWN.
+sudo /usr/local/mysql/support-files/mysql.server stop
+sudo /usr/local/mysql/support-files/mysql.server start --skip-grant-tables
 
 # ADDING MYSQL PATH TO BASH PROFILE, MAY CONFLICT WITH EXISTING PROFILES/.RC FILES
 touch ~/.bash_profile >/dev/null 2>&1
@@ -90,8 +69,10 @@ mypass="$(cat /dev/urandom | base64 | tr -dc A-Za-z0-9_ | head -c8)"
 echo $mypass > ~/Desktop/MYSQL_PASSWORD
 echo "Setting MySQL root Password to $mypass"
 echo "Placing password on desktop..."
-#/usr/local/mysql/bin/mysql -uroot -e "GRANT ALL ON *.* TO 'root'@'localhost' IDENTIFIED BY '$mypass' WITH GRANT OPTION;"
-/usr/local/mysql/bin/mysqladmin -u root -p$temppass password $mypass
+/usr/local/mysql/bin/mysql -uroot -e "UPDATE mysql.user SET Password=PASSWORD('$mypass') WHERE User='root'; FLUSH PRIVILEGES;"
+sudo /usr/local/mysql/support-files/mysql.server stop
+sudo /usr/local/mysql/support-files/mysql.server start
+
 echo "..."
 echo "..."
 # UNMOUNT AND DELELTE DOWNLOADED MySQL INSTALLER
