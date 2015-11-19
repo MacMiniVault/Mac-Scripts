@@ -69,7 +69,7 @@ mypass="$(cat /dev/urandom | base64 | tr -dc A-Za-z0-9_ | head -c8)"
 echo $mypass > ~/Desktop/MYSQL_PASSWORD
 echo "Setting MySQL root Password to $mypass"
 echo "Placing password on desktop..."
-/usr/local/mysql/bin/mysql -uroot -e "UPDATE mysql.user SET Password=PASSWORD('$mypass') WHERE User='root'; FLUSH PRIVILEGES;"
+/usr/local/mysql/bin/mysql -uroot -e "UPDATE mysql.user SET authentication_string=PASSWORD('$mypass') WHERE User='root'; FLUSH PRIVILEGES;"
 sudo /usr/local/mysql/support-files/mysql.server stop
 sudo /usr/local/mysql/support-files/mysql.server start
 
@@ -80,7 +80,6 @@ cd ~/
 hdiutil detach -quiet /Volumes/mysql-5.7.9-osx10.9-x86_64/
 sleep 2
 rm ~/Downloads/MySQL.dmg
-rm ~/Downloads/MySQL-install.plist
 # NEW MY.CNF PERFORMANCE OPTION START
 echo "BASE PERFORMANCE MY.CNF IS JUST A GENERIC SUGGESTION FOR PERFORMANCE"
 echo "YOUR RESULTS MAY VARY AND YOU MAY WANT TO FURTHER TUNE YOUR MY.CNF SETTINGS"
