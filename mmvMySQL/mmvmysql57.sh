@@ -73,6 +73,11 @@ sudo chown root:wheel /usr/local/mysql/support-files/mmv-start.sh
 # LET'S START UP MYSQL
 sudo /usr/local/mysql/support-files/mysql.server start
 
+# MYSQL NOW SETS A RANDOM PASSWORD ON STARTUP - WE NEED THAT PASSWORD
+
+echo "Enter the temporary password from the dialog box:"
+read temppass;
+
 # ADDING MYSQL PATH TO BASH PROFILE, MAY CONFLICT WITH EXISTING PROFILES/.RC FILES
 touch ~/.bash_profile >/dev/null 2>&1
 echo -e "\nexport PATH=$PATH:/usr/local/mysql/bin" | sudo tee -a  ~/.bash_profile > /dev/null
@@ -85,7 +90,8 @@ mypass="$(cat /dev/urandom | base64 | tr -dc A-Za-z0-9_ | head -c8)"
 echo $mypass > ~/Desktop/MYSQL_PASSWORD
 echo "Setting MySQL root Password to $mypass"
 echo "Placing password on desktop..."
-/usr/local/mysql/bin/mysql -uroot -e "GRANT ALL ON *.* TO 'root'@'localhost' IDENTIFIED BY '$mypass' WITH GRANT OPTION;"
+#/usr/local/mysql/bin/mysql -uroot -e "GRANT ALL ON *.* TO 'root'@'localhost' IDENTIFIED BY '$mypass' WITH GRANT OPTION;"
+/usr/local/mysql/bin/mysqladmin -u root -p$temppass password $mypass
 echo "..."
 echo "..."
 # UNMOUNT AND DELELTE DOWNLOADED MySQL INSTALLER
