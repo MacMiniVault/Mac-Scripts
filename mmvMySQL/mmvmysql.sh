@@ -10,7 +10,7 @@
 #  OS X 10.7 or newer
 #############################################
 # CHECK FOR OS X 10.7+
-if [[  $(sw_vers -productVersion | grep -E '10.[7-9]|10.10')  ]]
+if [[  $(sw_vers -productVersion | grep -E '10.[7-9]|10.[10-11]')  ]]
 then
 # CHECK FOR EXISTING MySQL
 if [[ -d /usr/local/mysql  ]]
