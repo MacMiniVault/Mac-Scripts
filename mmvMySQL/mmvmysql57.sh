@@ -86,6 +86,7 @@ echo "YOUR RESULTS MAY VARY AND YOU MAY WANT TO FURTHER TUNE YOUR MY.CNF SETTING
 echo "BASE PERFORMANCE MY.CNF INCREASES BUFFERS/MEMORY USAGE"
 echo "8GB+ RAM IS RECOMMENDED FOR BASE PERFORMANCE MY.CNF"
 echo "..."
+sudo touch /usr/local/my.cnf
 sudo cp /usr/local/mysql/my.cnf /usr/local/mysql/mmv.cnf
 sudo tee -a /usr/local/mysql/mmv.cnf > /dev/null  << EOF
 
