@@ -1,9 +1,10 @@
 #!/bin/bash
 #############################################
 # AUTHOR: JONATHAN SCHWENN @JONSCHWENN      #
+# AUTHOR: ALEX LEACH @AJLEACH               #
 # MAC MINI VAULT - MAC MINI COLOCATION      #
 # MACMINIVAULT.COM - @MACMINIVAULT          #
-# VERSION 2.2 RELEASE DATE SEPT 28 2015     #
+# VERSION 3.0 RELEASE DATE NOV 19 2015      #
 # DESC:  THIS SCRIPT INSTALLS MySQL on OSX  #
 #############################################
 #REQUIREMENTS:
@@ -55,7 +56,13 @@ echo "..."
 
 # WE NEED TO RESET THE ROOT PASSWORD WITH THE NEWEST MYSQL INSTALLER, SINCE IT SETS ONE ON ITS OWN.
 sudo /usr/local/mysql/support-files/mysql.server stop
-sudo /usr/local/mysql/support-files/mysql.server start --skip-grant-tables
+
+# TO RESET ROOT MYSQL PWD IN 5.7.6+ WE NEED A TEMPORARY INIT SCRIPT
+sudo tee -a /usr/local/mysql/mmv.cnf > /dev/null  << EOF
+ALTER USER 'root'@'localhost' IDENTIFIED BY '$mypass';
+EOF
+
+
 
 # ADDING MYSQL PATH TO BASH PROFILE, MAY CONFLICT WITH EXISTING PROFILES/.RC FILES
 touch ~/.bash_profile >/dev/null 2>&1
@@ -69,6 +76,8 @@ mypass="$(cat /dev/urandom | base64 | tr -dc A-Za-z0-9_ | head -c8)"
 echo $mypass > ~/Desktop/MYSQL_PASSWORD
 echo "Setting MySQL root Password to $mypass"
 echo "Placing password on desktop..."
+sudo touch /usr/local/mysql/reset-init.txt
+
 /usr/local/mysql/bin/mysql -uroot -e "UPDATE mysql.user SET authentication_string=PASSWORD('$mypass') WHERE User='root'; FLUSH PRIVILEGES;"
 sudo /usr/local/mysql/support-files/mysql.server stop
 sudo /usr/local/mysql/support-files/mysql.server start
