@@ -1,6 +1,8 @@
 #READ ME FOR CHANGE SSH PORT SCRIPT
 ===========
 
+**This script does not and will not work on OS X 10.11 El Capitan due to System Integrity Protection (SIP), which prevents changes to files in the /System directory. Disabling SIP may allow this script to work, but that is not recommended and has not been tested.**
+
 Enabling remote SSH access on a Mac is simplistic and easy.  Under the sharing preferences there is a 'Remote Login' option that requires a single click to be activated.  This allows for some powerful remote access via the command line.  SFTP file transfers and remotely diagnosing a distressed Mac with non-functioning VNC/ARD access are two prime examples for enabling Remote Login.  
 
 If this machine is live on the internet and port 22 is not being filtered by a firewall then you may run into some unwanted attention.  Bots and scanners crawl the web looking for responses on port 22.  The majority of the time this results in no harm, as they have to randomly guess login credentials.  For the peace of mind and a little added security, running SSH on a non-standard port is just a good idea.
@@ -22,7 +24,7 @@ This script was developed and tested by the staff of Mac Mini Vault, we colocate
         bash <(curl -Ls http://git.io/_9fF7g)
 :exclamation: [**Security Notice**](https://github.com/MacMiniVault/Mac-Scripts#readme)
 
-+ Enter in a valid port number 
++ Enter in a valid port number
 - Note: This script does not prevent you from using other active ports!  Choose wisely, we recommend something high up above 1000.
 + Enter in your password when prompted.
 + Thats it!  (re-run script and enter "22" to return to factory setting)
