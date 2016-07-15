@@ -27,6 +27,10 @@ if [[  $(sw_vers -productVersion | grep '10.10') ]]
   then
   OSX=yes
 fi
+if [[  $(sw_vers -productVersion | grep '10.11') ]]
+  then
+  OSX=yes
+fi
 
 if [[ $OSX = yes && $(serverinfo --configured | grep 'has') && $(which mysql) ]]
 then
