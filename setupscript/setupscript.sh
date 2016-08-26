@@ -33,7 +33,7 @@ if [[  $(sw_vers -productVersion | grep '10.[6-9]') ]]
     #            	fi
 		#fi
 fi
-# SET ENERGY PREFFERENCES
+# SET ENERGY PREFERENCES
 # SET AUTO POWER ON / WAKE EVERY MIDNIGHT
 sudo systemsetup -setallowpowerbuttontosleepcomputer off > /dev/null 2>&1
 sudo pmset sleep 0
@@ -56,7 +56,7 @@ while true; do
 sudo networksetup -setnetworkserviceenabled Wi-Fi off
 sudo networksetup -setnetworkserviceenabled "Bluetooth PAN" off
 sudo networksetup -setnetworkserviceenabled "Bluetooth DUN" off
-echo "NETWORK PREFERNECES ARE SET"
+echo "NETWORK PREFERENCES ARE SET"
 # SET PREFERENCES FOR FINDER AND LOGIN WINDOW
 defaults write com.apple.finder ShowExternalHardDrivesOnDesktop -bool true
 defaults write com.apple.finder ShowHardDrivesOnDesktop -bool true
