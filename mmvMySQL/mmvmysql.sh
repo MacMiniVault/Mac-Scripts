@@ -3,7 +3,7 @@
 # AUTHOR: JONATHAN SCHWENN @JONSCHWENN      #
 # MAC MINI VAULT - MAC MINI COLOCATION      #
 # MACMINIVAULT.COM - @MACMINIVAULT          #
-# VERSION 2.2 RELEASE DATE SEPT 28 2015     #
+# VERSION 2.3 RELEASE DATE SEPT 7 2016      #
 # DESC:  THIS SCRIPT INSTALLS MySQL on OSX  #
 #############################################
 #REQUIREMENTS:
@@ -47,16 +47,15 @@ sudo chmod 755 /usr/local/bin/pidof
 fi
 # LOOKS GOOD, LETS GRAB MySQL AND GET STARTED ...
 echo "Downloading MySQL Installers ... may take a few moments"
-curl -# -Lo ~/Downloads/MySQL.dmg http://cdn.mysql.com/Downloads/MySQL-5.6/mysql-5.6.30-osx10.9-x86_64.dmg
+curl -# -Lo ~/Downloads/MySQL.dmg https://cdn.mysql.com/Downloads/MySQL-5.6/mysql-5.6.33-osx10.11-x86_64.dmg
 hdiutil attach -quiet ~/Downloads/MySQL.dmg
 # PLIST TO ALTER MySQL INSTALLER TO NOT ATTEMPT TO INSTALL STARTUP ITEMS
 curl -s -o ~/Downloads/MySQL-install.plist https://raw.githubusercontent.com/MacMiniVault/Mac-Scripts/master/mmvMySQL/install.plist
-# DEAR MySQL, WHY HAVE A SPECIFIC 10.9 DOWNLOAD IF IT JUST HAS THE 10.8 INSTALLER?
-cd /Volumes/mysql-5.6.30-osx10.8-x86_64/
+cd /Volumes/mysql-5.6.33-osx10.11-x86_64/
 echo "..."
 echo "..."
 echo "Installing MySQL, administrator password required ..."
-sudo installer -applyChoiceChangesXML ~/Downloads/MySQL-install.plist -pkg mysql-5.6.30-osx10.8-x86_64.pkg -target /
+sudo installer -applyChoiceChangesXML ~/Downloads/MySQL-install.plist -pkg mysql-5.6.33-osx10.11-x86_64.pkg -target /
 # MySQL START SCRIPT CHANGES PATH - LINKING PIDOF TO THE MySQL DIR
 sudo ln -s /usr/local/bin/pidof /usr/local/mysql/bin/pidof
 echo "..."
@@ -90,7 +89,7 @@ echo "..."
 echo "..."
 # UNMOUNT AND DELELTE DOWNLOADED MySQL INSTALLER
 cd ~/
-hdiutil detach -quiet /Volumes/mysql-5.6.30-osx10.8-x86_64/
+hdiutil detach -quiet /Volumes/mysql-5.6.33-osx10.11-x86_64/
 sleep 2
 rm ~/Downloads/MySQL.dmg
 rm ~/Downloads/MySQL-install.plist
