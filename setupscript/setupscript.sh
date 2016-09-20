@@ -85,7 +85,7 @@ sleep 5
 sudo defaults write /var/db/launchd.db/com.apple.launchd/overrides.plist com.apple.screensharing -dict Disabled -bool false
 sudo launchctl load /System/Library/LaunchDaemons/com.apple.screensharing.plist
 fi
-if [[  $(sw_vers -productVersion | grep '10.[10-11]') ]]
+if [[  $(sw_vers -productVersion | grep '10.[10-12]') ]]
 then
 sudo launchctl enable system/com.apple.screensharing
 sleep 5
@@ -136,7 +136,7 @@ fi
 echo "...."
 echo "...."
 # YOSEMITE / EL CAPITAN SPECIFIC SETTINGS
-if [[  $(sw_vers -productVersion | grep '10.[10-11]') ]]
+if [[  $(sw_vers -productVersion | grep '10.[10-12]') ]]
 then
 sudo defaults write /Library/Preferences/com.apple.Bluetooth ControllerPowerState '0' > /dev/null 2>&1
 sudo defaults write /Library/Preferences/com.apple.Bluetooth BluetoothAutoSeekKeyboard '0' > /dev/null 2>&1
