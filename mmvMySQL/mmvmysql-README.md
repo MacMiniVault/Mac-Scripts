@@ -6,6 +6,8 @@
 
 MySQL is not installed by default on OS X 10.7 or newer.  This script will fix that bug.
 
+:exclamation: For OS X 10.11 and above, we no longer recommend using this script. Instead, we recommend following [these instructions](http://www.macminivault.com/install-mysql-on-macos-sierra/).
+
 #WHAT THIS SCRIPT DOES
 + Checks for OS X and MySQL
 + Downloads MySQL from Oracle
