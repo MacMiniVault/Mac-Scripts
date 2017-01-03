@@ -47,7 +47,7 @@ sudo chmod 755 /usr/local/bin/pidof
 fi
 # LOOKS GOOD, LETS GRAB MySQL AND GET STARTED ...
 echo "Downloading MySQL Installers ... may take a few moments"
-curl -# -Lo ~/Downloads/MySQL.dmg https://cdn.mysql.com/Downloads/MySQL-5.6/mysql-5.6.33-osx10.11-x86_64.dmg
+curl -# -Lo ~/Downloads/MySQL.dmg https://www.mysql.com/Downloads/MySQL-5.6/mysql-5.6.33-osx10.11-x86_64.dmg
 hdiutil attach -quiet ~/Downloads/MySQL.dmg
 # PLIST TO ALTER MySQL INSTALLER TO NOT ATTEMPT TO INSTALL STARTUP ITEMS
 curl -s -o ~/Downloads/MySQL-install.plist https://raw.githubusercontent.com/MacMiniVault/Mac-Scripts/master/mmvMySQL/install.plist
