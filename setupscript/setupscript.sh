@@ -43,6 +43,7 @@ sudo pmset displaysleep 0
 sudo pmset autorestart 1
 sudo pmset womp 1
 sudo pmset repeat wakeorpoweron MTWRFSU  23:00:00
+sudo pmset -c powernap 0
 echo "ENERGY PREFERENCES ARE SET"
 # DISABLES WIFI/BLUETOOTH NETWORKING
 while true; do
@@ -65,9 +66,9 @@ defaults write com.apple.finder ShowMountedServersOnDesktop -bool true
 defaults write com.apple.finder ShowRemovableMediaOnDesktop -bool true
 sudo killall Finder
 echo "FINDER PREFERENCES ARE SET"
-sudo defaults write /library/preferences/com.apple.loginwindow PowerOffDisabled -bool true
-sudo defaults write /library/preferences/com.apple.loginwindow SHOWFULLNAME -bool true
-sudo defaults write /library/preferences/com.apple.loginwindow showInputMenu -bool true
+sudo defaults write /Library/Preferences/com.apple.loginwindow PowerOffDisabled -bool true
+sudo defaults write /Library/Preferences/com.apple.loginwindow SHOWFULLNAME -bool true
+sudo defaults write /Library/Preferences/com.apple.loginwindow showInputMenu -bool true
 sudo defaults write /Library/Preferences/com.apple.loginwindow AdminHostInfo HostName
 echo "LOGIN WINDOW PREFERENCES ARE SET"
 # SET COMPUTER NAME, DISABLE AND REENABLE REMOTE LOGIN AND SCREEN SHARING
@@ -94,7 +95,7 @@ sudo launchctl load -w /System/Library/LaunchDaemons/com.apple.screensharing.pli
 fi
 echo "REMOTE LOGIN AND SCREEN SHARING ARE ENABLED"
 # DISABLES THE ANNOYING "NO KEYBOARD" BLUETOOTH POPUP
-# MOUNTAIN LION SPEDIFIC SETTINGS
+# MOUNTAIN LION SPECIFIC SETTINGS
 if [[  $(sw_vers -productVersion | grep '10.8') ]]
 then
 sudo rm  /System/Library/LaunchAgents/com.apple.btsa.plist
@@ -136,7 +137,7 @@ fi
 fi
 echo "...."
 echo "...."
-# YOSEMITE / EL CAPITAN SPECIFIC SETTINGS
+# YOSEMITE / EL CAPITAN / SIERRA / HIGH SIERRA SPECIFIC SETTINGS
 if [[  $(sw_vers -productVersion | grep '10.[10-13]') ]]
 then
 sudo defaults write /Library/Preferences/com.apple.Bluetooth ControllerPowerState '0' > /dev/null 2>&1
