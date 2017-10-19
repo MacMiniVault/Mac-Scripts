@@ -51,11 +51,11 @@ curl -# -Lo ~/Downloads/MySQL.dmg http://dev.mysql.com/get/Downloads/MySQL-5.6/m
 hdiutil attach -quiet ~/Downloads/MySQL.dmg
 # PLIST TO ALTER MySQL INSTALLER TO NOT ATTEMPT TO INSTALL STARTUP ITEMS
 curl -s -o ~/Downloads/MySQL-install.plist https://raw.githubusercontent.com/MacMiniVault/Mac-Scripts/master/mmvMySQL/install.plist
-cd /Volumes/mysql-5.6.35-osx10.12-x86_64/
+cd /Volumes/mysql-5.6.35-macos10.12-x86_64/
 echo "..."
 echo "..."
 echo "Installing MySQL, administrator password required ..."
-sudo installer -applyChoiceChangesXML ~/Downloads/MySQL-install.plist -pkg mysql-5.6.35-osx10.12-x86_64.pkg -target /
+sudo installer -applyChoiceChangesXML ~/Downloads/MySQL-install.plist -pkg mysql-5.6.35-macos10.12-x86_64.pkg -target /
 # MySQL START SCRIPT CHANGES PATH - LINKING PIDOF TO THE MySQL DIR
 sudo ln -s /usr/local/bin/pidof /usr/local/mysql/bin/pidof
 echo "..."
