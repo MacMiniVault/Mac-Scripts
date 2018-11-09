@@ -149,27 +149,29 @@ defaults write com.apple.spaces spans-displays -bool TRUE
 fi
 echo "...."
 echo "...."
-# PROGRESS SPINNER AND SOFTEWARE UPDATES
-echo "RUNNING SOFTWARE UPDATES"
-echo "MACHINE WILL REBOOT AFTER SOFTWARE UPDATES ARE INSTALLED"
-echo "SOFTWARE UPDATES CAN TAKE 10+ MINUTES"
-spinner()
-{
-    local pid=softwareupdate
-    local delay=0.5
-    local spinstr='|/-\'
-    while [ "$(ps a | awk '{print $5}' | grep $pid)" ]; do
-        local temp=${spinstr#?}
-        printf " [%c]  " "$spinstr"
-        local spinstr=$temp${spinstr%"$temp"}
-        sleep $delay
-        printf "\b\b\b\b\b\b"
-    done
-    printf "    \b\b\b\b"
-}
-sudo softwareupdate -i -r > /dev/null 2>&1 &
-sleep 1
-/bin/echo -n "SOFTWARE UPDATES ARE DOWNLOADING AND INSTALLING" && spinner
+# Software updates have temporarily been disabled - a certain EFI firmware update on 2018 minis cause the mini to boot into recovery after issuing a 'reboot' command. Instead, the updates will need to be run with the --restart arg.
+echo "RUN SOFTWARE UPDATES MANUALLY AFTER THE REBOOT."
+# PROGRESS SPINNER AND SOFTWARE UPDATES
+#echo "RUNNING SOFTWARE UPDATES"
+#echo "MACHINE WILL REBOOT AFTER SOFTWARE UPDATES ARE INSTALLED"
+#echo "SOFTWARE UPDATES CAN TAKE 10+ MINUTES"
+#spinner()
+#{
+#    local pid=softwareupdate
+#    local delay=0.5
+#    local spinstr='|/-\'
+#    while [ "$(ps a | awk '{print $5}' | grep $pid)" ]; do
+#        local temp=${spinstr#?}
+#        printf " [%c]  " "$spinstr"
+#        local spinstr=$temp${spinstr%"$temp"}
+#        sleep $delay
+#        printf "\b\b\b\b\b\b"
+#    done
+#    printf "    \b\b\b\b"
+#}
+#sudo softwareupdate -i -r > /dev/null 2>&1 &
+#sleep 1
+#/bin/echo -n "SOFTWARE UPDATES ARE DOWNLOADING AND INSTALLING" && spinner
 echo ""
 history -c
 clear
