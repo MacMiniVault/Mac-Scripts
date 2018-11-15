@@ -5,7 +5,7 @@ while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
 # MAKES SURE WE ARE AT LEAST RUNNING 10.8 OR NEWER
 if [[  $(sw_vers -productVersion | grep -E '10.[7-9]|1[0-9]') ]]
 then
-# CLEAR NVRAM IN CASE FIND MY MAC WAS PREVIOUSLY ENALBED
+# CLEAR NVRAM IN CASE FIND MY MAC WAS PREVIOUSLY ENABLED
 sudo nvram -d fmm-computer-name
 sudo nvram -d fmm-mobileme-token-FMM
 # DISABLE BONJOUR ADVERTISING
@@ -19,19 +19,6 @@ if [[  $(sw_vers -productVersion | grep '10.[6-9]') ]]
 			sudo /usr/libexec/PlistBuddy -c "Add :ProgramArguments: string -NoMulticastAdvertisements" /System/Library/LaunchDaemons/com.apple.mDNSResponder.plist
 			echo "MULTICAST DISABLED (OS X 10.6-10.9)"
 		fi
-#else
-	 #echo  "CHECKING FOR OS X 10.10..."
-		#if [[  $(sw_vers -productVersion | grep '10.10') ]]
-    #    	then
-                	# CHECKS FOR FLAG IN CURRENT PLIST FILE
-		#	if [[ $(sudo /usr/libexec/PlistBuddy -c Print /System/Library/LaunchDaemons/com.apple.discoveryd.plist | grep 'no-multicast') ]]
-	  #              then
-		#		echo "MULTICAST DISABLED, NO CHANGES MADE"
-    #            	else
-    #                    	sudo /usr/libexec/PlistBuddy -c "Add :ProgramArguments: string --no-multicast" /System/Library/LaunchDaemons/com.apple.discoveryd.plist
-    #                    	echo "MULTICAST DISABLED (OSX 10.10)"
-    #            	fi
-		#fi
 fi
 # SET ENERGY PREFERENCES
 # SET AUTO POWER ON / WAKE EVERY MIDNIGHT
@@ -87,7 +74,7 @@ sleep 5
 sudo defaults write /var/db/launchd.db/com.apple.launchd/overrides.plist com.apple.screensharing -dict Disabled -bool false
 sudo launchctl load /System/Library/LaunchDaemons/com.apple.screensharing.plist
 fi
-if [[  $(sw_vers -productVersion | grep '10.[10-13]') ]]
+if [[  $(sw_vers -productVersion | grep '10.1[0-4]') ]]
 then
 sudo launchctl enable system/com.apple.screensharing
 sleep 5
@@ -138,7 +125,7 @@ fi
 echo "...."
 echo "...."
 # YOSEMITE / EL CAPITAN / SIERRA / HIGH SIERRA SPECIFIC SETTINGS
-if [[  $(sw_vers -productVersion | grep '10.[10-13]') ]]
+if [[  $(sw_vers -productVersion | grep '10.1[0-4]') ]]
 then
 sudo defaults write /Library/Preferences/com.apple.Bluetooth ControllerPowerState '0' > /dev/null 2>&1
 sudo defaults write /Library/Preferences/com.apple.Bluetooth BluetoothAutoSeekKeyboard '0' > /dev/null 2>&1
@@ -149,29 +136,36 @@ defaults write com.apple.spaces spans-displays -bool TRUE
 fi
 echo "...."
 echo "...."
-# Software updates have temporarily been disabled - a certain EFI firmware update on 2018 minis cause the mini to boot into recovery after issuing a 'reboot' command. Instead, the updates will need to be run with the --restart arg.
 echo "RUN SOFTWARE UPDATES MANUALLY AFTER THE REBOOT."
 # PROGRESS SPINNER AND SOFTWARE UPDATES
-#echo "RUNNING SOFTWARE UPDATES"
-#echo "MACHINE WILL REBOOT AFTER SOFTWARE UPDATES ARE INSTALLED"
-#echo "SOFTWARE UPDATES CAN TAKE 10+ MINUTES"
-#spinner()
-#{
-#    local pid=softwareupdate
-#    local delay=0.5
-#    local spinstr='|/-\'
-#    while [ "$(ps a | awk '{print $5}' | grep $pid)" ]; do
-#        local temp=${spinstr#?}
-#        printf " [%c]  " "$spinstr"
-#        local spinstr=$temp${spinstr%"$temp"}
-#        sleep $delay
-#        printf "\b\b\b\b\b\b"
-#    done
-#    printf "    \b\b\b\b"
-#}
-#sudo softwareupdate -i -r > /dev/null 2>&1 &
-#sleep 1
-#/bin/echo -n "SOFTWARE UPDATES ARE DOWNLOADING AND INSTALLING" && spinner
+echo "RUNNING SOFTWARE UPDATES"
+echo "MACHINE WILL REBOOT AFTER SOFTWARE UPDATES ARE INSTALLED"
+echo "SOFTWARE UPDATES CAN TAKE 10+ MINUTES"
+spinner()
+{
+    local pid=softwareupdate
+    local delay=0.5
+    local spinstr='|/-\'
+    while [ "$(ps a | awk '{print $5}' | grep $pid)" ]; do
+        local temp=${spinstr#?}
+        printf " [%c]  " "$spinstr"
+        local spinstr=$temp${spinstr%"$temp"}
+        sleep $delay
+        printf "\b\b\b\b\b\b"
+    done
+    printf "    \b\b\b\b"
+}
+if [[  $(sw_vers -productVersion | grep -E '10.[7-9]|1[0-3]') ]]
+then
+sudo softwareupdate -i -r > /dev/null 2>&1 &
+fi
+# New 2018 minis that require an EFI firmware update will not come back online unless the --restart option is selected - obviously this means the rest of the script won't be run, which is fine.
+if [[  $(sw_vers -productVersion | grep '10.14') ]]
+then
+sudo softwareupdate -i -r --restart > /dev/null 2>&1 &
+fi
+sleep 1
+/bin/echo -n "SOFTWARE UPDATES ARE DOWNLOADING AND INSTALLING" && spinner
 echo ""
 history -c
 clear
