@@ -20,15 +20,15 @@
 #############################################
 #CHECK FOR MACOS AND ENSURE SERVER.APP IS NOT INSTALLED
 OSX=no
-if [[  $(sw_vers -productVersion | grep '10.12') && $(serverinfo --productname | grep 'not') ]]
+if [[  $(sw_vers -productVersion | grep '10.12') && $(serverinfo --configured | grep 'NOT') ]]
 then
 OSX=yes
 fi
-if [[  $(sw_vers -productVersion | grep '10.13') && $(serverinfo --productname | grep 'not') ]]
+if [[  $(sw_vers -productVersion | grep '10.13') && $(serverinfo --configured | grep 'NOT') ]]
 then
 OSX=yes
 fi
-if [[  $(sw_vers -productVersion | grep '10.14') && $(serverinfo --productname | grep 'not') ]]
+if [[  $(sw_vers -productVersion | grep '10.14') && $(serverinfo --configured | grep 'NOT') ]]
 then
 OSX=yes
 fi
