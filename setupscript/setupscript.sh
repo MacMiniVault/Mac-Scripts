@@ -26,22 +26,22 @@ sudo systemsetup -setallowpowerbuttontosleepcomputer off > /dev/null 2>&1
 sudo pmset sleep 0
 sudo pmset disksleep 0
 sudo pmset displaysleep 0
-sudo pmset displaysleep 0
 sudo pmset autorestart 1
 sudo pmset womp 1
 sudo pmset repeat wakeorpoweron MTWRFSU  23:00:00
 sudo pmset -c powernap 0
 echo "ENERGY PREFERENCES ARE SET"
-# DISABLES WIFI/BLUETOOTH NETWORKING
+# SET DNS RESOLVERS AND TIMEZONE
 while true; do
                 read -p "IS THIS MACHINE IN MKE1 or PHX1? [M/P]" sp
                 case $sp in
-                [Mm]* ) sudo networksetup -setdnsservers Ethernet 66.185.16.131 66.185.16.130; break;;
-                [Pp]* ) sudo networksetup -setdnsservers Ethernet 162.253.135.67 162.253.135.66; break;;
+                [Mm]* ) sudo networksetup -setdnsservers Ethernet 66.185.16.131 66.185.16.130; sudo systemsetup -settimezone America/Chicago; break;;
+                [Pp]* ) sudo networksetup -setdnsservers Ethernet 162.253.135.67 162.253.135.66; sudo systemsetup -settimezone America/Phoenix; break;;
                 * ) echo "Please type either an M or a P.";;
                 esac
         done
 sudo networksetup -setsearchdomains Ethernet macminivault.com
+# DISABLES WIFI/BLUETOOTH NETWORKING
 sudo networksetup -setnetworkserviceenabled Wi-Fi off
 sudo networksetup -setnetworkserviceenabled "Bluetooth PAN" off
 sudo networksetup -setnetworkserviceenabled "Bluetooth DUN" off
