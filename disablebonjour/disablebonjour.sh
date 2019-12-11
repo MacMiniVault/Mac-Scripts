@@ -7,7 +7,7 @@
 # DESC:  DISABLES BONJOUR ADVERTISING       #
 #############################################
 #REQUIREMENTS:
-#  OS X 10.6 or newer
+#  OS X 10.6 to 10.10.5
 #############################################
 
 if [[  $(sw_vers) ]]
@@ -27,7 +27,7 @@ then
 	else
 	echo  "OS X 10.6 - 10.9 or 10.10.4+ NOT DETECTED, NO CHANGES HAVE BEEN MADE YET"
 	echo  "CHECKING FOR OS X 10.10.0 to 10.10.3 ..."
-		if [[  $(sw_vers -productVersion | grep '10.10[.0-3]') ]]
+		if [[  $(sw_vers -productVersion | egrep -x '10.10(.[0-3])?') ]]
         	then
                 	# CHECKS FOR FLAG IN CURRENT PLIST FILE
 			if [[ $(sudo /usr/libexec/PlistBuddy -c Print /System/Library/LaunchDaemons/com.apple.discoveryd.plist | grep 'no-multicast') ]]
