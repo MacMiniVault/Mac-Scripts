@@ -74,7 +74,7 @@ sleep 5
 sudo defaults write /var/db/launchd.db/com.apple.launchd/overrides.plist com.apple.screensharing -dict Disabled -bool false
 sudo launchctl load /System/Library/LaunchDaemons/com.apple.screensharing.plist
 fi
-if [[  $(sw_vers -productVersion | grep '10.1[0-4]') ]]
+if [[  $(sw_vers -productVersion | grep '10.1[0-5]') ]]
 then
 sudo launchctl enable system/com.apple.screensharing
 sleep 5
@@ -125,7 +125,7 @@ fi
 echo "...."
 echo "...."
 # YOSEMITE / EL CAPITAN / SIERRA / HIGH SIERRA SPECIFIC SETTINGS
-if [[  $(sw_vers -productVersion | grep '10.1[0-4]') ]]
+if [[  $(sw_vers -productVersion | grep '10.1[0-5]') ]]
 then
 sudo defaults write /Library/Preferences/com.apple.Bluetooth ControllerPowerState '0' > /dev/null 2>&1
 sudo defaults write /Library/Preferences/com.apple.Bluetooth BluetoothAutoSeekKeyboard '0' > /dev/null 2>&1
@@ -160,7 +160,7 @@ then
 sudo softwareupdate -i -r > /dev/null 2>&1 &
 fi
 # New 2018 minis that require an EFI firmware update will not come back online unless the --restart option is selected - obviously this means the rest of the script won't be run, which is fine.
-if [[  $(sw_vers -productVersion | grep '10.14') ]]
+if [[  $(sw_vers -productVersion | grep '10.1[0-5]') ]]
 then
 sudo softwareupdate -i -r --restart > /dev/null 2>&1 &
 fi
