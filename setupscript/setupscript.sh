@@ -160,7 +160,7 @@ then
 sudo softwareupdate -i -r > /dev/null 2>&1 &
 fi
 # New 2018 minis that require an EFI firmware update will not come back online unless the --restart option is selected - obviously this means the rest of the script won't be run, which is fine.
-if [[  $(sw_vers -productVersion | grep -E '10.1[4-5]|11.[0]'') ]]
+if [[  $(sw_vers -productVersion | grep -E '10.1[4-5]|11.[0]') ]]
 then
 sudo softwareupdate -i -r --restart > /dev/null 2>&1 &
 fi
