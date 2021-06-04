@@ -63,6 +63,7 @@ MINI=xxx
 echo "WHAT MACHINE IS THIS? (e.g.; a1-8, d8-8, e16-5)"
 read MINI
 sudo scutil --set ComputerName "$MINI.macminivault.com"
+sudo scutil --set HostName "$MINI.macminivault.com"
 echo "COMPUTER NAME SET"
 echo "yes" | sudo systemsetup -setremotelogin off > /dev/null 2>&1
 sleep 5
