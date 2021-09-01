@@ -3,7 +3,7 @@
 sudo -v
 while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
 # MAKES SURE WE ARE AT LEAST RUNNING 10.8 OR NEWER
-if [[  $(sw_vers -productVersion | grep -E '10.[7-9]|1[0-9]') ]]
+if [[  $(sw_vers -productVersion | awk -F '.' '{print $1 "." $2}' | grep -E '10.[7-9]|1[0-9]') ]]
 then
 # CLEAR NVRAM IN CASE FIND MY MAC WAS PREVIOUSLY ENABLED
 sudo nvram -d fmm-computer-name
@@ -47,8 +47,9 @@ sudo networksetup -setnetworkserviceenabled "Bluetooth PAN" off
 sudo networksetup -setnetworkserviceenabled "Bluetooth DUN" off
 # CLEAN UP ANY SAVED WIFI PASSWORDS
 sudo networksetup -removeallpreferredwirelessnetworks en1
-sudo security delete-generic-password -D "AirPort network password"
-sudo rm -rf ~/Library/Keychains/*-*-*-*/keychain-2.db
+sudo security delete-generic-password -D "AirPort network password" > /dev/null 2>&1
+# REMOVE "LOCAL ITEMS" KEYCHAIN CONTAINING WIFI PASSWORD - IT WILL BE RECREATED WHEN NEEDED
+sudo rm -rf ~/Library/Keychains/*-*-*-*/keychain-2.db > /dev/null 2>&1
 echo "NETWORK PREFERENCES ARE SET"
 # SET PREFERENCES FOR FINDER AND LOGIN WINDOW
 defaults write com.apple.finder ShowExternalHardDrivesOnDesktop -bool true
@@ -79,7 +80,7 @@ sleep 5
 sudo defaults write /var/db/launchd.db/com.apple.launchd/overrides.plist com.apple.screensharing -dict Disabled -bool false
 sudo launchctl load /System/Library/LaunchDaemons/com.apple.screensharing.plist
 fi
-if [[  $(sw_vers -productVersion | grep -E '10.1[0-5]|11.[0]') ]]
+if [[  $(sw_vers -productVersion | awk -F '.' '{print $1 "." $2}' | grep -E '10.1[0-5]|11.[0-9]') ]]
 then
 sudo launchctl enable system/com.apple.screensharing
 sleep 5
@@ -130,7 +131,7 @@ fi
 echo "...."
 echo "...."
 # 10.10+ SETTINGS
-if [[  $(sw_vers -productVersion | grep -E '10.1[0-5]|11.[0]') ]]
+if [[  $(sw_vers -productVersion | awk -F '.' '{print $1 "." $2}' | awk -F '.' '{print $1 "." $2}' | grep -E '10.1[0-5]|11.[0-9]') ]]
 then
 sudo defaults write /Library/Preferences/com.apple.Bluetooth ControllerPowerState '0' > /dev/null 2>&1
 sudo defaults write /Library/Preferences/com.apple.Bluetooth BluetoothAutoSeekKeyboard '0' > /dev/null 2>&1
@@ -160,14 +161,19 @@ spinner()
     done
     printf "    \b\b\b\b"
 }
-if [[  $(sw_vers -productVersion | grep -E '10.[7-9]|10.1[0-3]') ]]
+if [[  $(sw_vers -productVersion | awk -F '.' '{print $1 "." $2}' | grep -E '10.[7-9]|10.1[0-3]') ]]
 then
 sudo softwareupdate -i -r > /dev/null 2>&1 &
 fi
 # New 2018 minis that require an EFI firmware update will not come back online unless the --restart option is selected - obviously this means the rest of the script won't be run, which is fine.
-if [[  $(sw_vers -productVersion | grep -E '10.1[4-5]|11.[0]') ]]
+if [[  $(sw_vers -productVersion | awk -F '.' '{print $1 "." $2}' | grep -E '10.1[4-5]') ]]
 then
 sudo softwareupdate -i -r --restart > /dev/null 2>&1 &
+fi
+# SCRIPTED UPDATES NO LONGER WORK ON BIG SUR+ DUE TO SECONDARY AUTH PROMPT, SKIPPING TO REBOOT
+if [[  $(sw_vers -productVersion | awk -F '.' '{print $1 "." $2}' | grep -E '11.[0-9]') ]]
+then
+sudo reboot > /dev/null 2>&1
 fi
 sleep 1
 /bin/echo -n "SOFTWARE UPDATES ARE DOWNLOADING AND INSTALLING" && spinner
