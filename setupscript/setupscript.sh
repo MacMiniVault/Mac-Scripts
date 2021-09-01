@@ -45,6 +45,10 @@ sudo networksetup -setsearchdomains Ethernet macminivault.com
 sudo networksetup -setnetworkserviceenabled Wi-Fi off
 sudo networksetup -setnetworkserviceenabled "Bluetooth PAN" off
 sudo networksetup -setnetworkserviceenabled "Bluetooth DUN" off
+# CLEAN UP ANY SAVED WIFI PASSWORDS
+sudo networksetup -removeallpreferredwirelessnetworks en1
+sudo security delete-generic-password -D "AirPort network password"
+sudo rm -rf ~/Library/Keychains/*-*-*-*/keychain-2.db
 echo "NETWORK PREFERENCES ARE SET"
 # SET PREFERENCES FOR FINDER AND LOGIN WINDOW
 defaults write com.apple.finder ShowExternalHardDrivesOnDesktop -bool true
