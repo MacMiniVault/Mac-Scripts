@@ -40,7 +40,9 @@ while true; do
                 * ) echo "Please type either an M or a P.";;
                 esac
         done
+# SET SEARCH DOMAIN AND CLEAR DNS CACHE TO USE CACHING SERVERS
 sudo networksetup -setsearchdomains Ethernet macminivault.com
+sudo killall -HUP mDNSResponder
 # DISABLES WIFI/BLUETOOTH NETWORKING
 sudo networksetup -setnetworkserviceenabled Wi-Fi off
 sudo networksetup -setnetworkserviceenabled "Bluetooth PAN" off
