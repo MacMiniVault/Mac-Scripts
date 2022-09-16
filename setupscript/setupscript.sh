@@ -43,15 +43,14 @@ while true; do
 # SET SEARCH DOMAIN AND CLEAR DNS CACHE TO USE CACHING SERVERS
 sudo networksetup -setsearchdomains Ethernet macminivault.com
 sudo killall -HUP mDNSResponder
-# DISABLES WIFI/BLUETOOTH NETWORKING
-sudo networksetup -setnetworkserviceenabled Wi-Fi off
-sudo networksetup -setnetworkserviceenabled "Bluetooth PAN" off
-sudo networksetup -setnetworkserviceenabled "Bluetooth DUN" off
 # CLEAN UP ANY SAVED WIFI PASSWORDS
 sudo networksetup -removeallpreferredwirelessnetworks en1
-sudo security delete-generic-password -D "AirPort network password" > /dev/null 2>&1
-# REMOVE "LOCAL ITEMS" KEYCHAIN CONTAINING WIFI PASSWORD - IT WILL BE RECREATED WHEN NEEDED
-sudo rm -rf ~/Library/Keychains/*-*-*-*/keychain-2.db > /dev/null 2>&1
+# DISABLES WIFI/BLUETOOTH NETWORKING
+sudo networksetup -deletepppoeservice "Bluetooth PAN"
+sudo networksetup -deletepppoeservice "Bluetooth DUN"
+sudo networksetup -deletepppoeservice "Thunderbolt Bridge"
+sudo networksetup -deletepppoeservice "FireWire"
+sudo networksetup -deletepppoeservice "Wi-Fi"
 echo "NETWORK PREFERENCES ARE SET"
 # SET PREFERENCES FOR FINDER AND LOGIN WINDOW
 defaults write com.apple.finder ShowExternalHardDrivesOnDesktop -bool true
