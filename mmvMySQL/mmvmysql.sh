@@ -5,6 +5,7 @@
 # MACMINIVAULT.COM - @MACMINIVAULT          #
 # VERSION 2.3 RELEASE DATE SEPT 7 2016      #
 # DESC:  THIS SCRIPT INSTALLS MySQL on OSX  #
+# and macOS                                 #
 #############################################
 #REQUIREMENTS:
 #  OS X 10.7 or newer
@@ -89,7 +90,7 @@ echo "..."
 echo "..."
 # UNMOUNT AND DELELTE DOWNLOADED MySQL INSTALLER
 cd ~/
-hdiutil detach -quiet /Volumes/mysql-5.6.35-osx10.12-x86_64/
+hdiutil detach -quiet /Volumes/mysql-5.6.35-macos10.12-x86_64/
 sleep 2
 rm ~/Downloads/MySQL.dmg
 rm ~/Downloads/MySQL-install.plist
