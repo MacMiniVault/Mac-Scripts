@@ -54,6 +54,9 @@ sudo networksetup -deletepppoeservice "Wi-Fi"
 # REMOVE SAVED WIFI PASSWORDS AS USER AND ROOT
 security delete-generic-password -D "AirPort network password"
 sudo security delete-generic-password -D "AirPort network password"
+UUID=xxx
+UUID=$(ioreg -d2 -c IOPlatformExpertDevice | awk -F\" '/IOPlatformUUID/{print $(NF-1)}')
+rm "/Users/$USER/Library/Keychains/$UUID/keychain-2.db"
 echo "NETWORK PREFERENCES ARE SET"
 # SET PREFERENCES FOR FINDER AND LOGIN WINDOW
 defaults write com.apple.finder ShowExternalHardDrivesOnDesktop -bool true
