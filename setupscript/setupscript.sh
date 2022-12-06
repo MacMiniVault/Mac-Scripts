@@ -50,7 +50,6 @@ sudo networksetup -deletepppoeservice "Bluetooth PAN"
 sudo networksetup -deletepppoeservice "Bluetooth DUN"
 sudo networksetup -deletepppoeservice "Thunderbolt Bridge"
 sudo networksetup -deletepppoeservice "FireWire"
-sudo networksetup -deletepppoeservice "Wi-Fi"
 echo "NETWORK PREFERENCES ARE SET"
 # SET PREFERENCES FOR FINDER AND LOGIN WINDOW
 defaults write com.apple.finder ShowExternalHardDrivesOnDesktop -bool true
