@@ -50,7 +50,6 @@ sudo networksetup -deletepppoeservice "Bluetooth PAN"
 sudo networksetup -deletepppoeservice "Bluetooth DUN"
 sudo networksetup -deletepppoeservice "Thunderbolt Bridge"
 sudo networksetup -deletepppoeservice "FireWire"
-sudo networksetup -deletepppoeservice "Wi-Fi"
 # REMOVE SAVED WIFI PASSWORDS AS USER AND ROOT
 security delete-generic-password -D "AirPort network password"
 sudo security delete-generic-password -D "AirPort network password"
