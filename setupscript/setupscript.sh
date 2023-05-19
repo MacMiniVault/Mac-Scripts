@@ -2,6 +2,39 @@
 # REQUEST ADMIN PASSWORD AND KEEP ALIVE
 sudo -v
 while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
+
+# Display some system stats before starting
+
+# Get serial number and model
+serial_number=$(system_profiler SPHardwareDataType | awk '/Serial/ {print $4}')
+model=$(system_profiler SPHardwareDataType | awk '/Model Identifier/ {print $3}')
+
+# Get friendly Mac model name
+modelfriendly=$(defaults read ~/Library/Preferences/com.apple.SystemProfiler.plist 'CPU Names' | cut -sd '"' -f 4 | uniq)
+
+# Get CPU info and memory
+cpu_info=$(sysctl -n machdep.cpu.brand_string)
+memory=$(sysctl hw.memsize | awk '{print $2/1073741824" GB RAM"}')
+
+# Get active network interface
+interface=$(route get google.com | grep interface | awk '/interface/ {print $2}')
+
+# Get primary IP address
+ip_address=$(ifconfig $interface | grep inet | awk '$1=="inet" {print $2}')
+
+# Get ethernet connection speed
+ethernet_speed=$(networksetup -getMedia $interface | awk '/Active/ {print $2}')
+
+output="
+IP Address: $ip_address
+Mac Model: $modelfriendly ($model)
+CPU: $cpu_info
+Memory: $memory
+Serial: $serial_number
+Ethernet Speed: $ethernet_speed
+"
+echo "$output"
+
 # MAKES SURE WE ARE AT LEAST RUNNING 10.8 OR NEWER
 if [[  $(sw_vers -productVersion | awk -F '.' '{print $1 "." $2}' | grep -E '10.[7-9]|1[0-9]') ]]
 then
@@ -53,9 +86,6 @@ sudo networksetup -deletepppoeservice "FireWire"
 # REMOVE SAVED WIFI PASSWORDS AS USER AND ROOT
 security delete-generic-password -D "AirPort network password"
 sudo security delete-generic-password -D "AirPort network password"
-UUID=xxx
-UUID=$(ioreg -d2 -c IOPlatformExpertDevice | awk -F\" '/IOPlatformUUID/{print $(NF-1)}')
-rm "/Users/$USER/Library/Keychains/$UUID/keychain-2.db"
 echo "NETWORK PREFERENCES ARE SET"
 # SET PREFERENCES FOR FINDER AND LOGIN WINDOW
 defaults write com.apple.finder ShowExternalHardDrivesOnDesktop -bool true
