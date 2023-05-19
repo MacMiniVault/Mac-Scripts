@@ -10,7 +10,7 @@ serial_number=$(system_profiler SPHardwareDataType | awk '/Serial/ {print $4}')
 model=$(system_profiler SPHardwareDataType | awk '/Model Identifier/ {print $3}')
 
 # Get friendly Mac model name
-modelfriendly=$(defaults read ~/Library/Preferences/com.apple.SystemProfiler.plist 'CPU Names' | cut -sd '"' -f 4 | uniq)
+modelfriendly=$(defaults read ~/Library/Preferences/com.apple.SystemProfiler.plist 'CPU Names' | cut -sd '"' -f 4 | uniq) > /dev/null 2>&1
 
 # Get CPU info and memory
 cpu_info=$(sysctl -n machdep.cpu.brand_string)
