@@ -106,7 +106,6 @@ read MINI
 sudo scutil --set ComputerName "$MINI.macminivault.com"
 sudo scutil --set HostName "$MINI.macminivault.com"
 echo "COMPUTER NAME SET"
-echo "yes" | sudo systemsetup -setremotelogin off > /dev/null 2>&1
 sleep 5
 #sudo systemsetup -setremotelogin on > /dev/null 2>&1
 if [[  $(sw_vers -productVersion | grep '10.[6-9]') ]]
