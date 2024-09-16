@@ -57,7 +57,7 @@ fi
 # SET AUTO POWER ON / WAKE EVERY MIDNIGHT
 sudo systemsetup -setallowpowerbuttontosleepcomputer off > /dev/null 2>&1
 sudo pmset sleep 0
-sudo pmset disksleep 0
+#sudo pmset disksleep 0
 sudo pmset displaysleep 0
 sudo pmset autorestart 1
 sudo pmset womp 1
@@ -114,14 +114,15 @@ sudo defaults write /var/db/launchd.db/com.apple.launchd/overrides.plist com.app
 sleep 5
 sudo defaults write /var/db/launchd.db/com.apple.launchd/overrides.plist com.apple.screensharing -dict Disabled -bool false
 sudo launchctl load /System/Library/LaunchDaemons/com.apple.screensharing.plist
+echo "SCREEN SHARING IS NOW ENABLED. REMOTE LOGIN MUST BE MANUALLY ENABLED."
 fi
 if [[  $(sw_vers -productVersion | awk -F '.' '{print $1 "." $2}' | grep -E '10.1[0-5]|1[1-5].[0-9]') ]]
 then
-sudo launchctl enable system/com.apple.screensharing
-sleep 5
-sudo launchctl load -w /System/Library/LaunchDaemons/com.apple.screensharing.plist
+#sudo launchctl enable system/com.apple.screensharing
+#sleep 5
+#sudo launchctl load -w /System/Library/LaunchDaemons/com.apple.screensharing.plist
+echo "REMOTE LOGIN AND SCREEN SHARING MUST BE MANUALLY ENABLED"
 fi
-echo "REMOTE LOGIN AND SCREEN SHARING ARE ENABLED"
 # DISABLES THE ANNOYING "NO KEYBOARD" BLUETOOTH POPUP
 # MOUNTAIN LION SPECIFIC SETTINGS
 if [[  $(sw_vers -productVersion | grep '10.8') ]]
