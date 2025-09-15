@@ -36,7 +36,7 @@ Ethernet Speed: $ethernet_speed
 echo "$output"
 
 # MAKES SURE WE ARE AT LEAST RUNNING 10.8 OR NEWER
-if [[  $(sw_vers -productVersion | awk -F '.' '{print $1 "." $2}' | grep -E '10.[7-9]|1[0-9]') ]]
+if [[  $(sw_vers -productVersion | awk -F '.' '{print $1 "." $2}' | grep -E '10.[7-9]|1[0-9]|26.[0-9]') ]]
 then
 # CLEAR NVRAM IN CASE FIND MY MAC WAS PREVIOUSLY ENABLED
 sudo nvram -d fmm-computer-name
@@ -116,7 +116,7 @@ sudo defaults write /var/db/launchd.db/com.apple.launchd/overrides.plist com.app
 sudo launchctl load /System/Library/LaunchDaemons/com.apple.screensharing.plist
 echo "SCREEN SHARING IS NOW ENABLED. REMOTE LOGIN MUST BE MANUALLY ENABLED."
 fi
-if [[  $(sw_vers -productVersion | awk -F '.' '{print $1 "." $2}' | grep -E '10.1[0-5]|1[1-5].[0-9]') ]]
+if [[  $(sw_vers -productVersion | awk -F '.' '{print $1 "." $2}' | grep -E '10.1[0-5]|1[1-5].[0-9]|26.[0-9]') ]]
 then
 #sudo launchctl enable system/com.apple.screensharing
 #sleep 5
@@ -167,7 +167,7 @@ fi
 echo "...."
 echo "...."
 # 10.10+ SETTINGS
-if [[  $(sw_vers -productVersion | awk -F '.' '{print $1 "." $2}' | grep -E '10.1[0-5]|1[1-5].[0-9]') ]]
+if [[  $(sw_vers -productVersion | awk -F '.' '{print $1 "." $2}' | grep -E '10.1[0-5]|1[1-5].[0-9]|26.[0-9]') ]]
 then
 sudo defaults write /Library/Preferences/com.apple.Bluetooth ControllerPowerState '0' > /dev/null 2>&1
 sudo defaults write /Library/Preferences/com.apple.Bluetooth BluetoothAutoSeekKeyboard '0' > /dev/null 2>&1
@@ -207,7 +207,7 @@ then
 sudo softwareupdate -i -r --restart > /dev/null 2>&1 &
 fi
 # SCRIPTED UPDATES NO LONGER WORK ON BIG SUR+ DUE TO SECONDARY AUTH PROMPT, SKIPPING TO REBOOT
-if [[  $(sw_vers -productVersion | awk -F '.' '{print $1 "." $2}' | grep -E '1[1-5].[0-9]') ]]
+if [[  $(sw_vers -productVersion | awk -F '.' '{print $1 "." $2}' | grep -E '1[1-5].[0-9]|26.[0-9]') ]]
 then
 sudo reboot > /dev/null 2>&1
 fi
