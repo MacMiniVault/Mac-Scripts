@@ -64,6 +64,25 @@ sudo pmset womp 1
 sudo pmset repeat wakeorpoweron MTWRFSU  23:00:00
 sudo pmset -c powernap 0
 echo "ENERGY PREFERENCES ARE SET"
+
+# SET "START UP WHEN POWER IS CONNECTED" (macOS 26.5+, Mac mini (2024+) & Mac Studio (2025+))
+# See https://support.apple.com/en-us/125517
+os_major=$(sw_vers -productVersion | awk -F. '{print $1}')
+os_minor=$(sw_vers -productVersion | awk -F. '{print $2}')
+if (( os_major > 26 )) || { (( os_major == 26 )) && (( ${os_minor:-0} >= 5 )); }
+then
+	sudo pmset autorestartatconnect 1 > /dev/null 2>&1
+	# READ BACK TO CONFIRM THE HARDWARE ACTUALLY SUPPORTS IT
+	if [[ $(pmset -g | awk '/autorestartatconnect/ {print $2}' | sed '/^$/d') == "1" ]]
+	then
+		echo "START UP WHEN POWER IS CONNECTED IS ENABLED"
+	else
+		echo "START UP WHEN POWER IS CONNECTED IS NOT SUPPORTED ON THIS HARDWARE"
+	fi
+else
+	echo "START UP WHEN POWER IS CONNECTED REQUIRES macOS 26.5 OR LATER, SKIPPING"
+fi
+
 # SET DNS RESOLVERS AND TIMEZONE
 while true; do
                 read -p "IS THIS MACHINE IN MKE1 or PHX1? [M/P]" sp
