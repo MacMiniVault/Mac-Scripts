@@ -12,7 +12,7 @@
 
 if [[  $(sw_vers) ]]
 then
-	# MAKES SURE WE ARE RUNNING 10.6 -> 10.9 or 10.10.4+
+	# MAKES SURE WE ARE RUNNING 10.6 -> 10.9 or 10.10.4+ -> 10.11 or 10.12
 	if [[  $(sw_vers -productVersion | grep '10.[6-9]') ]] || [[  $(sw_vers -productVersion | grep '10.10.[4-5]') ]]
 	then
 		# CHECKS FOR FLAG IN CURRENT PLIST FILE
@@ -39,7 +39,21 @@ then
                 	fi
                 	exit
 		else
-		echo "OS X 10.10 NOT DETECTED, NO CHANGES HAVE BEEN MADE"
+		echo "OS X 10.10 NOT DETECTED, NO CHANGES HAVE BEEN MADE YET"
+		echo "CHECKING FOR OS X 10.11 to 10.12.2"
+			if [[  $(sw_vers -productVersion | grep '10.1[1-2]') ]]
+			then
+				# CHECKS FOR FLAG IN CURRENT PLIST FILE
+				if [[ $(defaults read /Library/Preferences/com.apple.mDNSResponder.plist NoMulticastAdvertisements) == 1 ]]
+				then
+					echo "MULTICAST DISABLED, NO CHANGES MADE"
+				else
+					sudo defaults write /Library/Preferences/com.apple.mDNSResponder.plist NoMulticastAdvertisements -bool YES
+                    		    	echo "MULTICAST DISABLED (OSX 10.11 or 10.12), PLEASE REBOOT"
+				fi
+				exit
+			fi
+			exit
 		fi
 	fi
 
